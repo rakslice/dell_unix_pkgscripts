@@ -1,0 +1,43 @@
+#!/usr/local/bin/bash
+set -e -x -u
+
+cd /home/dell
+
+dirname="$1"
+shift
+
+[ -d "$dirname" ]
+[ -d stock ]
+[ -d patches ]
+
+
+if [ ! -d "stock/$dirname" ]; then
+	pushd stock
+	archive="$(basename ../$dirname.tar.*)"
+	ext=${archive##*.}
+	case $ext in \
+		bz2 )
+			letter=j
+			;;
+		gz )
+			letter=z
+			;;
+		*)
+			letter=
+	esac
+	tar x${letter}f ../$dirname.tar.*
+	popd
+fi
+
+[ -d "stock/$dirname" ]
+
+patchfile=patches/"$(basename "$dirname")".patch
+
+diff -ur "stock/$dirname" "$@" "$dirname" | grep -v '^Only in ' | tee "$patchfile"
+
+if [ $(ls -la "$patchfile" | awk '{print $5}') -eq 0 ]; then
+	rm "$patchfile"
+fi
+
+
+
