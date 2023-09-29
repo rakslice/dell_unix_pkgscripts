@@ -1,0 +1,14 @@
+diff -cr stock/patch-2.5.4/argmatch.c patch-2.5.4/argmatch.c
+*** stock/patch-2.5.4/argmatch.c	Mon Aug  9 16:09:13 1999
+--- patch-2.5.4/argmatch.c	Thu Sep 28 23:41:23 2023
+***************
+*** 39,44 ****
+--- 39,46 ----
+  #include "error.h"
+  #include "quotearg.h"
+  
++ #include "strcasecmp.c"
++ 
+  /* When reporting an invalid argument, show nonprinting characters
+     by using the quoting style ARGMATCH_QUOTING_STYLE.  Do not use
+     literal_quoting_style.  */
