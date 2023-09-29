@@ -3,14 +3,19 @@ if [ "$configure_cmd" = "" ]; then
 	configure_cmd="./configure"
 fi
 
-if [ "$config_libs" != "" ]; then
-	$configure_cmd LIBS="$config_libs" $config_options
-else
-	$configure_cmd $config_options
-fi
+if [ "$no_configure" = "" ]; then
+  # we are doing a configure
 
-# a pause for checking the config output
-read pause
+  if [ "$config_libs" != "" ]; then
+	$configure_cmd LIBS="$config_libs" $config_options
+  else
+	$configure_cmd $config_options
+  fi
+
+  # a pause for checking the configure output
+  read pause
+
+fi
 
 if [ "$make_cmd" = "" ]; then
 	make_cmd=make

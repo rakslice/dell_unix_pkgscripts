@@ -6,6 +6,7 @@ patches=$srcdir/patches
 
 # reset build vars
 config_vars=
+no_configure=
 
 
 if [ "$packagedir" = "" ]; then
@@ -37,8 +38,13 @@ if [ ! -d $packagedir ]; then
 		exit 1
 	fi
 
-	tar x${letter}f $tarball_prefix*
+	if [ "$use_old_tar" != "" ]; then
+		/usr/local/bin/gunzip -c $tarball_prefix* | tar xf -
+	else
+		tar x${letter}f $tarball_prefix*
+	fi
 
+	use_old_tar=
 fi
 
 [ -d $packagedir ]
