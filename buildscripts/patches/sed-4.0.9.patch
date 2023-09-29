@@ -1,0 +1,20 @@
+diff -ur stock/sed-4.0.9/lib/mkstemp.c sed-4.0.9/lib/mkstemp.c
+--- stock/sed-4.0.9/lib/mkstemp.c	Fri Mar 14 22:38:42 2003
++++ sed-4.0.9/lib/mkstemp.c	Thu Sep 28 04:54:36 2023
+@@ -13,6 +13,7 @@
+ #endif /* HAVE_STDLIB_H */
+ 
+ #ifdef HAVE_SYS_FILE_H
++# include <sys/types.h>
+ # include <sys/file.h>
+ #endif /* HAVE_SYS_FILE_H */
+ 
+@@ -27,6 +28,8 @@
+ #ifdef HAVE_FCNTL_H
+ #include <fcntl.h>
+ #endif /* HAVE_FCNTL_H */
++
++#include <sys/fcntl.h>
+ 
+ #include <limits.h>
+ #include <errno.h>
