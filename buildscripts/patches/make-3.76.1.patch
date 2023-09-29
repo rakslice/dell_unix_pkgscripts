@@ -1,0 +1,30 @@
+diff -cr stock/make-3.76.1/main.c make-3.76.1/main.c
+*** stock/make-3.76.1/main.c	Fri Sep 19 06:20:44 1997
+--- make-3.76.1/main.c	Sat Sep 23 05:22:02 2023
+***************
+*** 401,406 ****
+--- 401,407 ----
+  
+  /* Mask of signals that are being caught with fatal_error_signal.  */
+  
++ 
+  #ifdef	POSIX
+  sigset_t fatal_signal_set;
+  #else
+diff -cr stock/make-3.76.1/make.h make-3.76.1/make.h
+*** stock/make-3.76.1/make.h	Wed Aug 27 13:31:16 1997
+--- make-3.76.1/make.h	Sat Sep 23 05:22:21 2023
+***************
+*** 29,34 ****
+--- 29,39 ----
+  #define HAVE_CONFIG_H
+  
+  
++ typedef struct {                /* signal set type */
++         unsigned long   sigbits[4];
++ } sigset_t;
++ 
++ 
+  /* Use prototypes if available.  */
+  #if defined (__cplusplus) || (defined (__STDC__) && __STDC__)
+  #undef  PARAMS
