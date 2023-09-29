@@ -4,9 +4,10 @@ set -x
 
 package=tiff-3.9.1
 
-. preamble.inc
+PATH=/usr/local/bin:$PATH
+export PATH
 
-#cp $codefragments/strcasecmp.c src/lib/
+. preamble.inc
 
 config_libs="-lmp"
 config_options="--enable-static=yes --enable-shared=yes"

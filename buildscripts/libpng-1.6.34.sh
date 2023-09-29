@@ -4,6 +4,9 @@ set -x
 
 package=libpng-1.6.34
 
+PATH=/usr/local/bin:$PATH
+export PATH
+
 . preamble.inc
 
 #cp $codefragments/strcasecmp.c src/lib/
