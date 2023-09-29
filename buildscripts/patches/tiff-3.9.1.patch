@@ -1,0 +1,36 @@
+diff -ur stock/tiff-3.9.1/port/strcasecmp.c tiff-3.9.1/port/strcasecmp.c
+--- stock/tiff-3.9.1/port/strcasecmp.c	Thu Jul  7 09:34:06 2005
++++ tiff-3.9.1/port/strcasecmp.c	Thu Sep 28 04:11:26 2023
+@@ -37,6 +37,8 @@
+ #include <ctype.h>
+ #include <string.h>
+ 
++
++
+ int
+ strcasecmp(const char *s1, const char *s2)
+ {
+@@ -46,5 +48,23 @@
+ 	while (tolower(*us1) == tolower(*us2++))
+ 		if (*us1++ == '\0')
+ 			return (0);
++	return (tolower(*us1) - tolower(*--us2));
++}
++
++int
++strncasecmp(const char *s1, const char *s2, size_t n)
++{
++	const unsigned char *us1 = (const unsigned char *)s1,
++			*us2 = (const unsigned char *)s2;
++	size_t count = 0;
++
++	while (tolower(*us1) == tolower(*us2++)) {
++		if (*us1++ == '\0')
++			return (0);
++		count++;
++		if (count >= n) {
++			return (0);
++		}
++	}
+ 	return (tolower(*us1) - tolower(*--us2));
+ }

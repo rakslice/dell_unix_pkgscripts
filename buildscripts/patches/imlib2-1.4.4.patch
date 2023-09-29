@@ -1,0 +1,122 @@
+diff -ur stock/imlib2-1.4.4/src/lib/Makefile.in imlib2-1.4.4/src/lib/Makefile.in
+--- stock/imlib2-1.4.4/src/lib/Makefile.in	Wed May  5 11:26:28 2010
++++ imlib2-1.4.4/src/lib/Makefile.in	Thu Sep 28 23:21:53 2023
+@@ -89,7 +89,7 @@
+ am__v_lt_0 = --silent
+ libImlib2_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
+ 	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
+-	$(libImlib2_la_LDFLAGS) $(LDFLAGS) -o $@
++	-lnsl -lsocket $(libImlib2_la_LDFLAGS) $(LDFLAGS) -o $@
+ DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)
+ depcomp = $(SHELL) $(top_srcdir)/depcomp
+ am__depfiles_maybe = depfiles
+diff -ur stock/imlib2-1.4.4/src/lib/font_load.c imlib2-1.4.4/src/lib/font_load.c
+--- stock/imlib2-1.4.4/src/lib/font_load.c	Tue Jul 28 11:35:59 2009
++++ imlib2-1.4.4/src/lib/font_load.c	Thu Sep 28 05:24:06 2023
+@@ -221,6 +221,7 @@
+ int
+ imlib_font_insert_into_fallback_chain_imp(ImlibFont * fn, ImlibFont * fallback)
+ {
++   ImlibFont          *tmp;
+    /* avoid infinite recursion */
+    if (fn == fallback)
+       return 1;
+@@ -229,7 +230,7 @@
+    imlib_font_remove_from_fallback_chain_imp(fallback);
+ 
+    /* insert fallback into fn's font chain */
+-   ImlibFont          *tmp = fn->fallback_next;
++   tmp = fn->fallback_next;
+ 
+    fn->fallback_next = fallback;
+    fallback->fallback_prev = fn;
+diff -ur stock/imlib2-1.4.4/src/lib/image.c imlib2-1.4.4/src/lib/image.c
+--- stock/imlib2-1.4.4/src/lib/image.c	Wed May  5 11:25:49 2010
++++ imlib2-1.4.4/src/lib/image.c	Thu Sep 28 22:26:45 2023
+@@ -14,6 +14,8 @@
+ #include "loaderpath.h"
+ #include "Imlib2.h"
+ 
++#include "strcasecmp.c"
++
+ static ImlibImage  *images = NULL;
+ 
+ #ifdef BUILD_X11
+diff -ur stock/imlib2-1.4.4/src/modules/loaders/loader_png.c imlib2-1.4.4/src/modules/loaders/loader_png.c
+--- stock/imlib2-1.4.4/src/modules/loaders/loader_png.c	Thu Feb 11 12:02:11 2010
++++ imlib2-1.4.4/src/modules/loaders/loader_png.c	Thu Sep 28 23:39:21 2023
+@@ -58,7 +58,7 @@
+              fclose(f);
+              return 0;
+           }
+-        if (setjmp(png_ptr->jmpbuf))
++        if (setjmp(/*png_ptr->jmpbuf*/ png_jmpbuf(png_ptr)))
+           {
+              png_destroy_read_struct(&png_ptr, &info_ptr, NULL);
+              fclose(f);
+@@ -245,6 +245,7 @@
+    char                pper = 0;
+    ImlibImageTag      *tag;
+    int                 quality = 75, compression = 3, num_passes = 1, pass;
++   int                 our_interlace;
+ 
+    if (!im->data)
+       return 0;
+@@ -265,7 +266,7 @@
+         png_destroy_write_struct(&png_ptr, (png_infopp) NULL);
+         return 0;
+      }
+-   if (setjmp(png_ptr->jmpbuf))
++   if (setjmp(/*png_ptr->jmpbuf*/ png_jmpbuf(png_ptr)))
+      {
+         fclose(f);
+         png_destroy_write_struct(&png_ptr, (png_infopp) & info_ptr);
+@@ -273,11 +274,13 @@
+         return 0;
+      }
+ 
++     our_interlace = PNG_INTERLACE_NONE;
++
+    /* check whether we should use interlacing */
+    if ((tag = __imlib_GetTag(im, "interlacing")) && tag->val)
+      {
+ #ifdef PNG_WRITE_INTERLACING_SUPPORTED
+-          png_ptr->interlaced = PNG_INTERLACE_ADAM7;
++          our_interlace = PNG_INTERLACE_ADAM7;
+           num_passes = png_set_interlace_handling(png_ptr);
+ #endif
+      }
+@@ -286,7 +289,7 @@
+    if (im->flags & F_HAS_ALPHA)
+      {
+         png_set_IHDR(png_ptr, info_ptr, im->w, im->h, 8,
+-                     PNG_COLOR_TYPE_RGB_ALPHA, png_ptr->interlaced,
++                     PNG_COLOR_TYPE_RGB_ALPHA, our_interlace,
+                      PNG_COMPRESSION_TYPE_BASE, PNG_FILTER_TYPE_BASE);
+ #ifdef WORDS_BIGENDIAN
+         png_set_swap_alpha(png_ptr);
+@@ -297,7 +300,7 @@
+    else
+      {
+         png_set_IHDR(png_ptr, info_ptr, im->w, im->h, 8, PNG_COLOR_TYPE_RGB,
+-                     png_ptr->interlaced, PNG_COMPRESSION_TYPE_BASE,
++                     our_interlace, PNG_COMPRESSION_TYPE_BASE,
+                      PNG_FILTER_TYPE_BASE);
+         data = malloc(im->w * 3 * sizeof(char));
+      }
+diff -ur stock/imlib2-1.4.4/src/modules/loaders/loader_tga.c imlib2-1.4.4/src/modules/loaders/loader_tga.c
+--- stock/imlib2-1.4.4/src/modules/loaders/loader_tga.c	Tue Jul 28 11:35:59 2009
++++ imlib2-1.4.4/src/modules/loaders/loader_tga.c	Thu Sep 28 22:32:49 2023
+@@ -15,6 +15,12 @@
+ #include "colormod.h"
+ #include "blend.h"
+ 
++#ifdef __svr4__ 
++#ifndef MAP_FAILED
++#define MAP_FAILED ((caddr_t)-1)
++#endif
++#endif
++
+ /* flip an inverted image - see RLE reading below */
+ static void         tgaflip(DATA32 * in, int w, int h);
+ 

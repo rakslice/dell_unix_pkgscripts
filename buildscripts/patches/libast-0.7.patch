@@ -1,0 +1,42 @@
+diff -ur -x sysdefs.h stock/libast-0.7/include/libast/types.h.in libast-0.7/include/libast/types.h.in
+--- stock/libast-0.7/include/libast/types.h.in	Tue Dec 28 22:39:10 2004
++++ libast-0.7/include/libast/types.h.in	Fri Sep 29 00:59:18 2023
+@@ -779,6 +779,10 @@
+  */
+ typedef spif_uint16_t spif_sockport_t;
+ 
++#ifdef __svr4__
++typedef int socklen_t;
++#endif
++
+ /**
+  * The length of a socket address structure.
+  *
+diff -ur -x sysdefs.h stock/libast-0.7/include/libast.h libast-0.7/include/libast.h
+--- stock/libast-0.7/include/libast.h	Mon Jan 23 10:17:26 2006
++++ libast-0.7/include/libast.h	Thu Sep 28 22:39:33 2023
+@@ -107,6 +107,10 @@
+ #  endif
+ #endif
+ 
++#ifdef __svr4__
++#include <varargs.h>
++#endif
++
+ #include <libast/types.h>
+ #include <libast/obj.h>
+ 
+diff -ur -x sysdefs.h stock/libast-0.7/src/snprintf.c libast-0.7/src/snprintf.c
+--- stock/libast-0.7/src/snprintf.c	Fri Jul 23 15:34:05 2004
++++ libast-0.7/src/snprintf.c	Thu Sep 28 22:41:45 2023
+@@ -9,6 +9,10 @@
+ # undef HAVE_STDARG_H
+ #endif
+ 
++#ifdef __svr4__
++#include <sys/types.h>
++#endif
++
+ static const char __attribute__((unused)) cvs_ident[] = "$Id: snprintf.c,v 1.6 2004/07/23 21:38:39 mej Exp $";
+ 
+ /* 
