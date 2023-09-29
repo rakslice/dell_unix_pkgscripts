@@ -1,0 +1,15 @@
+diff -cr stock/tar-1.13.94/src/utf8.c tar-1.13.94/src/utf8.c
+*** stock/tar-1.13.94/src/utf8.c	Sun Apr  4 01:53:30 2004
+--- tar-1.13.94/src/utf8.c	Sat Sep 23 05:13:06 2023
+***************
+*** 272,277 ****
+--- 272,280 ----
+  
+  #ifndef HAVE_LIBICONV
+  
++ typedef void * iconv_t;
++ #define ICONV_CONST const
++ 
+  iconv_t
+  iconv_open (const char *tocode, const char *fromcode)
+  {
