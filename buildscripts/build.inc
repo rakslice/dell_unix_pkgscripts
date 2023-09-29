@@ -4,9 +4,9 @@ if [ "$configure_cmd" = "" ]; then
 fi
 
 if [ "$config_libs" != "" ]; then
-	$config_vars $configure_cmd LIBS="$config_libs" $config_options
+	$configure_cmd LIBS="$config_libs" $config_options
 else
-	$config_vars $configure_cmd $config_options
+	$configure_cmd $config_options
 fi
 
 if [ "$make_cmd" = "" ]; then
