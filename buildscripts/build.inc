@@ -9,6 +9,9 @@ else
 	$configure_cmd $config_options
 fi
 
+# a pause for checking the config output
+read pause
+
 if [ "$make_cmd" = "" ]; then
 	make_cmd=make
 fi
