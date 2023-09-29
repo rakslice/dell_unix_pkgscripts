@@ -4,6 +4,9 @@ set -x
 
 package=freetype-2.3.9
 
+PATH=/usr/local/bin:$PATH
+export PATH
+
 . preamble.inc
 
 #cp $codefragments/strcasecmp.c src/lib/

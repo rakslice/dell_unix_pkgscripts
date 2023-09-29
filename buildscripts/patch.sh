@@ -7,6 +7,9 @@ set -x
 
 package=patch-2.5.4
 
+PATH=/usr/local/bin:$PATH
+export PATH
+
 use_old_tar=1
 
 . preamble.inc
