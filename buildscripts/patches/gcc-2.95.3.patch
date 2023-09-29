@@ -1,0 +1,14 @@
+diff -cr stock/gcc-2.95.3/gcc/collect2.c gcc-2.95.3/gcc/collect2.c
+*** stock/gcc-2.95.3/gcc/collect2.c	Thu Jan 25 06:03:01 2001
+--- gcc-2.95.3/gcc/collect2.c	Sat Sep 23 05:32:16 2023
+***************
+*** 347,352 ****
+--- 347,354 ----
+  #endif
+  }
+  
++ #define NSIG 32
++ 
+  static const char *
+  my_strsignal (s)
+       int s;
