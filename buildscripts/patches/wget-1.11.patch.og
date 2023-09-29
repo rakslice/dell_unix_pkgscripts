@@ -1,0 +1,61 @@
+diff -cr stock/wget-1.11/configure wget-1.11/configure
+*** stock/wget-1.11/configure	Sat Jan 26 01:55:50 2008
+--- wget-1.11/configure	Fri Sep 29 04:20:25 2023
+***************
+*** 8911,8924 ****
+  
+  
+  
+! cat >>confdefs.h <<\_ACEOF
+! #define HAVE_STRCASECMP 1
+! _ACEOF
+  
+  
+! cat >>confdefs.h <<\_ACEOF
+! #define HAVE_STRNCASECMP 1
+! _ACEOF
+  
+  
+  cat >>confdefs.h <<\_ACEOF
+--- 8911,8924 ----
+  
+  
+  
+! #cat >>confdefs.h <<\_ACEOF
+! ##define HAVE_STRCASECMP 1
+! #_ACEOF
+  
+  
+! #cat >>confdefs.h <<\_ACEOF
+! ##define HAVE_STRNCASECMP 1
+! #_ACEOF
+  
+  
+  cat >>confdefs.h <<\_ACEOF
+diff -cr stock/wget-1.11/src/host.c wget-1.11/src/host.c
+*** stock/wget-1.11/src/host.c	Sat Jan 26 01:26:57 2008
+--- wget-1.11/src/host.c	Fri Sep 29 04:17:04 2023
+***************
+*** 36,41 ****
+--- 36,42 ----
+  #include <assert.h>
+  
+  #ifndef WINDOWS
++ # include <sys/types.h>
+  # include <sys/socket.h>
+  # include <netinet/in.h>
+  # ifndef __BEOS__
+diff -cr stock/wget-1.11/src/utils.c wget-1.11/src/utils.c
+*** stock/wget-1.11/src/utils.c	Sat Jan 26 01:26:58 2008
+--- wget-1.11/src/utils.c	Fri Sep 29 04:17:09 2023
+***************
+*** 1681,1686 ****
+--- 1681,1688 ----
+  # ifdef HAVE_SIGSETJMP
+  #  define SETJMP(env) sigsetjmp (env, 1)
+  
++ typedef int sigjmp_buf[_SIGJBLEN];
++ 
+  static sigjmp_buf run_with_timeout_env;
+  
+  static void
