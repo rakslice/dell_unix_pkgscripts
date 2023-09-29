@@ -19,3 +19,5 @@ sh bash-2.sh
 sh gawk.sh
 sh patch.sh
 sh freetype.sh
+sh sed.sh
+sh zlib.sh
