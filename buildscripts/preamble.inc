@@ -30,16 +30,19 @@ if [ ! -d $packagedir ]; then
 	letter=
 	if [ -f $tarball_prefix.gz ]; then
 		letter=z
+		old_prog=/usr/local/bin/gunzip
 	elif [ -f $tarball_prefix.bz2 ]; then
 		letter=j
+		old_prog=/usr/local/bin/bunzip2
 	elif [ -f $tarball_prefix ]; then
 		letter=
+		old_prog=
 	else
 		exit 1
 	fi
 
 	if [ "$use_old_tar" != "" ]; then
-		/usr/local/bin/gunzip -c $tarball_prefix* | tar xf -
+		$old_prog -c $tarball_prefix* | tar xf -
 	else
 		tar x${letter}f $tarball_prefix*
 	fi
