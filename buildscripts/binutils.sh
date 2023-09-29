@@ -4,6 +4,8 @@ set -x
 
 package=binutils-2.9.1
 
+use_old_tar=1
+
 . preamble.inc
 
 #cp $codefragments/strcasecmp.c src/lib/
