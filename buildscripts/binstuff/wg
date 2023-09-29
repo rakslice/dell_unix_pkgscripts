@@ -1,0 +1,21 @@
+#!/usr/local/bin/bash
+set -e
+set -u
+
+
+base="192.168.2.156:8122/source/open%20source"
+
+matches="$(/usr/local/bin/wget -qO - "$base" | /usr/local/bin/egrep '<a href="'"$1"'[^"]*">' | cut -d'"' -f2)"
+
+if [ "$matches" == "" ]; then
+	echo "No matches"
+	exit 1
+fi
+
+if [ $(echo "$matches" | wc -l) -eq 1 ]; then
+	echo wget "$base/$matches"
+	/usr/local/bin/wget "$base/$matches"
+else
+	echo "Multiple matches:"
+	echo "$matches"
+fi

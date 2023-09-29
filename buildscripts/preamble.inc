@@ -1,0 +1,44 @@
+
+srcdir=/home/dell
+incdir=$srcdir/buildscripts
+codefragments=$srcdir/codefragments
+patches=$srcdir/patches
+
+# reset build vars
+config_vars=
+
+
+if [ "$packagedir" = "" ]; then
+	packagedir=$package
+fi
+
+cd $srcdir
+
+if [ ! -d $packagedir ]; then
+
+	if [ "$tarball_prefix" = "" ]; then
+		tarball_prefix="$package.tar"
+	fi
+
+	if [ ! -f $tarball_prefix.* ]; then
+		wg $tarball_prefix
+	fi
+
+	[ -f $tarball_prefix.* ]
+
+	letter=
+	if [ -f $tarball_prefix.gz ]; then
+		letter=z
+	elif [ -f $tarball_prefix.bz2 ]; then
+		letter=j
+	else
+		exit 1
+	fi
+
+	tar x${letter}f $tarball_prefix.*
+
+fi
+
+[ -d $packagedir ]
+
+cd $packagedir

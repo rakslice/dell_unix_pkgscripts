@@ -1,0 +1,10 @@
+#!/bin/sh
+set -x
+
+
+PATH=/usr/local/bin:/usr/dell/gcc-2/bin:$PATH
+export PATH
+
+#sh
+/usr/local/bin/bash
+

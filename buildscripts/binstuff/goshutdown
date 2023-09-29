@@ -1,0 +1,5 @@
+#!/bin/sh
+set -x
+
+cd /
+/usr/sbin/shutdown -y -g0

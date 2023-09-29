@@ -1,0 +1,10 @@
+#!/bin/sh
+set -x
+
+DISPLAY=192.168.2.106:2
+export DISPLAY
+
+xterm&
+mwm&
+
+
