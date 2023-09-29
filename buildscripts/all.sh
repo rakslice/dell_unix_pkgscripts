@@ -25,4 +25,6 @@ sh grep-2.5.4.sh
 sh libpng-1.6.34.sh
 sh jpeg-6b.sh
 sh tiff-3.9.1.sh
-
+sh imlib.sh
+sh diffutils.sh
+sh windowmaker.sh

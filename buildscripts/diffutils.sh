@@ -6,10 +6,10 @@ package=diffutils-2.7
 
 use_old_tar=1
 
-. preamble.inc
-
-PATH=/usr/local/bin:/usr/dell/gcc-2/bin:$PATH
+PATH=/usr/local/bin:$PATH
 export PATH
+
+. preamble.inc
 
 . $incdir/build.inc
 

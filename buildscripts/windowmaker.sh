@@ -4,6 +4,9 @@ set -x
 
 package=WindowMaker-0.70.0
 
+PATH=/usr/local/bin:$PATH
+export PATH
+
 . preamble.inc
 
 cp $codefragments/strcasecmp.c WINGs/
