@@ -20,22 +20,24 @@ if [ ! -d $packagedir ]; then
 		tarball_prefix="$package.tar"
 	fi
 
-	if [ ! -f $tarball_prefix.* ]; then
+	if [ ! -f $tarball_prefix* ]; then
 		wg $tarball_prefix
 	fi
 
-	[ -f $tarball_prefix.* ]
+	[ -f $tarball_prefix* ]
 
 	letter=
 	if [ -f $tarball_prefix.gz ]; then
 		letter=z
 	elif [ -f $tarball_prefix.bz2 ]; then
 		letter=j
+	elif [ -f $tarball_prefix ]; then
+		letter=
 	else
 		exit 1
 	fi
 
-	tar x${letter}f $tarball_prefix.*
+	tar x${letter}f $tarball_prefix*
 
 fi
 
