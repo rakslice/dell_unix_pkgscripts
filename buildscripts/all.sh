@@ -14,4 +14,5 @@ sh bash-1.sh
 sh tar.sh
 sh make.sh
 sh binutils.sh
+sh gcc.sh
 
