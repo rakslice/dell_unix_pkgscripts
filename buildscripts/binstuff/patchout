@@ -13,7 +13,7 @@ shift
 
 if [ ! -d "stock/$dirname" ]; then
 	pushd stock
-	archive="$(basename ../$dirname.tar.*)"
+	archive="$(basename ../$dirname.tar*)"
 	ext=${archive##*.}
 	case $ext in \
 		bz2 )
@@ -25,7 +25,7 @@ if [ ! -d "stock/$dirname" ]; then
 		*)
 			letter=
 	esac
-	tar x${letter}f ../$dirname.tar.*
+	tar x${letter}f ../$dirname.tar*
 	popd
 fi
 
