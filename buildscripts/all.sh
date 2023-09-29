@@ -18,6 +18,7 @@ sh gcc.sh
 sh bash-2.sh
 sh gawk.sh
 sh patch.sh
+sh make-3.82.sh
 sh freetype.sh
 sh sed.sh
 sh zlib.sh
