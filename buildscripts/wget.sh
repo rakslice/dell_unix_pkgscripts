@@ -8,8 +8,9 @@ use_old_tar=1
 
 . preamble.inc
 
-if [ ! -f .patches ]; then
-	( /usr/bin/patch -p1 < $patches/$package.patch.og )
+if [ ! -f .patched ]; then
+	/usr/bin/patch -p1 < $patches/$package.patch.og
+	touch .patched
 fi
 
 #cp $codefragments/strcasecmp.c src/lib/
