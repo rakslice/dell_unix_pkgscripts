@@ -27,6 +27,8 @@ export CONFIG_SHELL
 
 . $incdir/build.inc
 
+cp /usr/local/bin/bash /usr/local/bin/bash-2
+
 unset CONFIG_SHELL
 unset SHELL
 
