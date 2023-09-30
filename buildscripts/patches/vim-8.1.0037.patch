@@ -1,0 +1,539 @@
+diff -ur -x Makefile stock/vim-8.1.0037/src/channel.c vim-8.1.0037/src/channel.c
+--- stock/vim-8.1.0037/src/channel.c	Wed Jun  6 12:04:07 2018
++++ vim-8.1.0037/src/channel.c	Fri Sep 29 18:02:53 2023
+@@ -12,6 +12,10 @@
+ 
+ #include "vim.h"
+ 
++#if ( defined(_AIX) || defined(__svr4__) ) && defined(__i386__)
++typedef caddr_t socklen_t;
++#endif
++
+ #if defined(FEAT_JOB_CHANNEL) || defined(PROTO)
+ 
+ /* TRUE when netbeans is running with a GUI. */
+diff -ur -x Makefile stock/vim-8.1.0037/src/edit.c vim-8.1.0037/src/edit.c
+--- stock/vim-8.1.0037/src/edit.c	Wed Jun  6 12:04:07 2018
++++ vim-8.1.0037/src/edit.c	Fri Sep 29 18:02:53 2023
+@@ -8367,14 +8367,14 @@
+ {
+     if (p_hkmapp)   /* phonetic mapping, by Ilya Dogolazky */
+     {
+-	enum {hALEF=0, BET, GIMEL, DALET, HEI, VAV, ZAIN, HET, TET, IUD,
++	enum {hALEF=0, BET, GIMEL, DALET, HEI, VAV, ZAIN, CH_HET, TET, IUD,
+ 	    KAFsofit, hKAF, LAMED, MEMsofit, MEM, NUNsofit, NUN, SAMEH, AIN,
+ 	    PEIsofit, PEI, ZADIsofit, ZADI, KOF, RESH, hSHIN, TAV};
+ 	static char_u map[26] =
+ 	    {(char_u)hALEF/*a*/, (char_u)BET  /*b*/, (char_u)hKAF    /*c*/,
+ 	     (char_u)DALET/*d*/, (char_u)-1   /*e*/, (char_u)PEIsofit/*f*/,
+ 	     (char_u)GIMEL/*g*/, (char_u)HEI  /*h*/, (char_u)IUD     /*i*/,
+-	     (char_u)HET  /*j*/, (char_u)KOF  /*k*/, (char_u)LAMED   /*l*/,
++	     (char_u)CH_HET  /*j*/, (char_u)KOF  /*k*/, (char_u)LAMED   /*l*/,
+ 	     (char_u)MEM  /*m*/, (char_u)NUN  /*n*/, (char_u)SAMEH   /*o*/,
+ 	     (char_u)PEI  /*p*/, (char_u)-1   /*q*/, (char_u)RESH    /*r*/,
+ 	     (char_u)ZAIN /*s*/, (char_u)TAV  /*t*/, (char_u)TET     /*u*/,
+diff -ur -x Makefile stock/vim-8.1.0037/src/gui_beval.c vim-8.1.0037/src/gui_beval.c
+--- stock/vim-8.1.0037/src/gui_beval.c	Wed Jun  6 12:04:07 2018
++++ vim-8.1.0037/src/gui_beval.c	Fri Sep 29 18:02:53 2023
+@@ -1124,13 +1124,27 @@
+ 	 * multi-line label.  This doesn't work for all languages, but
+ 	 * XmStringCreateLocalized() doesn't do multi-line labels... */
+ 	if (beval->msgCB != NULL)
+-	    s = XmStringCreateLtoR((char *)beval->msg, XmFONTLIST_DEFAULT_TAG);
++	    s = XmStringCreateLtoR((char *)beval->msg,
++#if (XmVersion >= 1002)
++		 XmFONTLIST_DEFAULT_TAG
++#else
++		 XmSTRING_DEFAULT_CHARSET
++#endif
++		);
+ 	else
++#if (XmVersion >= 1002)
+ 	    s = XmStringCreateLocalized((char *)beval->msg);
++#else
++	    s = XmStringCreateSimple((char *)beval->msg);
++#endif
+ 	{
+ 	    XmFontList fl;
+ 
++#if (XmVersion >= 1002)
+ 	    fl = gui_motif_fontset2fontlist(&gui.tooltip_fontset);
++#else
++	    fl = NULL;
++#endif
+ 	    if (fl == NULL)
+ 	    {
+ 		XmStringFree(s);
+@@ -1256,10 +1270,14 @@
+     {
+ 	XmFontList fl;
+ 
++#if (XmVersion >= 1002)
+ 	fl = gui_motif_fontset2fontlist(&gui.tooltip_fontset);
++#endif
+ 	XtSetArg(args[n], XmNforeground, gui.tooltip_fg_pixel); n++;
+ 	XtSetArg(args[n], XmNbackground, gui.tooltip_bg_pixel); n++;
++#if (XmVersion >= 1002)
+ 	XtSetArg(args[n], XmNfontList, fl); n++;
++#endif
+ 	XtSetArg(args[n], XmNalignment, XmALIGNMENT_BEGINNING); n++;
+ 	beval->balloonLabel = XtCreateManagedWidget("balloonLabel",
+ 			xmLabelWidgetClass, beval->balloonShell, args, n);
+diff -ur -x Makefile stock/vim-8.1.0037/src/gui_motif.c vim-8.1.0037/src/gui_motif.c
+--- stock/vim-8.1.0037/src/gui_motif.c	Wed Jun  6 12:04:07 2018
++++ vim-8.1.0037/src/gui_motif.c	Fri Sep 29 18:02:53 2023
+@@ -1590,10 +1590,14 @@
+ 		{
+ 		    Arg args[1];
+ 
++#if (XmVersion >= 1002)
+ 		    args[0].name = XmNfontList;
+ 		    args[0].value = (XtArgVal)gui_motif_fontset2fontlist(
+ 						    &gui.tooltip_fontset);
+ 		    XtSetValues(mp->tip->balloonLabel, &args[0], XtNumber(args));
++#else
++		    // If we're in X11R5 but no motif 1.2 maybe we can do something appropriate...
++#endif
+ 		}
+ #endif
+ 	    }
+@@ -2098,7 +2102,7 @@
+ {
+     XmFontList fl;
+ 
+-#ifdef FONTSET_ALWAYS
++#if (XmVersion >= 1002) && defined(FONTSET_ALWAYS)
+     if (gui.fontset != NOFONTSET)
+     {
+ 	fl = gui_motif_fontset2fontlist((XFontSet *)&gui.fontset);
+@@ -2147,7 +2151,9 @@
+  */
+ 
+ #include <Xm/FileSB.h>
++#if (XmVersion >= 1002)
+ #include <Xm/XmStrDefs.h>
++#endif
+ 
+ typedef struct dialog_callback_arg
+ {
+@@ -2833,11 +2839,13 @@
+ 	dfltbutton = butcount;
+     XtVaSetValues(dialogform,
+ 	    XmNdefaultButton, buttons[dfltbutton - 1], NULL);
++#if (XmVersion >= 1002)
+     if (textfield != NULL)
+ 	XtVaSetValues(dialogform, XmNinitialFocus, dialogtextfield, NULL);
+     else
+ 	XtVaSetValues(dialogform, XmNinitialFocus, buttons[dfltbutton - 1],
+ 									NULL);
++#endif
+ 
+     manage_centered(dialogform);
+     activate_dialog_mnemonics(dialogform);
+@@ -3421,6 +3429,7 @@
+ gui_motif_menu_fontlist(Widget id UNUSED)
+ {
+ #ifdef FEAT_MENU
++#if (XmVersion >= 1002)
+ #ifdef FONTSET_ALWAYS
+     if (gui.menu_fontset != NOFONTSET)
+     {
+@@ -3465,6 +3474,7 @@
+     }
+ #endif
+ #endif
++#endif
+ }
+ 
+ 
+@@ -3912,8 +3922,10 @@
+ 	w = XtVaCreateManagedWidget("directionFrameLabel",
+ 		xmLabelGadgetClass, frame,
+ 		XmNlabelString, str,
++#if (XmVersion >= 1002)
+ 		XmNchildHorizontalAlignment, XmALIGNMENT_BEGINNING,
+ 		XmNchildType, XmFRAME_TITLE_CHILD,
++#endif
+ 		NULL);
+ 	XmStringFree(str);
+ 	gui_motif_menu_fontlist(w);
+diff -ur -x Makefile stock/vim-8.1.0037/src/gui_xmdlg.c vim-8.1.0037/src/gui_xmdlg.c
+--- stock/vim-8.1.0037/src/gui_xmdlg.c	Wed Jun  6 12:04:07 2018
++++ vim-8.1.0037/src/gui_xmdlg.c	Fri Sep 29 18:02:53 2023
+@@ -38,6 +38,12 @@
+ #include <X11/StringDefs.h>
+ #include <X11/Intrinsic.h>
+ 
++#if (XmVersion >= 1002)
++#define XM_STRING_CREATE(s) XmStringCreateLocalized(s)
++#else
++#define XM_STRING_CREATE(s) XmStringCreateSimple(s)
++#endif
++
+ extern Widget vimShell;
+ 
+ #ifdef FEAT_MENU
+@@ -446,7 +452,7 @@
+ 	{
+ 	    Widget button;
+ 
+-	    items[i] = XmStringCreateLocalized(list[ENCODING][i]);
++	    items[i] = XM_STRING_CREATE(list[ENCODING][i]);
+ 
+ 	    if (i < (int)n_items)
+ 	    {
+@@ -527,7 +533,7 @@
+ 
+ 	for (i = 0; i < count[idx]; ++i)
+ 	{
+-	    items[i] = XmStringCreateLocalized(list[idx][i]);
++	    items[i] = XM_STRING_CREATE(list[idx][i]);
+ 	    XtFree(list[idx][i]);
+ 	}
+ 	XmListDeleteAllItems(w);
+@@ -535,7 +541,7 @@
+ 	if (data->sel[idx])
+ 	{
+ 	    XmStringFree(items[0]);
+-	    items[0] = XmStringCreateLocalized(data->sel[idx]);
++	    items[0] = XM_STRING_CREATE(data->sel[idx]);
+ 	    XmListSelectItem(w, items[0], False);
+ 	    XmListSetBottomItem(w, items[0]);
+ 	}
+@@ -577,7 +583,7 @@
+ 
+     if (do_sel)
+     {
+-	str = XmStringCreateLocalized(newSize);
++	str = XM_STRING_CREATE(newSize);
+ 	XmListSelectItem(data->list[SIZE], str, True);
+ 	XmListSetBottomItem(data->list[SIZE], str);
+ 	XmStringFree(str);
+@@ -602,7 +608,8 @@
+     font_list = gui_motif_create_fontlist(font);
+ 
+     n = 0;
+-    str = XmStringCreateLocalized("AaBbZzYy 0123456789");
++
++    str = XM_STRING_CREATE("AaBbZzYy 0123456789");
+     XtSetArg(args[n], XmNlabelString, str); n++;
+     XtSetArg(args[n], XmNfontList, font_list); n++;
+ 
+@@ -700,7 +707,7 @@
+ 	char	    *nomatch_msg = _("no specific match");
+ 
+ 	n = 0;
+-	str = XmStringCreateLocalized(nomatch_msg);
++	str = XM_STRING_CREATE(nomatch_msg);
+ 	XtSetArg(args[n], XmNlabelString, str); ++n;
+ 	XtSetValues(data->sample, args, n);
+ 	apply_fontlist(data->sample);
+@@ -906,7 +913,7 @@
+ 
+     /* Set the title of the Dialog window. */
+     data->dialog = XmCreateDialogShell(parent, "fontSelector", NULL, 0);
+-    str = XmStringCreateLocalized(_("Vim - Font Selector"));
++    str = XM_STRING_CREATE(_("Vim - Font Selector"));
+ 
+     /* Create form popup dialog widget. */
+     form = XtVaCreateWidget("form",
+@@ -975,7 +982,7 @@
+ 	    XmNcolumns, 60,
+ 	    NULL);
+ 
+-    str = XmStringCreateLocalized(_("Name:"));
++    str = XM_STRING_CREATE(_("Name:"));
+     name = XtVaCreateManagedWidget("fontNameLabel",
+ 	    xmLabelGadgetClass, form,
+ 	    XmNlabelString, str,
+@@ -1015,7 +1022,7 @@
+ 	    NULL);
+ 
+     /* create toggle button */
+-    str = XmStringCreateLocalized(_("Show size in Points"));
++    str = XM_STRING_CREATE(_("Show size in Points"));
+     size_toggle = XtVaCreateManagedWidget("sizeToggle",
+ 	    xmToggleButtonGadgetClass, form,
+ 	    XmNlabelString, str,
+@@ -1034,7 +1041,7 @@
+ 
+     data->encoding_pulldown = XmCreatePulldownMenu(form,
+ 						 "encodingPulldown", NULL, 0);
+-    str = XmStringCreateLocalized(_("Encoding:"));
++    str = XM_STRING_CREATE(_("Encoding:"));
+     n = 0;
+     XtSetArg(args[n], XmNsubMenuId, data->encoding_pulldown); ++n;
+     XtSetArg(args[n], XmNlabelString, str); ++n;
+@@ -1080,11 +1087,13 @@
+ 	    XmNrightPosition, 50,
+ 	    NULL);
+ 
+-    str = XmStringCreateLocalized(_("Font:"));
++    str = XM_STRING_CREATE(_("Font:"));
+     name = XtVaCreateManagedWidget("nameListLabel", xmLabelGadgetClass, frame,
++#if (XmVersion >= 1002)
+ 	    XmNchildType, XmFRAME_TITLE_CHILD,
+ 	    XmNchildVerticalAlignment, XmALIGNMENT_CENTER,
+ 	    XmNchildHorizontalAlignment, XmALIGNMENT_BEGINNING,
++#endif
+ 	    XmNlabelString, str,
+ 	    NULL);
+     XmStringFree(str);
+@@ -1113,11 +1122,13 @@
+ 	    XmNrightPosition, 80,
+ 	    NULL);
+ 
+-    str = XmStringCreateLocalized(_("Style:"));
++    str = XM_STRING_CREATE(_("Style:"));
+     name = XtVaCreateManagedWidget("styleListLabel", xmLabelWidgetClass, frame,
++#if (XmVersion >= 1002)
+ 	    XmNchildType, XmFRAME_TITLE_CHILD,
+ 	    XmNchildVerticalAlignment, XmALIGNMENT_CENTER,
+ 	    XmNchildHorizontalAlignment, XmALIGNMENT_BEGINNING,
++#endif
+ 	    XmNlabelString, str,
+ 	    NULL);
+     XmStringFree(str);
+@@ -1145,11 +1156,13 @@
+ 	    XmNrightAttachment, XmATTACH_FORM,
+ 	    NULL);
+ 
+-    str = XmStringCreateLocalized(_("Size:"));
++    str = XM_STRING_CREATE(_("Size:"));
+     name = XtVaCreateManagedWidget("sizeListLabel", xmLabelGadgetClass, frame,
++#if (XmVersion >= 1002)
+ 	    XmNchildType, XmFRAME_TITLE_CHILD,
+ 	    XmNchildVerticalAlignment, XmALIGNMENT_CENTER,
+ 	    XmNchildHorizontalAlignment, XmALIGNMENT_BEGINNING,
++#endif
+ 	    XmNlabelString, str,
+ 	    NULL);
+     XmStringFree(str);
+diff -ur -x Makefile stock/vim-8.1.0037/src/if_cscope.c vim-8.1.0037/src/if_cscope.c
+--- stock/vim-8.1.0037/src/if_cscope.c	Wed Jun  6 12:04:07 2018
++++ vim-8.1.0037/src/if_cscope.c	Fri Sep 29 18:02:53 2023
+@@ -582,7 +582,11 @@
+ 	i = cs_insert_filelist(fname2, ppath, flags, &statbuf);
+     }
+ #if defined(UNIX)
+-    else if (S_ISREG(statbuf.st_mode) || S_ISLNK(statbuf.st_mode))
++    else if (S_ISREG(statbuf.st_mode) 
++    #ifdef S_ISLNK
++    || S_ISLNK(statbuf.st_mode)
++    #endif
++)
+ #else
+ 	/* WIN32 - substitute define S_ISREG from os_unix.h */
+     else if (((statbuf.st_mode) & S_IFMT) == S_IFREG)
+diff -ur -x Makefile stock/vim-8.1.0037/src/libvterm/src/vterm_internal.h vim-8.1.0037/src/libvterm/src/vterm_internal.h
+--- stock/vim-8.1.0037/src/libvterm/src/vterm_internal.h	Wed Jun  6 12:04:07 2018
++++ vim-8.1.0037/src/libvterm/src/vterm_internal.h	Fri Sep 29 18:02:53 2023
+@@ -3,10 +3,18 @@
+ 
+ #include "vterm.h"
+ 
++#if defined(_AIX) && defined(_i386__)
++#include "../../memmove.h"
++#endif
++
+ #include <stdarg.h>
+ 
+ #if defined(__GNUC__) && !defined(__MINGW32__)
+-# define INTERNAL __attribute__((visibility("internal")))
++# if defined(__ELF__)
++#  define INTERNAL __attribute__((visibility("internal")))
++# else
++#  define INTERNAL
++# endif
+ # define UNUSED __attribute__((unused))
+ #else
+ # define INTERNAL
+diff -ur -x Makefile stock/vim-8.1.0037/src/os_unix.c vim-8.1.0037/src/os_unix.c
+--- stock/vim-8.1.0037/src/os_unix.c	Wed Jun  6 12:04:07 2018
++++ vim-8.1.0037/src/os_unix.c	Fri Sep 29 18:02:53 2023
+@@ -29,6 +29,10 @@
+ # define select select_declared_wrong
+ #endif
+ 
++#if defined(_AIX) && defined(__i386__)
++#define   ONLCR   0000004
++#endif
++
+ #include "vim.h"
+ 
+ #ifdef FEAT_MZSCHEME
+diff -ur -x Makefile stock/vim-8.1.0037/src/spell.c vim-8.1.0037/src/spell.c
+--- stock/vim-8.1.0037/src/spell.c	Wed Jun  6 12:04:07 2018
++++ vim-8.1.0037/src/spell.c	Fri Sep 29 18:02:53 2023
+@@ -7726,7 +7726,7 @@
+     int		badlen;
+     int		n;
+     char_u	*pl, *ps;
+-    char_u	*pl2, *ps2;
++    char_u	*pl2, *pstwo;
+     int		score = 0;
+ 
+     /* Adding/inserting "*" at the start (word starts with vowel) shouldn't be
+@@ -7813,49 +7813,49 @@
+ 
+ 	    /* 1: delete */
+ 	    pl2 = pl + 1;
+-	    ps2 = ps;
+-	    while (*pl2 == *ps2)
++	    pstwo = ps;
++	    while (*pl2 == *pstwo)
+ 	    {
+ 		if (*pl2 == NUL)	/* reached the end */
+ 		    return score + SCORE_DEL;
+ 		++pl2;
+-		++ps2;
++		++pstwo;
+ 	    }
+ 
+ 	    /* 2: delete then swap, then rest must be equal */
+-	    if (pl2[0] == ps2[1] && pl2[1] == ps2[0]
+-					     && STRCMP(pl2 + 2, ps2 + 2) == 0)
++	    if (pl2[0] == pstwo[1] && pl2[1] == pstwo[0]
++					     && STRCMP(pl2 + 2, pstwo + 2) == 0)
+ 		return score + SCORE_DEL + SCORE_SWAP;
+ 
+ 	    /* 3: delete then substitute, then the rest must be equal */
+-	    if (STRCMP(pl2 + 1, ps2 + 1) == 0)
++	    if (STRCMP(pl2 + 1, pstwo + 1) == 0)
+ 		return score + SCORE_DEL + SCORE_SUBST;
+ 
+ 	    /* 4: first swap then delete */
+ 	    if (pl[0] == ps[1] && pl[1] == ps[0])
+ 	    {
+ 		pl2 = pl + 2;	    /* swap, skip two chars */
+-		ps2 = ps + 2;
+-		while (*pl2 == *ps2)
++		pstwo = ps + 2;
++		while (*pl2 == *pstwo)
+ 		{
+ 		    ++pl2;
+-		    ++ps2;
++		    ++pstwo;
+ 		}
+ 		/* delete a char and then strings must be equal */
+-		if (STRCMP(pl2 + 1, ps2) == 0)
++		if (STRCMP(pl2 + 1, pstwo) == 0)
+ 		    return score + SCORE_SWAP + SCORE_DEL;
+ 	    }
+ 
+ 	    /* 5: first substitute then delete */
+ 	    pl2 = pl + 1;	    /* substitute, skip one char */
+-	    ps2 = ps + 1;
+-	    while (*pl2 == *ps2)
++	    pstwo = ps + 1;
++	    while (*pl2 == *pstwo)
+ 	    {
+ 		++pl2;
+-		++ps2;
++		++pstwo;
+ 	    }
+ 	    /* delete a char and then strings must be equal */
+-	    if (STRCMP(pl2 + 1, ps2) == 0)
++	    if (STRCMP(pl2 + 1, pstwo) == 0)
+ 		return score + SCORE_SUBST + SCORE_DEL;
+ 
+ 	    /* Failed to compare. */
+@@ -7874,64 +7874,64 @@
+ 	    if (pl[0] == ps[1] && pl[1] == ps[0])
+ 	    {
+ 		pl2 = pl + 2;	    /* swap, skip two chars */
+-		ps2 = ps + 2;
+-		while (*pl2 == *ps2)
++		pstwo = ps + 2;
++		while (*pl2 == *pstwo)
+ 		{
+ 		    if (*pl2 == NUL)	/* reached the end */
+ 			return score + SCORE_SWAP;
+ 		    ++pl2;
+-		    ++ps2;
++		    ++pstwo;
+ 		}
+ 		/* 3: swap and swap again */
+-		if (pl2[0] == ps2[1] && pl2[1] == ps2[0]
+-					     && STRCMP(pl2 + 2, ps2 + 2) == 0)
++		if (pl2[0] == pstwo[1] && pl2[1] == pstwo[0]
++					     && STRCMP(pl2 + 2, pstwo + 2) == 0)
+ 		    return score + SCORE_SWAP + SCORE_SWAP;
+ 
+ 		/* 4: swap and substitute */
+-		if (STRCMP(pl2 + 1, ps2 + 1) == 0)
++		if (STRCMP(pl2 + 1, pstwo + 1) == 0)
+ 		    return score + SCORE_SWAP + SCORE_SUBST;
+ 	    }
+ 
+ 	    /* 5: substitute */
+ 	    pl2 = pl + 1;
+-	    ps2 = ps + 1;
+-	    while (*pl2 == *ps2)
++	    pstwo = ps + 1;
++	    while (*pl2 == *pstwo)
+ 	    {
+ 		if (*pl2 == NUL)	/* reached the end */
+ 		    return score + SCORE_SUBST;
+ 		++pl2;
+-		++ps2;
++		++pstwo;
+ 	    }
+ 
+ 	    /* 6: substitute and swap */
+-	    if (pl2[0] == ps2[1] && pl2[1] == ps2[0]
+-					     && STRCMP(pl2 + 2, ps2 + 2) == 0)
++	    if (pl2[0] == pstwo[1] && pl2[1] == pstwo[0]
++					     && STRCMP(pl2 + 2, pstwo + 2) == 0)
+ 		return score + SCORE_SUBST + SCORE_SWAP;
+ 
+ 	    /* 7: substitute and substitute */
+-	    if (STRCMP(pl2 + 1, ps2 + 1) == 0)
++	    if (STRCMP(pl2 + 1, pstwo + 1) == 0)
+ 		return score + SCORE_SUBST + SCORE_SUBST;
+ 
+ 	    /* 8: insert then delete */
+ 	    pl2 = pl;
+-	    ps2 = ps + 1;
+-	    while (*pl2 == *ps2)
++	    pstwo = ps + 1;
++	    while (*pl2 == *pstwo)
+ 	    {
+ 		++pl2;
+-		++ps2;
++		++pstwo;
+ 	    }
+-	    if (STRCMP(pl2 + 1, ps2) == 0)
++	    if (STRCMP(pl2 + 1, pstwo) == 0)
+ 		return score + SCORE_INS + SCORE_DEL;
+ 
+ 	    /* 9: delete then insert */
+ 	    pl2 = pl + 1;
+-	    ps2 = ps;
+-	    while (*pl2 == *ps2)
++	    pstwo = ps;
++	    while (*pl2 == *pstwo)
+ 	    {
+ 		++pl2;
+-		++ps2;
++		++pstwo;
+ 	    }
+-	    if (STRCMP(pl2, ps2 + 1) == 0)
++	    if (STRCMP(pl2, pstwo + 1) == 0)
+ 		return score + SCORE_INS + SCORE_DEL;
+ 
+ 	    /* Failed to compare. */
+diff -ur -x Makefile stock/vim-8.1.0037/src/vim.h vim-8.1.0037/src/vim.h
+--- stock/vim-8.1.0037/src/vim.h	Wed Jun  6 12:04:07 2018
++++ vim-8.1.0037/src/vim.h	Fri Sep 29 18:02:53 2023
+@@ -1716,6 +1716,10 @@
+ # define mch_memmove(to, from, len) memmove((char*)(to), (char*)(from), (size_t)(len))
+ #endif
+ 
++#if defined(_AIX) && defined(__i386__)
++#include "memmove.h"
++#endif
++
+ /*
+  * fnamecmp() is used to compare file names.
+  * On some systems case in a file name does not matter, on others it does.
