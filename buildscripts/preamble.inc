@@ -41,10 +41,14 @@ if [ ! -d $packagedir ]; then
 		exit 1
 	fi
 
+	if [ "$tar_cmd" = "" ]; then
+		tar_cmd=tar
+	fi
+
 	if [ "$use_old_tar" != "" ]; then
-		$old_prog -c $tarball_prefix* | tar xf -
+		$old_prog -c $tarball_prefix* | $tar_cmd xf -
 	else
-		tar x${letter}f $tarball_prefix*
+		$tar_cmd x${letter}f $tarball_prefix*
 	fi
 
 	use_old_tar=
