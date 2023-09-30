@@ -19,7 +19,8 @@ fi
 
 #configure_cmd="./Configure"
 
-config_options="--with-prngd-socket=/usr/local/var/run/egd-pool"
+#config_options="--with-prngd-socket=/usr/local/var/run/egd-pool"
+config_options="--with-prngd-port=12345"
 
 CONFIG_SHELL=/usr/local/bin/bash
 export CONFIG_SHELL
