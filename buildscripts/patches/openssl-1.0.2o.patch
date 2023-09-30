@@ -1,0 +1,41 @@
+diff -ur -x Makefile -x c_rehash -x Makefile.bak -x opensslconf.h -x CA.pl stock/openssl-1.0.2o/crypto/bio/bio.h openssl-1.0.2o/crypto/bio/bio.h
+--- stock/openssl-1.0.2o/crypto/bio/bio.h	Tue Mar 27 05:54:46 2018
++++ openssl-1.0.2o/crypto/bio/bio.h	Sat Sep 30 03:52:51 2023
+@@ -76,6 +76,10 @@
+ #  endif
+ # endif
+ 
++#ifdef __svr4__
++typedef int ssize_t;
++#endif
++
+ #ifdef  __cplusplus
+ extern "C" {
+ #endif
+diff -ur -x Makefile -x c_rehash -x Makefile.bak -x opensslconf.h -x CA.pl stock/openssl-1.0.2o/crypto/o_str.c openssl-1.0.2o/crypto/o_str.c
+--- stock/openssl-1.0.2o/crypto/o_str.c	Tue Mar 27 05:54:46 2018
++++ openssl-1.0.2o/crypto/o_str.c	Sat Sep 30 03:49:04 2023
+@@ -64,7 +64,9 @@
+ #if !defined(OPENSSL_IMPLEMENTS_strncasecmp) && \
+     !defined(OPENSSL_SYSNAME_WIN32) && !defined(OPENSSL_SYSNAME_WINCE) && \
+     !defined(NETWARE_CLIB)
++#ifndef __svr4__
+ # include <strings.h>
++#endif
+ #endif
+ 
+ int OPENSSL_strncasecmp(const char *str1, const char *str2, size_t n)
+diff -ur -x Makefile -x c_rehash -x Makefile.bak -x opensslconf.h -x CA.pl stock/openssl-1.0.2o/crypto/x509v3/v3_utl.c openssl-1.0.2o/crypto/x509v3/v3_utl.c
+--- stock/openssl-1.0.2o/crypto/x509v3/v3_utl.c	Tue Mar 27 05:54:46 2018
++++ openssl-1.0.2o/crypto/x509v3/v3_utl.c	Sat Sep 30 04:12:20 2023
+@@ -77,6 +77,10 @@
+ static int ipv6_cb(const char *elem, int len, void *usr);
+ static int ipv6_hex(unsigned char *out, const char *in, int inlen);
+ 
++#ifdef __svr4__
++#include "../../strcasecmp.c"
++#endif
++
+ /* Add a CONF_VALUE name value pair to stack */
+ 
+ int X509V3_add_value(const char *name, const char *value,
