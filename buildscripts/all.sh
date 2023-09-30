@@ -29,3 +29,5 @@ sh tiff-3.9.1.sh
 sh imlib.sh
 sh diffutils.sh
 sh windowmaker.sh
+sh libast.sh
+sh eterm.sh

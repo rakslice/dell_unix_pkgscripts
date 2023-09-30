@@ -1,0 +1,147 @@
+diff -ur stock/Eterm-0.9.6/configure Eterm-0.9.6/configure
+--- stock/Eterm-0.9.6/configure	Tue Mar 15 22:10:27 2011
++++ Eterm-0.9.6/configure	Fri Sep 29 22:27:35 2023
+@@ -8728,7 +8728,7 @@
+ 
+   # Append ld.so.conf contents to the search path
+   if test -f /etc/ld.so.conf; then
+-    lt_ld_extra=`awk '/^include / { system(sprintf("cd /etc; cat %s 2>/dev/null", \$2)); skip = 1; } { if (!skip) print \$0; skip = 0; }' < /etc/ld.so.conf | $SED -e 's/#.*//;s/[:,	]/ /g;s/=[^=]*$//;s/=[^= ]* / /g;/^$/d' | tr '\n' ' '`
++    lt_ld_extra=`awk '/^include / { system(sprintf("cd /etc; cat %s 2>/dev/null", \$2)); skip = 1; } { if (!skip) print \$0; skip = 0; }' < /etc/ld.so.conf | $SED -e 's/#.*//;s/[:,	]/ /g;s/=[^=]*$//;s/=[^= ]* / /g;/^$/d' | tr '\012' ' '`
+     sys_lib_dlsearch_path_spec="/lib${libsuff} /usr/lib${libsuff} $lt_ld_extra"
+   fi
+ 
+@@ -12708,7 +12708,7 @@
+ 
+   # Append ld.so.conf contents to the search path
+   if test -f /etc/ld.so.conf; then
+-    lt_ld_extra=`awk '/^include / { system(sprintf("cd /etc; cat %s 2>/dev/null", \$2)); skip = 1; } { if (!skip) print \$0; skip = 0; }' < /etc/ld.so.conf | $SED -e 's/#.*//;s/[:,	]/ /g;s/=[^=]*$//;s/=[^= ]* / /g;/^$/d' | tr '\n' ' '`
++    lt_ld_extra=`awk '/^include / { system(sprintf("cd /etc; cat %s 2>/dev/null", \$2)); skip = 1; } { if (!skip) print \$0; skip = 0; }' < /etc/ld.so.conf | $SED -e 's/#.*//;s/[:,	]/ /g;s/=[^=]*$//;s/=[^= ]* / /g;/^$/d' | tr '\012' ' '`
+     sys_lib_dlsearch_path_spec="/lib${libsuff} /usr/lib${libsuff} $lt_ld_extra"
+   fi
+ 
+@@ -15319,7 +15319,7 @@
+ 
+   # Append ld.so.conf contents to the search path
+   if test -f /etc/ld.so.conf; then
+-    lt_ld_extra=`awk '/^include / { system(sprintf("cd /etc; cat %s 2>/dev/null", \$2)); skip = 1; } { if (!skip) print \$0; skip = 0; }' < /etc/ld.so.conf | $SED -e 's/#.*//;s/[:,	]/ /g;s/=[^=]*$//;s/=[^= ]* / /g;/^$/d' | tr '\n' ' '`
++    lt_ld_extra=`awk '/^include / { system(sprintf("cd /etc; cat %s 2>/dev/null", \$2)); skip = 1; } { if (!skip) print \$0; skip = 0; }' < /etc/ld.so.conf | $SED -e 's/#.*//;s/[:,	]/ /g;s/=[^=]*$//;s/=[^= ]* / /g;/^$/d' | tr '\012' ' '`
+     sys_lib_dlsearch_path_spec="/lib${libsuff} /usr/lib${libsuff} $lt_ld_extra"
+   fi
+ 
+@@ -17938,7 +17938,7 @@
+ 
+   # Append ld.so.conf contents to the search path
+   if test -f /etc/ld.so.conf; then
+-    lt_ld_extra=`awk '/^include / { system(sprintf("cd /etc; cat %s 2>/dev/null", \$2)); skip = 1; } { if (!skip) print \$0; skip = 0; }' < /etc/ld.so.conf | $SED -e 's/#.*//;s/[:,	]/ /g;s/=[^=]*$//;s/=[^= ]* / /g;/^$/d' | tr '\n' ' '`
++    lt_ld_extra=`awk '/^include / { system(sprintf("cd /etc; cat %s 2>/dev/null", \$2)); skip = 1; } { if (!skip) print \$0; skip = 0; }' < /etc/ld.so.conf | $SED -e 's/#.*//;s/[:,	]/ /g;s/=[^=]*$//;s/=[^= ]* / /g;/^$/d' | tr '\012' ' '`
+     sys_lib_dlsearch_path_spec="/lib${libsuff} /usr/lib${libsuff} $lt_ld_extra"
+   fi
+ 
+@@ -26183,12 +26183,11 @@
+   GDB_CMD_FILE=""
+ fi
+ 
+-
+ CPPFLAGS=`eval eval eval eval eval echo "-I$includedir -I$prefix/include $CPPFLAGS"`
+-CPPFLAGS=`echo $CPPFLAGS | tr ' ' '\n' | uniq | grep -v NONE | tr '\n' ' '`
++CPPFLAGS=`echo $CPPFLAGS | tr ' ' '\012' | uniq | grep -v NONE | tr '\012' ' '`
+ CFLAGS=${CFLAGS--O}
+ LDFLAGS=`eval eval eval eval eval echo "-L$libdir -L$prefix/lib ${LDFLAGS--O}"`
+-LDFLAGS=`echo $LDFLAGS | tr ' ' '\n' | uniq | grep -v NONE | tr '\n' ' '`
++LDFLAGS=`echo $LDFLAGS | tr ' ' '\012' | uniq | grep -v NONE | tr '\012' ' '`
+ LIBS="$GRLIBS $X_PRE_LIBS $LIBS $X_EXTRA_LIBS"
+ 
+ 
+diff -ur stock/Eterm-0.9.6/src/defaultfont.h Eterm-0.9.6/src/defaultfont.h
+--- stock/Eterm-0.9.6/src/defaultfont.h	Tue Jan  6 01:05:36 2009
++++ Eterm-0.9.6/src/defaultfont.h	Sat Sep 30 00:22:12 2023
+@@ -8,7 +8,10 @@
+ # endif
+ 
+ #ifdef HAVE_NL_LANGINFO
++#undef MALLOC
+ # include <langinfo.h>
++#undef MALLOC
++#define MALLOC(sz) malloc(sz)
+ #endif
+ 
+ 
+diff -ur stock/Eterm-0.9.6/src/events.c Eterm-0.9.6/src/events.c
+--- stock/Eterm-0.9.6/src/events.c	Tue Mar 15 21:16:59 2011
++++ Eterm-0.9.6/src/events.c	Fri Sep 29 22:27:35 2023
+@@ -217,7 +217,9 @@
+     }
+     if (BITFIELD_IS_SET(vt_options, VT_OPTIONS_URG_ALERT)) {
+         wm_hints = XGetWMHints(Xdisplay, TermWin.parent);
++#ifdef XUrgencyHint
+         wm_hints->flags &= ~XUrgencyHint;
++#endif
+         XSetWMHints(Xdisplay, TermWin.parent, wm_hints);
+         XFree(wm_hints);
+     }
+@@ -498,7 +500,9 @@
+ #endif
+         if (BITFIELD_IS_SET(vt_options, VT_OPTIONS_URG_ALERT)) {
+             wm_hints = XGetWMHints(Xdisplay, TermWin.parent);
++#ifdef XUrgencyHint
+             wm_hints->flags &= ~XUrgencyHint;
++#endif
+             XSetWMHints(Xdisplay, TermWin.parent, wm_hints);
+             XFree(wm_hints);
+         }
+diff -ur stock/Eterm-0.9.6/src/libscream.c Eterm-0.9.6/src/libscream.c
+--- stock/Eterm-0.9.6/src/libscream.c	Fri Nov 20 19:58:10 2009
++++ Eterm-0.9.6/src/libscream.c	Fri Sep 29 22:27:35 2023
+@@ -45,6 +45,10 @@
+ #include "config.h"
+ #include "feature.h"
+ 
++#if defined(__svr4__) && defined(__i386__)
++typedef int ssize_t;
++#endif
++
+ /* use libast if we have it */
+ #ifdef DEBUG_ESCREEN
+ #  include <libast.h>
+diff -ur stock/Eterm-0.9.6/src/screen.c Eterm-0.9.6/src/screen.c
+--- stock/Eterm-0.9.6/src/screen.c	Tue Mar 15 21:16:59 2011
++++ Eterm-0.9.6/src/screen.c	Fri Sep 29 22:27:35 2023
+@@ -1553,7 +1553,9 @@
+ 
+     if (BITFIELD_IS_SET(vt_options, VT_OPTIONS_URG_ALERT)) {
+         wm_hints = XGetWMHints(Xdisplay, TermWin.parent);
++#ifdef XUrgencyHint
+         wm_hints->flags |= XUrgencyHint;
++#endif
+         XSetWMHints(Xdisplay, TermWin.parent, wm_hints);
+         XFree(wm_hints);
+     }
+diff -ur stock/Eterm-0.9.6/src/term.c Eterm-0.9.6/src/term.c
+--- stock/Eterm-0.9.6/src/term.c	Tue Mar 15 21:16:59 2011
++++ Eterm-0.9.6/src/term.c	Fri Sep 29 22:27:35 2023
+@@ -723,7 +723,9 @@
+ 
+                         /* Tab key is normal unless it's shift-tab. */
+                     case XK_Tab:
++#ifdef XK_ISO_Left_Tab
+                     case XK_ISO_Left_Tab:
++#endif
+                         if (shft) {
+                             len = 3;
+                             strcpy(kbuf, "\033[Z");
+diff -ur stock/Eterm-0.9.6/src/windows.c Eterm-0.9.6/src/windows.c
+--- stock/Eterm-0.9.6/src/windows.c	Tue Mar 15 21:16:59 2011
++++ Eterm-0.9.6/src/windows.c	Sat Sep 30 00:30:49 2023
+@@ -504,7 +504,12 @@
+ 
+         atom = XInternAtom(Xdisplay, "UTF8_STRING", False);
+         XChangeProperty(Xdisplay, TermWin.parent, props[PROP_EWMH_STARTUP_ID], atom, 8, PropModeReplace, tmp, strlen(tmp) + 1);
++
++#ifdef __svr4__
++        putenv("DESKTOP_STARTUP_ID="); 
++#else
+         unsetenv("DESKTOP_STARTUP_ID");
++#endif
+     }
+ 
+     /* Set window opacity if needed. */
