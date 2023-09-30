@@ -1,20 +1,6 @@
-diff -ur -x Makefile -x c_rehash -x Makefile.bak -x opensslconf.h -x CA.pl stock/openssl-1.0.2o/crypto/bio/bio.h openssl-1.0.2o/crypto/bio/bio.h
---- stock/openssl-1.0.2o/crypto/bio/bio.h	Tue Mar 27 05:54:46 2018
-+++ openssl-1.0.2o/crypto/bio/bio.h	Sat Sep 30 03:52:51 2023
-@@ -76,6 +76,10 @@
- #  endif
- # endif
- 
-+#ifdef __svr4__
-+typedef int ssize_t;
-+#endif
-+
- #ifdef  __cplusplus
- extern "C" {
- #endif
 diff -ur -x Makefile -x c_rehash -x Makefile.bak -x opensslconf.h -x CA.pl stock/openssl-1.0.2o/crypto/o_str.c openssl-1.0.2o/crypto/o_str.c
 --- stock/openssl-1.0.2o/crypto/o_str.c	Tue Mar 27 05:54:46 2018
-+++ openssl-1.0.2o/crypto/o_str.c	Sat Sep 30 03:49:04 2023
++++ openssl-1.0.2o/crypto/o_str.c	Sat Sep 30 04:14:15 2023
 @@ -64,7 +64,9 @@
  #if !defined(OPENSSL_IMPLEMENTS_strncasecmp) && \
      !defined(OPENSSL_SYSNAME_WIN32) && !defined(OPENSSL_SYSNAME_WINCE) && \
@@ -27,7 +13,7 @@ diff -ur -x Makefile -x c_rehash -x Makefile.bak -x opensslconf.h -x CA.pl stock
  int OPENSSL_strncasecmp(const char *str1, const char *str2, size_t n)
 diff -ur -x Makefile -x c_rehash -x Makefile.bak -x opensslconf.h -x CA.pl stock/openssl-1.0.2o/crypto/x509v3/v3_utl.c openssl-1.0.2o/crypto/x509v3/v3_utl.c
 --- stock/openssl-1.0.2o/crypto/x509v3/v3_utl.c	Tue Mar 27 05:54:46 2018
-+++ openssl-1.0.2o/crypto/x509v3/v3_utl.c	Sat Sep 30 04:12:20 2023
++++ openssl-1.0.2o/crypto/x509v3/v3_utl.c	Sat Sep 30 04:14:15 2023
 @@ -77,6 +77,10 @@
  static int ipv6_cb(const char *elem, int len, void *usr);
  static int ipv6_hex(unsigned char *out, const char *in, int inlen);
@@ -39,3 +25,17 @@ diff -ur -x Makefile -x c_rehash -x Makefile.bak -x opensslconf.h -x CA.pl stock
  /* Add a CONF_VALUE name value pair to stack */
  
  int X509V3_add_value(const char *name, const char *value,
+diff -ur -x Makefile -x c_rehash -x Makefile.bak -x opensslconf.h -x CA.pl stock/openssl-1.0.2o/e_os2.h openssl-1.0.2o/e_os2.h
+--- stock/openssl-1.0.2o/e_os2.h	Tue Mar 27 05:54:46 2018
++++ openssl-1.0.2o/e_os2.h	Sat Sep 30 04:33:49 2023
+@@ -314,6 +314,10 @@
+ #  define ssize_t int
+ # endif
+ 
++# if defined(__svr4__)
++#  define ssize_t int
++# endif
++
+ # if defined(__ultrix) && !defined(ssize_t)
+ #  define ossl_ssize_t int
+ # endif
