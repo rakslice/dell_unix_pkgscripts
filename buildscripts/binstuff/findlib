@@ -1,0 +1,6 @@
+#!/usr/local/bin/bash
+set -u
+
+for f in /usr/X5/lib/*.{a,so} /lib/*.{a,so}; do nm $f | grep -v UNDEF | grep "$1" | awk '{print "'$f': " $0}'; done 
+
+
