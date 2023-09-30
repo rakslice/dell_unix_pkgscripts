@@ -11,11 +11,9 @@ export PATH
 
 #cp $codefragments/strcasecmp.c .
 
-if false; then
 if [ ! -f .patched ]; then
 	patch -p1 -i $patches/$package.patch
 	touch .patched
-fi
 fi
 
 no_configure=1
