@@ -1,0 +1,24 @@
+diff -ur stock/perl-5.6.2/ext/POSIX/POSIX.xs perl-5.6.2/ext/POSIX/POSIX.xs
+--- stock/perl-5.6.2/ext/POSIX/POSIX.xs	Sun Aug 31 15:07:00 2003
++++ perl-5.6.2/ext/POSIX/POSIX.xs	Sat Sep 30 03:26:05 2023
+@@ -175,6 +175,20 @@
+ 
+ typedef int SysRet;
+ typedef long SysRetLong;
++
++#ifdef __svr4__
++typedef struct {
++	unsigned long sigbits[4];
++} sigset_t;
++
++struct sigaction {
++        int sa_flags;
++        void (*sa_handler)();
++        sigset_t sa_mask;
++        int sa_resv[2];
++};
++#endif
++
+ typedef sigset_t* POSIX__SigSet;
+ typedef HV* POSIX__SigAction;
+ #ifdef I_TERMIOS
