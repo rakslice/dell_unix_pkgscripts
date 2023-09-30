@@ -1,0 +1,31 @@
+diff -ur stock/prngd-0.9.29/config.h prngd-0.9.29/config.h
+--- stock/prngd-0.9.29/config.h	Mon Jul 12 08:13:35 2004
++++ prngd-0.9.29/config.h	Sat Sep 30 06:43:51 2023
+@@ -183,6 +183,11 @@
+ #define PATH_SYSLOG     "/var/log/messages"
+ #endif
+ 
++#if defined(__svr4__)
++typedef int ssize_t;
++#undef HAVE_GETRUSAGE
++#endif
++
+ #endif
+ 
+ #ifdef NEXTSTEP
+diff -ur stock/prngd-0.9.29/error_log.c prngd-0.9.29/error_log.c
+--- stock/prngd-0.9.29/error_log.c	Tue Aug  7 01:07:26 2001
++++ prngd-0.9.29/error_log.c	Sat Sep 30 06:52:13 2023
+@@ -6,6 +6,12 @@
+ 
+ #include "prngd.h"
+ 
++#ifdef __svr4__
++void openlog(const char * ident, int logopt, int facility);
++void syslog(int priority, const char * format, ...);
++void closelog();
++#endif
++
+ 
+ /* functions that are only used by this module */
+ static void error_syslog(int, const char *, int);

@@ -31,3 +31,9 @@ sh diffutils.sh
 sh windowmaker.sh
 sh libast.sh
 sh eterm.sh
+
+sh perl.sh
+sh openssl.sh
+sh pcre.sh
+sh prngd.sh
+sh openssh.sh

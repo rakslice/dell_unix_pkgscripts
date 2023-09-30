@@ -1,0 +1,61 @@
+diff -ur stock/openssh-2.9p2/Makefile.in openssh-2.9p2/Makefile.in
+--- stock/openssh-2.9p2/Makefile.in	Thu Apr 26 17:31:08 2001
++++ openssh-2.9p2/Makefile.in	Sat Sep 30 05:45:13 2023
+@@ -47,7 +47,7 @@
+ 
+ LIBSSH_OBJS=atomicio.o authfd.o authfile.o bufaux.o buffer.o canohost.o channels.o cipher.o cli.o compat.o compress.o crc32.o deattack.o dh.o dispatch.o mac.o hostfile.o key.o kex.o kexdh.o kexgex.o log.o match.o misc.o mpaux.o nchan.o packet.o radix.o rijndael.o entropy.o readpass.o rsa.o ssh-dss.o ssh-rsa.o tildexpand.o ttymodes.o uidswap.o uuencode.o xmalloc.o 
+ 
+-SSHOBJS= ssh.o sshconnect.o sshconnect1.o sshconnect2.o sshtty.o readconf.o clientloop.o
++SSHOBJS= ssh.o sshconnect.o sshconnect1.o sshconnect2.o sshtty.o readconf.o clientloop.o md5c.o md5hl.o
+ 
+ SSHDOBJS= sshd.o auth.o auth1.o auth2.o auth-chall.o auth2-chall.o auth-rhosts.o auth-options.o auth-krb4.o auth-pam.o auth2-pam.o auth-passwd.o auth-rsa.o auth-rh-rsa.o auth-sia.o sshpty.o sshlogin.o loginrec.o servconf.o serverloop.o md5crypt.o session.o groupaccess.o
+ 
+diff -ur stock/openssh-2.9p2/config.h.in openssh-2.9p2/config.h.in
+--- stock/openssh-2.9p2/config.h.in	Sat Jun 16 21:09:47 2001
++++ openssh-2.9p2/config.h.in	Sat Sep 30 05:57:08 2023
+@@ -30,7 +30,7 @@
+ 
+ /* SCO workaround */
+ #undef BROKEN_SYS_TERMIO_H
+-#undef HAVE_BOGUS_SYS_QUEUE_H
++#define HAVE_BOGUS_SYS_QUEUE_H 1
+ 
+ /* Define if you have SCO protected password database */
+ #undef HAVE_SCO_PROTECTED_PW
+diff -ur stock/openssh-2.9p2/sshconnect1.c openssh-2.9p2/sshconnect1.c
+--- stock/openssh-2.9p2/sshconnect1.c	Tue Apr 17 11:08:16 2001
++++ openssh-2.9p2/sshconnect1.c	Sat Sep 30 05:48:04 2023
+@@ -12,6 +12,8 @@
+  * called by a name other than "ssh" or "Secure Shell".
+  */
+ 
++#include "stdint.h"
++
+ #include "includes.h"
+ RCSID("$OpenBSD: sshconnect1.c,v 1.31 2001/04/17 08:14:01 markus Exp $");
+ 
+@@ -25,6 +27,12 @@
+ #include <kafs.h>
+ #include "radix.h"
+ #endif
++
++#define MD5_Init MD5Init
++#define MD5_Update MD5Update
++#define MD5_Final MD5Final
++
++#include "md5.h"
+ 
+ #include "ssh.h"
+ #include "ssh1.h"
+diff -ur stock/openssh-2.9p2/sshd.c openssh-2.9p2/sshd.c
+--- stock/openssh-2.9p2/sshd.c	Sun Apr 15 19:00:02 2001
++++ openssh-2.9p2/sshd.c	Sat Sep 30 05:45:13 2023
+@@ -39,6 +39,8 @@
+  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  */
+ 
++#include "md5.h"
++
+ #include "includes.h"
+ RCSID("$OpenBSD: sshd.c,v 1.195 2001/04/15 16:58:03 markus Exp $");
+ 
