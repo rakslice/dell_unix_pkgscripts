@@ -1,0 +1,5 @@
+#!/bin/bash
+set -e -x
+
+~/src/debian_desktop/gvfs_mount.bash
+git push origin HEAD
