@@ -1,0 +1,99 @@
+diff -ur stock/gdb-5.3/gdb/proc-api.c gdb-5.3/gdb/proc-api.c
+--- stock/gdb-5.3/gdb/proc-api.c	Thu Aug 29 08:08:23 2002
++++ gdb-5.3/gdb/proc-api.c	Wed Oct  4 03:19:50 2023
+@@ -177,7 +177,9 @@
+   { PIOCOPENPD,    "PIOCOPENPD",   "get page data file descriptor" },
+ #endif
+   { PIOCPSINFO,    "PIOCPSINFO",   "get ps(1) information" },
++#ifdef PIOCRESET
+   { PIOCRESET,     "PIOCRESET",    "reset process flags" },
++#endif
+   { PIOCRFORK,     "PIOCRFORK",    "reset inherit-on-fork flag" },
+   { PIOCRRLC,      "PIOCRRLC",     "reset run-on-last-close flag" },
+   { PIOCRUN,       "PIOCRUN",      "make process runnable" },
+@@ -185,7 +187,9 @@
+   { PIOCSAVECCNTRS, "PIOCSAVECCNTRS", "parent gets child cntrs" },
+ #endif
+   { PIOCSENTRY,    "PIOCSENTRY",   "set traced syscall entry set" },
++#ifdef PIOCSET
+   { PIOCSET,       "PIOCSET",      "set process flags" },
++#endif
+   { PIOCSEXIT,     "PIOCSEXIT",    "set traced syscall exit  set" },
+   { PIOCSFAULT,    "PIOCSFAULT",   "set traced fault set" },
+   { PIOCSFORK,     "PIOCSFORK",    "set inherit-on-fork flag" },
+@@ -238,6 +242,7 @@
+ 	fprintf (procfs_file ? procfs_file : stdout, 
+ 		 "%s:%d -- ", file, line);
+       switch (opcode) {
++#ifdef PIOCSET
+       case PIOCSET:
+ 	arg1 = ptr ? *(long *) ptr : 0;
+ 	fprintf (procfs_file ? procfs_file : stdout, 
+@@ -250,6 +255,8 @@
+ 		 "<unknown flag>",
+ 		 info_verbose ? ioctl_table[i].desc : "");
+ 	break;
++#endif
++#ifdef PIOCRESET
+       case PIOCRESET:
+ 	arg1 = ptr ? *(long *) ptr : 0;
+ 	fprintf (procfs_file ? procfs_file : stdout, 
+@@ -262,6 +269,7 @@
+ 		 "<unknown flag>",
+ 		 info_verbose ? ioctl_table[i].desc : "");
+ 	break;
++#endif
+       case PIOCSTRACE:
+ 	fprintf (procfs_file ? procfs_file : stdout, 
+ 		 "ioctl (PIOCSTRACE) ");
+diff -ur stock/gdb-5.3/gdb/procfs.c gdb-5.3/gdb/procfs.c
+--- stock/gdb-5.3/gdb/procfs.c	Mon Aug 26 12:18:33 2002
++++ gdb-5.3/gdb/procfs.c	Wed Oct  4 03:15:47 2023
+@@ -1257,6 +1257,7 @@
+ }
+ 
+ #ifndef PIOCSSPCACT	/* The following is not supported on OSF.  */
++#ifndef __svr4__
+ /*
+  * Function: proc_nsysarg
+  *
+@@ -1316,6 +1317,7 @@
+   return pi->prstatus.pr_syscall;
+ #endif
+ }
++#endif
+ #endif /* PIOCSSPCACT */
+ 
+ /*
+@@ -3998,6 +4000,7 @@
+ 		    proc_prettyprint_syscall (proc_what (pi), 0);
+ 		    printf_filtered ("\n");
+ #ifndef PIOCSSPCACT
++#ifndef __svr4__
+ 		    {
+ 		      long i, nsysargs, *sysargs;
+ 
+@@ -4012,6 +4015,7 @@
+ 
+ 		    }
+ #endif
++#endif
+ 		    if (status)
+ 		      {
+ 			/* How to exit gracefully, returning "unknown event" */
+@@ -4086,6 +4090,7 @@
+ 		    proc_prettyprint_syscall (proc_what (pi), 0);
+ 		    printf_filtered ("\n");
+ #ifndef PIOCSSPCACT
++#ifndef __svr4__
+ 		    {
+ 		      long i, nsysargs, *sysargs;
+ 
+@@ -4098,6 +4103,7 @@
+ 					     i, sysargs[i]);
+ 			}
+ 		    }
++#endif
+ #endif
+ 		    status->kind = TARGET_WAITKIND_SPURIOUS;
+ 		    return inferior_ptid;

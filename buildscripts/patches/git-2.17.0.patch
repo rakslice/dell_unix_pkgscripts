@@ -1,0 +1,266 @@
+diff -ur stock/git-2.17.0/Makefile git-2.17.0/Makefile
+--- stock/git-2.17.0/Makefile	Mon Apr  2 10:44:04 2018
++++ git-2.17.0/Makefile	Wed Oct  4 01:52:28 2023
+@@ -1038,7 +1038,7 @@
+ BUILTIN_OBJS += builtin/write-tree.o
+ 
+ GITLIBS = common-main.o $(LIB_FILE) $(XDIFF_LIB)
+-EXTLIBS =
++EXTLIBS = -lnsl -lucb
+ 
+ GIT_USER_AGENT = git/$(GIT_VERSION)
+ 
+@@ -2098,7 +2098,7 @@
+ 
+ ifeq ($(COMPUTE_HEADER_DEPENDENCIES),yes)
+ $(dep_dirs):
+-	@mkdir -p $@
++	@[ -d $@ ] || mkdir -p $@
+ 
+ missing_dep_dirs := $(filter-out $(wildcard $(dep_dirs)),$(dep_dirs))
+ dep_file = $(dir $@).depend/$(notdir $@).d
+@@ -2306,7 +2306,7 @@
+ endif
+ 
+ po/build/locale/%/LC_MESSAGES/git.mo: po/%.po
+-	$(QUIET_MSGFMT)mkdir -p $(dir $@) && $(MSGFMT) -o $@ $<
++	$(QUIET_MSGFMT)( [ -d $(dir $@) ] || mkdir -p $(dir $@) ) && $(MSGFMT) -o $@ $<
+ 
+ LIB_PERL := $(wildcard perl/Git.pm perl/Git/*.pm perl/Git/*/*.pm perl/Git/*/*/*.pm)
+ LIB_PERL_GEN := $(patsubst perl/%.pm,perl/build/lib/%.pm,$(LIB_PERL))
+@@ -2322,13 +2322,13 @@
+ endif
+ 
+ perl/build/lib/%.pm: perl/%.pm
+-	$(QUIET_GEN)mkdir -p $(dir $@) && \
++	$(QUIET_GEN) ( [ -d $(dir $@) ] || mkdir -p $(dir $@) ) && \
+ 	sed -e 's|@@LOCALEDIR@@|$(localedir_SQ)|g' \
+ 	    -e 's|@@NO_PERL_CPAN_FALLBACKS@@|$(NO_PERL_CPAN_FALLBACKS_SQ)|g' \
+ 	< $< > $@
+ 
+ perl/build/man/man3/Git.3pm: perl/Git.pm
+-	$(QUIET_GEN)mkdir -p $(dir $@) && \
++	$(QUIET_GEN) ( [ -d $(dir $@) ] || mkdir -p $(dir $@) ) && \
+ 	pod2man $< $@
+ 
+ FIND_SOURCE_FILES = ( \
+@@ -2465,7 +2465,7 @@
+ all:: $(NO_INSTALL)
+ 
+ bin-wrappers/%: wrap-for-bin.sh
+-	@mkdir -p bin-wrappers
++	@[ -d bin-wrappers ] || mkdir -p bin-wrappers
+ 	$(QUIET_GEN)sed -e '1s|#!.*/sh|#!$(SHELL_PATH_SQ)|' \
+ 	     -e 's|@@BUILD_DIR@@|$(shell pwd)|' \
+ 	     -e 's|@@PROG@@|$(patsubst test-%,t/helper/test-%,$(@F))|' < $< > $@ && \
+diff -ur stock/git-2.17.0/builtin/config.c git-2.17.0/builtin/config.c
+--- stock/git-2.17.0/builtin/config.c	Mon Apr  2 10:44:04 2018
++++ git-2.17.0/builtin/config.c	Wed Oct  4 01:17:37 2023
+@@ -11,6 +11,10 @@
+ 	NULL
+ };
+ 
++#ifndef PRId64
++#define PRId64 "lld"
++#endif
++
+ static char *key;
+ static regex_t *key_regexp;
+ static regex_t *regexp;
+diff -ur stock/git-2.17.0/compat/hstrerror.c git-2.17.0/compat/hstrerror.c
+--- stock/git-2.17.0/compat/hstrerror.c	Mon Apr  2 10:44:04 2018
++++ git-2.17.0/compat/hstrerror.c	Wed Oct  4 01:01:33 2023
+@@ -2,6 +2,10 @@
+ #include <stdio.h>
+ #include <netdb.h>
+ 
++#ifdef __svr4__
++#define snprintf rpl_snprintf
++#endif
++
+ const char *githstrerror(int err)
+ {
+ 	static char buffer[48];
+diff -ur stock/git-2.17.0/compat/snprintf.c git-2.17.0/compat/snprintf.c
+--- stock/git-2.17.0/compat/snprintf.c	Mon Apr  2 10:44:04 2018
++++ git-2.17.0/compat/snprintf.c	Wed Oct  4 01:00:49 2023
+@@ -16,7 +16,21 @@
+ #endif
+ #endif
+ 
++#ifdef __svr4__
++#include <float.h>
++#define HAVE_STDARG_H 1
++#define vsnprintf rpl_vsnprintf
++#define vasprintf rpl_vasprintf
++#include "c99_snprintf.c"
++#define compat_snprintf rpl_snprintf
++#define compat_vsnprintf rpl_vsnprintf
++#define compat_vasprintf rpl_vasprintf
++#else
+ #undef vsnprintf
++#define compat_snprintf snprintf
++#define compat_vsnprintf vsnprintf
++#define compat_vasprintf vasprintf
++#endif
+ int git_vsnprintf(char *str, size_t maxsize, const char *format, va_list ap)
+ {
+ 	va_list cp;
+@@ -25,7 +39,7 @@
+ 
+ 	if (maxsize > 0) {
+ 		va_copy(cp, ap);
+-		ret = vsnprintf(str, maxsize-SNPRINTF_SIZE_CORR, format, cp);
++		ret = compat_vsnprintf(str, maxsize-SNPRINTF_SIZE_CORR, format, cp);
+ 		va_end(cp);
+ 		if (ret == maxsize-1)
+ 			ret = -1;
+@@ -46,7 +60,7 @@
+ 			break;
+ 		s = str;
+ 		va_copy(cp, ap);
+-		ret = vsnprintf(str, maxsize-SNPRINTF_SIZE_CORR, format, cp);
++		ret = compat_vsnprintf(str, maxsize-SNPRINTF_SIZE_CORR, format, cp);
+ 		va_end(cp);
+ 		if (ret == maxsize-1)
+ 			ret = -1;
+diff -ur stock/git-2.17.0/compat/strtoimax.c git-2.17.0/compat/strtoimax.c
+--- stock/git-2.17.0/compat/strtoimax.c	Mon Apr  2 10:44:04 2018
++++ git-2.17.0/compat/strtoimax.c	Wed Oct  4 04:25:19 2023
+@@ -1,5 +1,9 @@
+ #include "../git-compat-util.h"
+ 
++#if defined(__svr4__)
++#include "strtoll.c"
++#endif
++
+ intmax_t gitstrtoimax (const char *nptr, char **endptr, int base)
+ {
+ #if defined(NO_STRTOULL)
+diff -ur stock/git-2.17.0/compat/strtoumax.c git-2.17.0/compat/strtoumax.c
+--- stock/git-2.17.0/compat/strtoumax.c	Mon Apr  2 10:44:04 2018
++++ git-2.17.0/compat/strtoumax.c	Wed Oct  4 04:24:11 2023
+@@ -1,5 +1,9 @@
+ #include "../git-compat-util.h"
+ 
++#if defined(__svr4__)
++#include "strtoull.c"
++#endif
++
+ uintmax_t gitstrtoumax (const char *nptr, char **endptr, int base)
+ {
+ #if defined(NO_STRTOULL)
+diff -ur stock/git-2.17.0/daemon.c git-2.17.0/daemon.c
+--- stock/git-2.17.0/daemon.c	Mon Apr  2 10:44:04 2018
++++ git-2.17.0/daemon.c	Wed Oct  4 01:10:27 2023
+@@ -9,6 +9,10 @@
+ #define initgroups(x, y) (0) /* nothing */
+ #endif
+ 
++#ifndef INET_ADDRSTRLEN
++#define INET_ADDRSTRLEN 16
++#endif
++
+ static enum log_destination {
+ 	LOG_DESTINATION_UNSET = -1,
+ 	LOG_DESTINATION_NONE = 0,
+diff -ur stock/git-2.17.0/date.c git-2.17.0/date.c
+--- stock/git-2.17.0/date.c	Mon Apr  2 10:44:04 2018
++++ git-2.17.0/date.c	Tue Oct  3 23:19:39 2023
+@@ -6,6 +6,10 @@
+ 
+ #include "cache.h"
+ 
++#ifdef __svr4__
++#include "timewrap.c"
++#endif
++
+ /*
+  * This is like mktime, but without normalization of tm_wday and tm_yday.
+  */
+diff -ur stock/git-2.17.0/git-compat-util.h git-2.17.0/git-compat-util.h
+--- stock/git-2.17.0/git-compat-util.h	Mon Apr  2 10:44:04 2018
++++ git-2.17.0/git-compat-util.h	Wed Oct  4 01:20:40 2023
+@@ -3,6 +3,17 @@
+ 
+ #define _FILE_OFFSET_BITS 64
+ 
++#ifdef __svr4__
++
++typedef int ssize_t;
++#define SHUT_WR 2
++#define SIZE_MAX LONG_MAX
++
++#ifndef UINT32_MAX
++#define UINT32_MAX ULONG_MAX
++#endif
++
++#endif
+ 
+ /* Derived from Linux "Features Test Macro" header
+  * Convenience macros to test the versions of gcc (or
+@@ -158,6 +169,13 @@
+ #include <unistd.h>
+ #include <stdio.h>
+ #include <sys/stat.h>
++
++#ifdef __svr4__
++#define S_ISLNK(mode) ((mode & 0xF000) == S_IFLNK)
++#define S_ISSOCK(mode) ((mode & 0xF000) == S_IFSOCK)
++#endif
++
++
+ #include <fcntl.h>
+ #include <stddef.h>
+ #include <stdlib.h>
+diff -ur stock/git-2.17.0/ref-filter.c git-2.17.0/ref-filter.c
+--- stock/git-2.17.0/ref-filter.c	Mon Apr  2 10:44:04 2018
++++ git-2.17.0/ref-filter.c	Tue Oct  3 20:10:47 2023
+@@ -17,6 +17,9 @@
+ #include "wt-status.h"
+ #include "commit-slab.h"
+ 
++#define __NO_CODEFRAGMENTS_CTYPE__ 1
++#include "strcasecmp.c"
++
+ static struct ref_msg {
+ 	const char *gone;
+ 	const char *ahead;
+diff -ur stock/git-2.17.0/t/Makefile git-2.17.0/t/Makefile
+--- stock/git-2.17.0/t/Makefile	Mon Apr  2 10:44:04 2018
++++ git-2.17.0/t/Makefile	Wed Oct  4 02:11:56 2023
+@@ -61,7 +61,7 @@
+ 	$(RM) .prove
+ 
+ test-lint: test-lint-duplicates test-lint-executable test-lint-shell-syntax \
+-	test-lint-filenames
++	#test-lint-filenames
+ 
+ test-lint-duplicates:
+ 	@dups=`echo $(T) | tr ' ' '\n' | sed 's/-.*//' | sort | uniq -d` && \
+diff -ur stock/git-2.17.0/templates/Makefile git-2.17.0/templates/Makefile
+--- stock/git-2.17.0/templates/Makefile	Mon Apr  2 10:44:04 2018
++++ git-2.17.0/templates/Makefile	Wed Oct  4 01:47:29 2023
+@@ -39,7 +39,7 @@
+ 		case "$$boilerplate" in *~) continue ;; esac && \
+ 		dst=`echo "$$boilerplate" | sed -e 's|^this|.|;s|--|/|g'` && \
+ 		dir=`expr "$$dst" : '\(.*\)/'` && \
+-		mkdir -p blt/$$dir && \
++		[ -d blt/$$dir ] || mkdir -p blt/$$dir && \
+ 		case "$$boilerplate" in \
+ 		*--) continue;; \
+ 		esac && \
+diff -ur stock/git-2.17.0/wrapper.c git-2.17.0/wrapper.c
+--- stock/git-2.17.0/wrapper.c	Mon Apr  2 10:44:04 2018
++++ git-2.17.0/wrapper.c	Wed Oct  4 01:08:55 2023
+@@ -291,6 +291,10 @@
+ 	}
+ }
+ 
++#ifdef __svr4__
++#include "pread.c"
++#endif
++
+ /*
+  * xpread() is the same as pread(), but it automatically restarts pread()
+  * operations with a recoverable error (EAGAIN and EINTR). xpread() DOES

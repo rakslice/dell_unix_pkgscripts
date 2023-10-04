@@ -39,3 +39,8 @@ sh prngd.sh
 # start prngd as openssh make install will try to use it to generate keys
 /usr/local/bin/startprngd
 sh openssh.sh
+
+sh tcl.sh
+sh git.sh
+
+sh gdb-5.3.sh
