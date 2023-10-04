@@ -1,8 +1,8 @@
 
 srcdir=/home/dell
 incdir=$srcdir/buildscripts
-codefragments=$srcdir/codefragments
-patches=$srcdir/patches
+codefragments=$incdir/codefragments
+patches=$incdir/patches
 
 # reset build vars
 config_vars=
