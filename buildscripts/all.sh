@@ -36,4 +36,6 @@ sh perl.sh
 sh openssl.sh
 sh pcre.sh
 sh prngd.sh
+# start prngd as openssh make install will try to use it to generate keys
+/usr/local/bin/startprngd
 sh openssh.sh
