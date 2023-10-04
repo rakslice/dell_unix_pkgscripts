@@ -37,3 +37,8 @@ sh openssl.sh
 sh pcre.sh
 sh prngd.sh
 sh openssh.sh
+
+sh tcl.sh
+sh git.sh
+
+sh gdb-5.3.sh

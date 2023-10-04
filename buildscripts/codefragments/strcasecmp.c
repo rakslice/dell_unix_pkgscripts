@@ -34,7 +34,9 @@ static char sccsid[] = "@(#)strcasecmp.c	8.1 (Berkeley) 6/4/93";
 __RCSID("$NetBSD: strcasecmp.c,v 1.16 2003/08/07 16:43:49 agc Exp $");
 #endif
 
+#ifndef __NO_CODEFRAGMENTS_CTYPE__
 #include <ctype.h>
+#endif
 #include <string.h>
 
 
