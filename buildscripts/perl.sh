@@ -14,7 +14,7 @@ if [ ! -f .patched ]; then
 	touch .patched
 fi
 
-cp perl/config.sh .
+cp $incdir/perl/config.sh .
 
 configure_cmd="bash Configure -d"
 
