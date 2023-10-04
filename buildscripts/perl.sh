@@ -14,7 +14,9 @@ if [ ! -f .patched ]; then
 	touch .patched
 fi
 
-configure_cmd="bash Configure"
+cp perl/config.sh .
+
+configure_cmd="bash Configure -d"
 
 #config_options="-de -Dcc=gcc -Dusedl=n"
 
