@@ -37,8 +37,7 @@ export SHELL_PATH
 NO_ICONV=1
 export NO_ICONV
 
-NO_MSGFMT=1
-export NO_MSGFMT=1
+make_args="V=1 NO_MSGFMT=1"
 
 . $incdir/build.inc
 
