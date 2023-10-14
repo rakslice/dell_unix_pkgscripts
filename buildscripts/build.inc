@@ -13,7 +13,7 @@ if [ "$no_configure" = "" ]; then
   fi
 
   # a pause for checking the configure output
-  read pause
+  #read pause
 
 fi
 
