@@ -21,7 +21,7 @@ if [ ! -d /usr/local ]; then
 fi
 
 if [ ! -d $working_dir/buildscripts ]; then
-	cp -r buildscripts $working_dir/
+	cp -r * $working_dir/
 fi
 
 cd $working_dir/buildscripts
