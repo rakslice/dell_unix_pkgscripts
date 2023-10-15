@@ -7,6 +7,8 @@ package=make-3.76.1
 PATH=/usr/local/bin:/usr/dell/gcc-2/bin:$PATH
 export PATH
 
+use_old_tar=1  # workaround for tar format issue
+
 . preamble.inc
 
 #cp $codefragments/strcasecmp.c src/lib/
