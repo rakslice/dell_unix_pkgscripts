@@ -14,6 +14,8 @@ mkdir $fs_dir
 cp -R buildscripts $fs_dir/
 rm -rf $fs_dir/buildscripts/.git
 
+cp -R iso_template/* $fs_dir/
+
 for sh_file in buildscripts/*.sh; do
 	if [ "$sh_file" == "buildscripts/all.sh" ]; then continue; fi
 	if ! grep -q "^package=" $sh_file; then continue; fi
