@@ -44,3 +44,4 @@ sh tcl.sh
 sh git.sh
 
 sh gdb-5.3.sh
+sh less.sh
