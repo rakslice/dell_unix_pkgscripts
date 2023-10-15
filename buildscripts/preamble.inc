@@ -46,7 +46,11 @@ if [ ! -d $packagedir ]; then
 	fi
 
 	if [ "$use_old_tar" != "" ]; then
-		$old_prog -c $tarball_prefix* | $tar_cmd $tar_options xf -
+		if [ "$old_prog" = "" ]; then
+			$tar_cmd $tar_options xf $tarball_prefix*
+		else
+			$old_prog -c $tarball_prefix* | $tar_cmd $tar_options xf -
+		fi
 	else
 		$tar_cmd $tar_options -x ${letter} -f $tarball_prefix*
 	fi
