@@ -1,0 +1,19 @@
+diff -ur stock/gcc-3.0.4/gcc/configure gcc-3.0.4/gcc/configure
+--- stock/gcc-3.0.4/gcc/configure	Tue Feb  5 14:11:19 2002
++++ gcc-3.0.4/gcc/configure	Wed Oct  4 18:19:32 2023
+@@ -1333,6 +1333,7 @@
+   eval ac_cv_prog_cc_${ac_cc}_c_o=yes
+   if test "x$CC" != xcc; then
+     # Test first that cc exists at all.
++    if false; then
+     if { ac_try='cc -c conftest.c 1>&5'; { (eval echo configure:1337: \"$ac_try\") 1>&5; (eval $ac_try) 2>&5; }; }; then
+       ac_try='cc -c conftest.c -o conftest.o 1>&5'
+       if { (eval echo configure:1339: \"$ac_try\") 1>&5; (eval $ac_try) 2>&5; } &&
+@@ -1345,6 +1346,7 @@
+         eval ac_cv_prog_cc_${ac_cc}_c_o=no
+       fi
+     fi
++  fi
+   fi
+ else
+   eval ac_cv_prog_cc_${ac_cc}_c_o=no

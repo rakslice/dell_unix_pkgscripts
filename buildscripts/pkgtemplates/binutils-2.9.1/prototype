@@ -1,0 +1,59 @@
+i	pkginfo
+d none /usr/local 0755 root other
+d none /usr/local/lib 0755 root other
+f none /usr/local/lib/libiberty.a=lib/libiberty.a 0644 root other
+f none /usr/local/lib/libbfd.la=lib/libbfd.la 0644 root other
+f none /usr/local/lib/libbfd.a=lib/libbfd.a 0644 root other
+f none /usr/local/lib/libopcodes.la=lib/libopcodes.la 0644 root other
+f none /usr/local/lib/libopcodes.a=lib/libopcodes.a 0644 root other
+d none /usr/local/include 0755 root other
+f none /usr/local/include/bfd.h=include/bfd.h 0644 root other
+f none /usr/local/include/ansidecl.h=include/ansidecl.h 0644 root other
+f none /usr/local/include/bfdlink.h=include/bfdlink.h 0644 root other
+d none /usr/local/bin 0755 root other
+f none /usr/local/bin/size=bin/size 0755 root other
+f none /usr/local/bin/objdump=bin/objdump 0755 root other
+f none /usr/local/bin/ar=bin/ar 0755 root other
+f none /usr/local/bin/strings=bin/strings 0755 root other
+f none /usr/local/bin/ranlib=bin/ranlib 0755 root other
+f none /usr/local/bin/c++filt=bin/c++filt 0755 root other
+f none /usr/local/bin/objcopy=bin/objcopy 0755 root other
+f none /usr/local/bin/addr2line=bin/addr2line 0755 root other
+f none /usr/local/bin/nm=bin/nm 0755 root other
+f none /usr/local/bin/strip=bin/strip 0755 root other
+f none /usr/local/bin/as=bin/as 0755 root other
+f none /usr/local/bin/gasp=bin/gasp 0755 root other
+f none /usr/local/bin/gprof=bin/gprof 0755 root other
+f none /usr/local/bin/ld=bin/ld 0755 root other
+d none /usr/local/i386-pc-sysv4.0 0755 root other
+d none /usr/local/i386-pc-sysv4.0/bin 0755 root other
+l none /usr/local/i386-pc-sysv4.0/bin/nm=/usr/local/bin/nm
+l none /usr/local/i386-pc-sysv4.0/bin/strip=/usr/local/bin/strip
+l none /usr/local/i386-pc-sysv4.0/bin/ar=/usr/local/bin/ar
+l none /usr/local/i386-pc-sysv4.0/bin/ranlib=/usr/local/bin/ranlib
+l none /usr/local/i386-pc-sysv4.0/bin/as=/usr/local/bin/as
+l none /usr/local/i386-pc-sysv4.0/bin/ld=/usr/local/bin/ld
+d none /usr/local/i386-pc-sysv4.0/lib 0755 root other
+d none /usr/local/i386-pc-sysv4.0/lib/ldscripts 0755 root other
+f none /usr/local/i386-pc-sysv4.0/lib/ldscripts/elf_i386.x=i386-pc-sysv4.0/lib/ldscripts/elf_i386.x 0644 root other
+f none /usr/local/i386-pc-sysv4.0/lib/ldscripts/elf_i386.xbn=i386-pc-sysv4.0/lib/ldscripts/elf_i386.xbn 0644 root other
+f none /usr/local/i386-pc-sysv4.0/lib/ldscripts/elf_i386.xn=i386-pc-sysv4.0/lib/ldscripts/elf_i386.xn 0644 root other
+f none /usr/local/i386-pc-sysv4.0/lib/ldscripts/elf_i386.xr=i386-pc-sysv4.0/lib/ldscripts/elf_i386.xr 0644 root other
+f none /usr/local/i386-pc-sysv4.0/lib/ldscripts/elf_i386.xs=i386-pc-sysv4.0/lib/ldscripts/elf_i386.xs 0644 root other
+f none /usr/local/i386-pc-sysv4.0/lib/ldscripts/elf_i386.xu=i386-pc-sysv4.0/lib/ldscripts/elf_i386.xu 0644 root other
+d none /usr/local/man 0755 root other
+d none /usr/local/man/man1 0755 root other
+f none /usr/local/man/man1/ar.1=man/man1/ar.1 0644 root other
+f none /usr/local/man/man1/nlmconv.1=man/man1/nlmconv.1 0644 root other
+f none /usr/local/man/man1/c++filt.1=man/man1/c++filt.1 0644 root other
+f none /usr/local/man/man1/nm.1=man/man1/nm.1 0644 root other
+f none /usr/local/man/man1/objdump.1=man/man1/objdump.1 0644 root other
+f none /usr/local/man/man1/ranlib.1=man/man1/ranlib.1 0644 root other
+f none /usr/local/man/man1/size.1=man/man1/size.1 0644 root other
+f none /usr/local/man/man1/strings.1=man/man1/strings.1 0644 root other
+f none /usr/local/man/man1/strip.1=man/man1/strip.1 0644 root other
+f none /usr/local/man/man1/objcopy.1=man/man1/objcopy.1 0644 root other
+f none /usr/local/man/man1/addr2line.1=man/man1/addr2line.1 0644 root other
+f none /usr/local/man/man1/as.1=man/man1/as.1 0644 root other
+f none /usr/local/man/man1/gprof.1=man/man1/gprof.1 0644 root other
+f none /usr/local/man/man1/ld.1=man/man1/ld.1 0644 root other
