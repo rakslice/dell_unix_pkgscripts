@@ -1,0 +1,13 @@
+i	pkginfo
+d none /usr/local 0755 root other
+d none /usr/local/bin 0755 root other
+f none /usr/local/bin/cmp=bin/cmp 0755 root other
+f none /usr/local/bin/diff=bin/diff 0755 root other
+f none /usr/local/bin/diff3=bin/diff3 0755 root other
+f none /usr/local/bin/sdiff=bin/sdiff 0755 root other
+d none /usr/local/info 0755 root other
+f none /usr/local/info/diff.info=info/diff.info 0644 root other
+f none /usr/local/info/diff.info-1=info/diff.info-1 0644 root other
+f none /usr/local/info/diff.info-2=info/diff.info-2 0644 root other
+f none /usr/local/info/diff.info-3=info/diff.info-3 0644 root other
+f none /usr/local/info/diff.info-4=info/diff.info-4 0644 root other
