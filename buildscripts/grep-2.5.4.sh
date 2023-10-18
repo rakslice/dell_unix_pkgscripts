@@ -7,7 +7,6 @@ package=grep-2.5.4
 PATH=/usr/local/bin:$PATH
 export PATH
 
-
 . preamble.inc
 
 if [ ! -f .patched ]; then
@@ -16,6 +15,9 @@ if [ ! -f .patched ]; then
 fi
 
 cp $codefragments/strcasecmp.c src/
+
+prefixvar=DESTDIR
+pkgdestrootbased=1
 
 . $incdir/build.inc
 

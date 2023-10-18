@@ -1,0 +1,7 @@
+PKG="GNUgrep25"
+NAME="GNU grep"
+ARCH="i386"
+VERSION="2.5.4"
+RELEASE="1"
+CLASSES="none"
+CATEGORY="applications"
