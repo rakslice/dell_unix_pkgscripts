@@ -1,0 +1,7 @@
+PKG="GNUtar1"
+NAME="tar"
+ARCH="i386"
+VERSION="1.13.94"
+RELEASE="1"
+CLASSES="none"
+CATEGORY="applications"

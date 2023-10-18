@@ -18,5 +18,8 @@ fi
 PATH=/usr/dell/gcc-2/bin:$PATH
 export PATH
 
+prefixvar=DESTDIR
+pkgdestrootbased=1
+
 . $incdir/build.inc
 

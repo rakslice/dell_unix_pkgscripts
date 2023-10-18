@@ -1,0 +1,9 @@
+i	pkginfo
+d none / 0755 root other
+d none /usr 0755 root other
+d none /usr/local 0755 root other
+d none /usr/local/info 0755 root other
+f none /usr/local/info/tar.info=usr/local/info/tar.info 0644 root other
+d none /usr/local/bin 0755 root other
+f none /usr/local/bin/tar=usr/local/bin/tar 0755 root other
+d none /usr/local/libexec 0755 root other
