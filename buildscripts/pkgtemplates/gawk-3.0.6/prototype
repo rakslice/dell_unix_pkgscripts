@@ -1,0 +1,32 @@
+i	pkginfo
+d none /usr/local 0755 root other
+d none /usr/local/bin 0755 root other
+f none /usr/local/bin/gawk=bin/gawk 0755 root other
+l none /usr/local/bin/gawk-3.0.6=/usr/local/bin/gawk
+s none /usr/local/bin/awk=gawk
+f none /usr/local/bin/igawk=bin/igawk 0755 root other
+d none /usr/local/share 0755 root other
+d none /usr/local/share/awk 0755 root other
+f none /usr/local/share/awk/passwd.awk=share/awk/passwd.awk 0644 root other
+f none /usr/local/share/awk/group.awk=share/awk/group.awk 0644 root other
+f none /usr/local/share/awk/assert.awk=share/awk/assert.awk 0644 root other
+f none /usr/local/share/awk/ctime.awk=share/awk/ctime.awk 0644 root other
+f none /usr/local/share/awk/ftrans.awk=share/awk/ftrans.awk 0644 root other
+f none /usr/local/share/awk/getopt.awk=share/awk/getopt.awk 0644 root other
+f none /usr/local/share/awk/gettime.awk=share/awk/gettime.awk 0644 root other
+f none /usr/local/share/awk/join.awk=share/awk/join.awk 0644 root other
+f none /usr/local/share/awk/mktime.awk=share/awk/mktime.awk 0644 root other
+f none /usr/local/share/awk/nextfile.awk=share/awk/nextfile.awk 0644 root other
+f none /usr/local/share/awk/ord.awk=share/awk/ord.awk 0644 root other
+f none /usr/local/share/awk/round.awk=share/awk/round.awk 0644 root other
+d none /usr/local/lib 0755 root other
+d none /usr/local/info 0755 root other
+f none /usr/local/info/gawk.info=info/gawk.info 0644 root other
+d none /usr/local/man 0755 root other
+d none /usr/local/man/man1 0755 root other
+f none /usr/local/man/man1/gawk.1=man/man1/gawk.1 0644 root other
+f none /usr/local/man/man1/igawk.1=man/man1/igawk.1 0644 root other
+d none /usr/local/libexec 0755 root other
+d none /usr/local/libexec/awk 0755 root other
+f none /usr/local/libexec/awk/pwcat=libexec/awk/pwcat 0755 root other
+f none /usr/local/libexec/awk/grcat=libexec/awk/grcat 0755 root other
