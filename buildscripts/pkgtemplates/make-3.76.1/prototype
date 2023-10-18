@@ -1,0 +1,15 @@
+i	pkginfo
+d none /usr/local 0755 root other
+d none /usr/local/bin 0755 root other
+f none /usr/local/bin/make=bin/make 0755 root other
+d none /usr/local/info 0755 root other
+f none /usr/local/info/make.info=info/make.info 0644 root other
+f none /usr/local/info/make.info-1=info/make.info-1 0644 root other
+f none /usr/local/info/make.info-2=info/make.info-2 0644 root other
+f none /usr/local/info/make.info-3=info/make.info-3 0644 root other
+f none /usr/local/info/make.info-4=info/make.info-4 0644 root other
+f none /usr/local/info/make.info-5=info/make.info-5 0644 root other
+f none /usr/local/info/make.info-6=info/make.info-6 0644 root other
+f none /usr/local/info/make.info-7=info/make.info-7 0644 root other
+f none /usr/local/info/make.info-8=info/make.info-8 0644 root other
+f none /usr/local/info/make.info-9=info/make.info-9 0644 root other

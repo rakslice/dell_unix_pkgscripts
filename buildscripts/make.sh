@@ -9,11 +9,6 @@ export PATH
 
 . preamble.inc
 
-#cp $codefragments/strcasecmp.c src/lib/
-
-#config_libs="-lm -lz -ljpeg -ltiff"
-#config_options="--disable-nls --enable-languages=c,c++"
-
 if [ ! -f .patched ]; then
 	patch -p1 < $patches/$package.patch
 	touch .patched
@@ -22,6 +17,7 @@ fi
 CONFIG_SHELL=/usr/local/bin/bash
 export CONFIG_SHELL
 
+prefixvar=prefix
 
 . $incdir/build.inc
 
