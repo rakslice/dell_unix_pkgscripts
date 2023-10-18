@@ -63,9 +63,15 @@ fi
 
 realprefix=/usr/local
 
+if [ "$pkgdestrootbased" = "" ]; then
+	pkgprotoprefix="$realprefix/"
+else
+	pkgprotoprefix="/"
+fi
+
 if [ ! -f "$pkgtemplatesdir/prototype" ]; then
 	printf "i\tpkginfo\n" > "$pkgtemplatesdir/prototype.new" || true
-	(cd "$pkgdestdir" ; pkgproto ".=$realprefix" >> "$pkgtemplatesdir/prototype.new")
+	(cd "$pkgdestdir" ; pkgproto ".=$pkgprotoprefix" >> "$pkgtemplatesdir/prototype.new")
 	mv "$pkgtemplatesdir/prototype.new" "$pkgtemplatesdir/prototype"
 fi
 
@@ -75,7 +81,7 @@ set +x
 
 (cd "$pkgdestdir"; find . -type f -print) | while read curfile; do
 	curfile=`echo "$curfile" | cut -d/ -f2-`
-	fgrep " $realprefix/$curfile=" "$pkgtemplatesdir/prototype" > /dev/null || (echo $pkgtemplatesdir/prototype is missing $curfile; exit 1)
+	fgrep " $pkgprotoprefix$curfile=" "$pkgtemplatesdir/prototype" > /dev/null || (echo $pkgtemplatesdir/prototype is missing $curfile; exit 1)
 done
 
 set -x

@@ -1,0 +1,7 @@
+PKG="GNUbu214a"
+NAME="GNU binutils"
+ARCH="i386"
+VERSION="2.14a"
+RELEASE="1"
+CLASSES="none"
+CATEGORY="build"
