@@ -1,0 +1,21 @@
+i	pkginfo
+d none / 0755 root other
+d none /usr 0755 root other
+d none /usr/local 0755 root other
+d none /usr/local/bin 0755 root other
+f none /usr/local/bin/bash=usr/local/bin/bash 0755 root other
+f none /usr/local/bin/bashbug=usr/local/bin/bashbug 0555 root other
+d none /usr/local/man 0755 root other
+d none /usr/local/man/man1 0755 root other
+d none /usr/local/info 0755 root other
+d none /usr/local/share 0755 root other
+d none /usr/local/share/locale 0755 root other
+d none /usr/local/share/locale/en@quot 0755 root other
+d none /usr/local/share/locale/en@quot/LC_MESSAGES 0755 root other
+f none /usr/local/share/locale/en@quot/LC_MESSAGES/bash.mo=usr/local/share/locale/en@quot/LC_MESSAGES/bash.mo 0644 root other
+d none /usr/local/share/locale/en@boldquot 0755 root other
+d none /usr/local/share/locale/en@boldquot/LC_MESSAGES 0755 root other
+f none /usr/local/share/locale/en@boldquot/LC_MESSAGES/bash.mo=usr/local/share/locale/en@boldquot/LC_MESSAGES/bash.mo 0644 root other
+d none /usr/local/share/locale/ru 0755 root other
+d none /usr/local/share/locale/ru/LC_MESSAGES 0755 root other
+f none /usr/local/share/locale/ru/LC_MESSAGES/bash.mo=usr/local/share/locale/ru/LC_MESSAGES/bash.mo 0644 root other

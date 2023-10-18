@@ -1,0 +1,7 @@
+PKG="GNUba3257"
+NAME="GNU bash"
+ARCH="i386"
+VERSION="3.2.57"
+RELEASE="1"
+CLASSES="none"
+CATEGORY="applications"
