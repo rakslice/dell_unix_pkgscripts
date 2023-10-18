@@ -1,0 +1,7 @@
+PKG="wmaker"
+NAME="WindowMaker"
+ARCH="i386"
+VERSION="0.70.0"
+RELEASE="1"
+CLASSES="none"
+CATEGORY="x11"
