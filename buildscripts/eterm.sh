@@ -20,14 +20,16 @@ fi
 tar xzf ../$bg_package.tar.gz
 
 # workaround for bg install script incorrect use of relative path to install-sh
-ln -s ../install-sh bg/install-sh
+if [ ! -h bg/install-sh ]; then
+  ln -s ../install-sh bg/install-sh
+fi
 
 if [ ! -f .patched ]; then
 	patch -p1 -i $patches/$package.patch
 	touch .patched
 fi
 
-config_libs="-lsocket -lnsl -lfreetype"
+config_libs="-lsocket -lnsl -lfreetype -lucb"
 
 CONFIG_SHELL=/usr/local/bin/bash
 export CONFIG_SHELL
@@ -37,6 +39,9 @@ export SHELL
 
 configure_cmd="bash configure"
 config_options="--enable-mmx --disable-multi-charset"
+
+prefixvar=DESTDIR
+pkgdestrootbased=1
 
 . $incdir/build.inc
 

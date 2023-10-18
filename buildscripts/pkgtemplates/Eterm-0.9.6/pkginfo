@@ -1,0 +1,7 @@
+PKG="eterm"
+NAME="Eterm terminal emulator"
+ARCH="i386"
+VERSION="0.9.6"
+RELEASE="1"
+CLASSES="none"
+CATEGORY="applications"
