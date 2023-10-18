@@ -16,12 +16,13 @@ fi
 
 cp $incdir/perl/config.sh .
 
-configure_cmd="bash Configure -d"
-
-#config_options="-de -Dcc=gcc -Dusedl=n"
+configure_cmd="bash Configure -Dinstallprefix=$srcdir/destdir/$package -de"
 
 CONFIG_SHELL=/usr/local/bin/bash
 export CONFIG_SHELL
+
+prefixvar=DESTDIR
+pkgdestrootbased=1
 
 . $incdir/build.inc
 

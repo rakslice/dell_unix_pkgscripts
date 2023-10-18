@@ -1,0 +1,7 @@
+PKG="perl"
+NAME="perl"
+ARCH="i386"
+VERSION="5.6.2"
+RELEASE="1"
+CLASSES="none"
+CATEGORY="language"
