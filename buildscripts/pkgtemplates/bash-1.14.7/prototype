@@ -1,0 +1,12 @@
+i	pkginfo
+d none /usr/local 0755 root other
+d none /usr/local/bin 0755 root other
+f none /usr/local/bin/bash=bin/bash 0755 root other
+f none /usr/local/bin/bashbug=bin/bashbug 0755 root other
+d none /usr/local/man 0755 root other
+d none /usr/local/man/man1 0755 root other
+f none /usr/local/man/man1/bash.1=man/man1/bash.1 0644 root other
+d none /usr/local/man/man3 0755 root other
+f none /usr/local/man/man3/readline.3=man/man3/readline.3 0644 root other
+d none /usr/local/info 0755 root other
+f none /usr/local/info/bash.info=info/bash.info 0644 root other

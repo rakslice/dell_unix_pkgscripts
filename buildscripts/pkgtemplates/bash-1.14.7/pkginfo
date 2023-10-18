@@ -1,0 +1,7 @@
+PKG="GNUbash1"
+NAME="bash"
+ARCH="i386"
+VERSION="1.14.7"
+RELEASE="1"
+CLASSES="none"
+CATEGORY="shells"

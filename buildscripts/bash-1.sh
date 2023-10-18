@@ -17,6 +17,8 @@ if [ -f /usr/local/bin/bash ]; then
 	rm /usr/local/bin/bash
 fi
 
+prefixvar=prefix
+
 . $incdir/build.inc
 
 cp /usr/local/bin/bash /usr/local/bin/bash-1
