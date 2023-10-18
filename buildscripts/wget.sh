@@ -13,13 +13,11 @@ if [ ! -f .patched ]; then
 	touch .patched
 fi
 
-#cp $codefragments/strcasecmp.c src/lib/
-
-#config_libs="-lm -lz -ljpeg -ltiff"
-#config_options="PNG_LIBS=-lpng16 PNG_CFLAGS=-I/usr/local/include/libpng16"
-
 PATH=/usr/dell/gcc-2/bin:/usr/local/bin:$PATH
 export PATH
+
+prefixvar=DESTDIR
+pkgdestrootbased=1
 
 . $incdir/build.inc
 

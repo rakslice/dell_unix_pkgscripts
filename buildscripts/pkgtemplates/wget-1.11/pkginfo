@@ -1,0 +1,7 @@
+PKG="wget111"
+NAME="GNU wget"
+ARCH="i386"
+VERSION="1.11"
+RELEASE="1"
+CLASSES="none"
+CATEGORY="applications"
