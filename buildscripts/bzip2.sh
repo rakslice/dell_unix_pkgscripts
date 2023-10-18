@@ -30,5 +30,7 @@ done
 PATH=/usr/dell/gcc-2/bin:$PATH
 export PATH
 
+prefixvar=PREFIX
+
 . $incdir/build.inc
 

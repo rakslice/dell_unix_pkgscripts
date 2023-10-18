@@ -1,0 +1,28 @@
+i	pkginfo
+d none /usr/local 0755 root other
+d none /usr/local/bin 0755 root other
+f none /usr/local/bin/bzip2=bin/bzip2 0755 root other
+f none /usr/local/bin/bunzip2=bin/bunzip2 0755 root other
+f none /usr/local/bin/bzcat=bin/bzcat 0755 root other
+f none /usr/local/bin/bzip2recover=bin/bzip2recover 0755 root other
+f none /usr/local/bin/bzgrep=bin/bzgrep 0775 root other
+s none /usr/local/bin/bzegrep=/home/dell/destdir/bzip2-1.0.6/bin/bzgrep
+s none /usr/local/bin/bzfgrep=/home/dell/destdir/bzip2-1.0.6/bin/bzgrep
+f none /usr/local/bin/bzmore=bin/bzmore 0775 root other
+s none /usr/local/bin/bzless=/home/dell/destdir/bzip2-1.0.6/bin/bzmore
+f none /usr/local/bin/bzdiff=bin/bzdiff 0775 root other
+s none /usr/local/bin/bzcmp=/home/dell/destdir/bzip2-1.0.6/bin/bzdiff
+d none /usr/local/lib 0755 root other
+f none /usr/local/lib/libbz2.a=lib/libbz2.a 0644 root other
+d none /usr/local/man 0755 root other
+d none /usr/local/man/man1 0755 root other
+f none /usr/local/man/man1/bzip2.1=man/man1/bzip2.1 0664 root other
+f none /usr/local/man/man1/bzgrep.1=man/man1/bzgrep.1 0664 root other
+f none /usr/local/man/man1/bzmore.1=man/man1/bzmore.1 0664 root other
+f none /usr/local/man/man1/bzdiff.1=man/man1/bzdiff.1 0664 root other
+f none /usr/local/man/man1/bzegrep.1=man/man1/bzegrep.1 0644 root other
+f none /usr/local/man/man1/bzfgrep.1=man/man1/bzfgrep.1 0644 root other
+f none /usr/local/man/man1/bzless.1=man/man1/bzless.1 0644 root other
+f none /usr/local/man/man1/bzcmp.1=man/man1/bzcmp.1 0644 root other
+d none /usr/local/include 0755 root other
+f none /usr/local/include/bzlib.h=include/bzlib.h 0664 root other
