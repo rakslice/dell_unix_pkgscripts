@@ -18,7 +18,7 @@ if [ "$no_configure" = "" ] && ([ "$configure_once" = "" ] || [ ! -f .configured
   fi
 
   # a pause for checking the configure output
-  # read pause
+  #read pause
 
   touch .configured
 fi

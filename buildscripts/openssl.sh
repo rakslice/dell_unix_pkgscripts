@@ -7,6 +7,8 @@ package=openssl-1.0.2o
 PATH=/usr/local/bin:$PATH
 export PATH
 
+use_old_tar=1 # archive end error workaround
+
 . preamble.inc
 
 cp $codefragments/strcasecmp.c .

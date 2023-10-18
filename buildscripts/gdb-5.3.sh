@@ -7,6 +7,8 @@ package=gdb-5.3
 PATH=/usr/local/bin:$PATH
 export PATH
 
+tar_options="--no-same-owner"
+
 . preamble.inc
 
 if [ ! -f .patched ]; then
@@ -15,8 +17,6 @@ if [ ! -f .patched ]; then
 fi
 
 config_options=""
-
-tar_options="--no-same-owner"
 
 CONFIG_SHELL=/usr/local/bin/bash
 export CONFIG_SHELL
