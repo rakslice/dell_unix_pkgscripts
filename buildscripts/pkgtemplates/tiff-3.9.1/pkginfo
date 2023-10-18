@@ -1,0 +1,7 @@
+PKG="tiff"
+NAME="tiff"
+ARCH="i386"
+VERSION="3.9.1"
+RELEASE="1"
+CLASSES="none"
+CATEGORY="image"
