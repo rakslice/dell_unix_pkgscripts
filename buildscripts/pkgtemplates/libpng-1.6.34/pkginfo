@@ -1,0 +1,7 @@
+PKG="png"
+NAME="libpng"
+ARCH="i386"
+VERSION="1.6.34"
+RELEASE="1"
+CLASSES="none"
+CATEGORY="image"
