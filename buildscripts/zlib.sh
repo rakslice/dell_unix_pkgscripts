@@ -11,11 +11,6 @@ export PATH
 
 config_options="--static"
 
-#if [ ! -f .patched ]; then
-#	patch -p1 -i $patches/$package.patch
-#	touch .patched
-#fi
-
 CONFIG_SHELL=/usr/local/bin/bash
 export CONFIG_SHELL
 
@@ -23,6 +18,9 @@ SHELL=/usr/local/bin/bash
 export SHELL
 
 configure_cmd="bash configure"
+
+prefixvar=DESTDIR
+pkgdestrootbased=1
 
 . $incdir/build.inc
 
