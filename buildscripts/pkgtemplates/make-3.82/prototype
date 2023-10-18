@@ -1,0 +1,14 @@
+i	pkginfo
+d none / 0755 root other
+d none /usr 0755 root other
+d none /usr/local 0755 root other
+d none /usr/local/share 0755 root other
+d none /usr/local/share/info 0755 root other
+f none /usr/local/share/info/make.info=usr/local/share/info/make.info 0644 root other
+f none /usr/local/share/info/make.info-1=usr/local/share/info/make.info-1 0644 root other
+f none /usr/local/share/info/make.info-2=usr/local/share/info/make.info-2 0644 root other
+d none /usr/local/share/man 0755 root other
+d none /usr/local/share/man/man1 0755 root other
+f none /usr/local/share/man/man1/make.1=usr/local/share/man/man1/make.1 0644 root other
+d none /usr/local/bin 0755 root other
+f none /usr/local/bin/make=usr/local/bin/make 2755 root sys

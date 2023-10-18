@@ -1,0 +1,7 @@
+PKG="GNUmake38"
+NAME="GNU make"
+ARCH="i386"
+VERSION="3.82"
+RELEASE="1"
+CLASSES="none"
+CATEGORY="build"
