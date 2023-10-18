@@ -1,0 +1,36 @@
+#!/bin/sh
+
+set -e
+set -x
+
+# helper script to initialize pkg template dir
+#
+# takes a param like foo-1.2.3 to populate
+# the initial pkginfo
+
+if [ "$1" = "" ]; then
+	exit 1
+fi
+
+cd pkgtemplates
+
+if [ -d "$1" ]; then
+	exit 1
+fi
+
+mkdir "$1"
+
+name=`echo "$1" | cut -d'-' -f1`
+ver=`echo "$1" | cut -d'-' -f2-`
+
+cat <<EOF > "$1/pkginfo"
+PKG="$name"
+NAME="$name"
+ARCH="i386"
+VERSION="$ver"
+RELEASE="1"
+CLASSES="none"
+CATEGORY="applications"
+EOF
+
+vi "$1/pkginfo"
