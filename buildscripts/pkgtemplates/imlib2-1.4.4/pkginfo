@@ -1,0 +1,7 @@
+PKG="imlib2"
+NAME="imlib2 image formats wrapper library"
+ARCH="i386"
+VERSION="1.4.4"
+RELEASE="1"
+CLASSES="none"
+CATEGORY="image"
