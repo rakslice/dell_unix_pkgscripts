@@ -1,0 +1,28 @@
+i	pkginfo
+d none /usr/local 0755 root other
+d none /usr/local/man 0755 root other
+d none /usr/local/man/man1 0755 root other
+f none /usr/local/man/man1/gzip.1=man/man1/gzip.1 0644 root other
+f none /usr/local/man/man1/gzexe.1=man/man1/gzexe.1 0644 root other
+f none /usr/local/man/man1/zdiff.1=man/man1/zdiff.1 0644 root other
+f none /usr/local/man/man1/zgrep.1=man/man1/zgrep.1 0644 root other
+f none /usr/local/man/man1/zmore.1=man/man1/zmore.1 0644 root other
+f none /usr/local/man/man1/znew.1=man/man1/znew.1 0644 root other
+f none /usr/local/man/man1/zforce.1=man/man1/zforce.1 0644 root other
+l none /usr/local/man/man1/zcat.1=/usr/local/man/man1/gzip.1
+l none /usr/local/man/man1/zcmp.1=/usr/local/man/man1/zdiff.1
+l none /usr/local/man/man1/gunzip.1=/usr/local/man/man1/gzip.1
+d none /usr/local/bin 0755 root other
+f none /usr/local/bin/gzip=bin/gzip 0755 root other
+f none /usr/local/bin/zdiff=bin/zdiff 0755 root other
+f none /usr/local/bin/zgrep=bin/zgrep 0755 root other
+f none /usr/local/bin/zmore=bin/zmore 0755 root other
+f none /usr/local/bin/znew=bin/znew 0755 root other
+f none /usr/local/bin/zforce=bin/zforce 0755 root other
+f none /usr/local/bin/gzexe=bin/gzexe 0755 root other
+l none /usr/local/bin/zcmp=/usr/local/bin/zdiff
+l none /usr/local/bin/gunzip=/usr/local/bin/gzip
+l none /usr/local/bin/zcat=/usr/local/bin/gzip
+d none /usr/local/lib 0755 root other
+d none /usr/local/info 0755 root other
+f none /usr/local/info/gzip.info=info/gzip.info 0644 root other

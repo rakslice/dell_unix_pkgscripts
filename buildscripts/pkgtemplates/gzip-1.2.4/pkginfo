@@ -1,0 +1,7 @@
+PKG="GNUgz124"
+NAME="GNU gzip"
+ARCH="i386"
+VERSION="1.2.4"
+RELEASE="1"
+CLASSES="none"
+CATEGORY="build"
