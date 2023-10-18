@@ -1,0 +1,76 @@
+diff -ur stock/gcc-3.3.6/gcc/configure gcc-3.3.6/gcc/configure
+--- stock/gcc-3.3.6/gcc/configure	Fri Dec  3 17:51:43 2004
++++ gcc-3.3.6/gcc/configure	Tue Oct 17 19:17:54 2023
+@@ -1211,6 +1211,7 @@
+   eval ac_cv_prog_cc_${ac_cc}_c_o=yes
+   if test "x$CC" != xcc; then
+     # Test first that cc exists at all.
++    if false; then
+     if { ac_try='cc -c conftest.c 1>&5'; { (eval echo configure:1215: \"$ac_try\") 1>&5; (eval $ac_try) 2>&5; }; }; then
+       ac_try='cc -c conftest.c -o conftest.o 1>&5'
+       if { (eval echo configure:1217: \"$ac_try\") 1>&5; (eval $ac_try) 2>&5; } &&
+@@ -1222,6 +1223,7 @@
+         # cc exists but doesn't like -o.
+         eval ac_cv_prog_cc_${ac_cc}_c_o=no
+       fi
++    fi
+     fi
+   fi
+ else
+diff -ur stock/gcc-3.3.6/gcc/gdbinit.in gcc-3.3.6/gcc/gdbinit.in
+--- stock/gcc-3.3.6/gcc/gdbinit.in	Mon Apr 28 14:37:10 2003
++++ gcc-3.3.6/gcc/gdbinit.in	Tue Oct 17 19:45:57 2023
+@@ -97,7 +97,7 @@
+ 
+ # Put breakpoints at exit and fancy_abort in case abort is mapped
+ # to either fprintf/exit or fancy_abort.
+-b fancy_abort
++#b fancy_abort
+ 
+ # Make gdb complain about symbol reading errors.  This is so that gcc
+ # developers can see and fix bugs in gcc debug output.
+diff -ur stock/gcc-3.3.6/gcc/scan-decls.c gcc-3.3.6/gcc/scan-decls.c
+--- stock/gcc-3.3.6/gcc/scan-decls.c	Wed Oct  8 05:33:43 2003
++++ gcc-3.3.6/gcc/scan-decls.c	Tue Oct 17 22:12:30 2023
+@@ -33,7 +33,7 @@
+    prefixed by extern "C".  */
+ int extern_C_braces_length = 0;
+ /* 20 is not enough anymore on Solaris 9.  */
+-#define MAX_EXTERN_C_BRACES  200
++#define MAX_EXTERN_C_BRACES  1000
+ char extern_C_braces[MAX_EXTERN_C_BRACES];
+ #define in_extern_C_brace (extern_C_braces_length>0)
+ 
+diff -ur stock/gcc-3.3.6/libiberty/configure gcc-3.3.6/libiberty/configure
+--- stock/gcc-3.3.6/libiberty/configure	Wed Nov 12 09:32:29 2003
++++ gcc-3.3.6/libiberty/configure	Tue Oct 17 19:06:48 2023
+@@ -1024,6 +1024,7 @@
+   eval ac_cv_prog_cc_${ac_cc}_c_o=yes
+   if test "x$CC" != xcc; then
+     # Test first that cc exists at all.
++    if false; then
+     if { ac_try='cc -c conftest.c 1>&5'; { (eval echo configure:1028: \"$ac_try\") 1>&5; (eval $ac_try) 2>&5; }; }; then
+       ac_try='cc -c conftest.c -o conftest.o 1>&5'
+       if { (eval echo configure:1030: \"$ac_try\") 1>&5; (eval $ac_try) 2>&5; } &&
+@@ -1035,6 +1036,7 @@
+         # cc exists but doesn't like -o.
+         eval ac_cv_prog_cc_${ac_cc}_c_o=no
+       fi
++    fi
+     fi
+   fi
+ else
+diff -ur stock/gcc-3.3.6/libstdc++-v3/testsuite/testsuite_hooks.cc gcc-3.3.6/libstdc++-v3/testsuite/testsuite_hooks.cc
+--- stock/gcc-3.3.6/libstdc++-v3/testsuite/testsuite_hooks.cc	Wed Jan 15 17:41:51 2003
++++ gcc-3.3.6/libstdc++-v3/testsuite/testsuite_hooks.cc	Wed Oct 18 00:51:00 2023
+@@ -34,6 +34,10 @@
+ #include <unistd.h>
+ #include <sys/time.h>
+ #include <sys/resource.h>
++#ifdef __svr4__
++int getrlimit(int resource, struct rlimit *rlp);
++int setrlimit(int resource, const struct rlimit *rlp);
++#endif
+ #endif
+ #include <list>
+ #include <string>

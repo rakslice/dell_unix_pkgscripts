@@ -1,0 +1,7 @@
+PKG="GNUgcc336"
+NAME="GNU gcc"
+ARCH="i386"
+VERSION="3.3.6"
+RELEASE="1"
+CLASSES="none"
+CATEGORY="build"
