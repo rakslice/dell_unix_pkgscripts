@@ -1,0 +1,23 @@
+i	pkginfo
+d none /usr/local 0755 root other
+d none /usr/local/include 0755 root other
+f none /usr/local/include/jconfig.h=include/jconfig.h 0644 root other
+f none /usr/local/include/jpeglib.h=include/jpeglib.h 0644 root other
+f none /usr/local/include/jmorecfg.h=include/jmorecfg.h 0644 root other
+f none /usr/local/include/jerror.h=include/jerror.h 0644 root other
+d none /usr/local/lib 0755 root other
+f none /usr/local/lib/libjpeg.la=lib/libjpeg.la 0755 root other
+f none /usr/local/lib/libjpeg.a=lib/libjpeg.a 0644 root other
+d none /usr/local/bin 0755 root other
+f none /usr/local/bin/cjpeg=bin/cjpeg 0755 root other
+f none /usr/local/bin/djpeg=bin/djpeg 0755 root other
+f none /usr/local/bin/jpegtran=bin/jpegtran 0755 root other
+f none /usr/local/bin/rdjpgcom=bin/rdjpgcom 0755 root other
+f none /usr/local/bin/wrjpgcom=bin/wrjpgcom 0755 root other
+d none /usr/local/man 0755 root other
+d none /usr/local/man/man1 0755 root other
+f none /usr/local/man/man1/cjpeg.1=man/man1/cjpeg.1 0644 root other
+f none /usr/local/man/man1/djpeg.1=man/man1/djpeg.1 0644 root other
+f none /usr/local/man/man1/jpegtran.1=man/man1/jpegtran.1 0644 root other
+f none /usr/local/man/man1/rdjpgcom.1=man/man1/rdjpgcom.1 0644 root other
+f none /usr/local/man/man1/wrjpgcom.1=man/man1/wrjpgcom.1 0644 root other

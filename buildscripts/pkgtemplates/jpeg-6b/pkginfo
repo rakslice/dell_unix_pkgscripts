@@ -1,0 +1,7 @@
+PKG="jpeg"
+NAME="jpeg"
+ARCH="i386"
+VERSION="6b"
+RELEASE="1"
+CLASSES="none"
+CATEGORY="imaging"
