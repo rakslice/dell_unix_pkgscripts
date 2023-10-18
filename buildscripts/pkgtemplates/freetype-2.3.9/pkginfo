@@ -1,0 +1,7 @@
+PKG="freetype"
+NAME="freetype"
+ARCH="i386"
+VERSION="2.3.9"
+RELEASE="1"
+CLASSES="none"
+CATEGORY="libraries"
