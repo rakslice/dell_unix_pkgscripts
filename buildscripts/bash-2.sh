@@ -22,8 +22,7 @@ export PATH
 CONFIG_SHELL=/usr/local/bin/bash
 export CONFIG_SHELL
 
-#configure_cmd="bash configure"
-
+prefixvar=prefix
 
 . $incdir/build.inc
 
