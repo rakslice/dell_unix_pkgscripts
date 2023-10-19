@@ -1,0 +1,7 @@
+PKG="gmp"
+NAME="gmp"
+ARCH="i386"
+VERSION="4.3.2"
+RELEASE="1"
+CLASSES="none"
+CATEGORY="libraries"

@@ -1,0 +1,14 @@
+i	pkginfo
+d none / 0755 root other
+d none /usr 0755 root other
+d none /usr/local 0755 root other
+d none /usr/local/share 0755 root other
+d none /usr/local/share/info 0755 root other
+f none /usr/local/share/info/gmp.info=usr/local/share/info/gmp.info 0644 root other
+f none /usr/local/share/info/gmp.info-1=usr/local/share/info/gmp.info-1 0644 root other
+f none /usr/local/share/info/gmp.info-2=usr/local/share/info/gmp.info-2 0644 root other
+d none /usr/local/lib 0755 root other
+f none /usr/local/lib/libgmp.la=usr/local/lib/libgmp.la 0755 root other
+f none /usr/local/lib/libgmp.a=usr/local/lib/libgmp.a 0644 root other
+d none /usr/local/include 0755 root other
+f none /usr/local/include/gmp.h=usr/local/include/gmp.h 0644 root other
