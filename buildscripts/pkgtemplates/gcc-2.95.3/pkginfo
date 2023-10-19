@@ -1,0 +1,7 @@
+PKG="gcc"
+NAME="gcc"
+ARCH="i386"
+VERSION="2.95.3"
+RELEASE="1"
+CLASSES="build"
+CATEGORY="applications"
