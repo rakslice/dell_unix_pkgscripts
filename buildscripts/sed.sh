@@ -25,6 +25,8 @@ configure_cmd="bash configure"
 prefixvar=DESTDIR
 pkgdestrootbased=1
 
+do_not_package="bin/sed"
+
 . $incdir/build.inc
 
 unset CONFIG_SHELL

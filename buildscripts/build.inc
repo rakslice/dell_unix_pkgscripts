@@ -75,6 +75,15 @@ if [ ! -f "$pkgtemplatesdir/prototype" ]; then
 	mv "$pkgtemplatesdir/prototype.new" "$pkgtemplatesdir/prototype"
 fi
 
+# remove any files from the destdir we specifically want to exclude
+if [ "$do_not_package" != "" ]; then
+	for curspec in $do_not_package; do
+		if [ -f "$pkgdestdir/$curspec" ] || [ -d "$pkgdestdir/$curspec" ]; then
+			rm -rf "$pkgdestdir/$curspec"
+		fi
+	done
+fi
+
 # check if there are extra files in the destdir missing from the proto
 
 set +x

@@ -92,8 +92,6 @@ f none /share/locale/tr/LC_MESSAGES/sed.mo=share/locale/tr/LC_MESSAGES/sed.mo 06
 d none /share/locale/zh_CN 0755 root other
 d none /share/locale/zh_CN/LC_MESSAGES 0755 root other
 f none /share/locale/zh_CN/LC_MESSAGES/sed.mo=share/locale/zh_CN/LC_MESSAGES/sed.mo 0644 root other
-d none /bin 0755 root other
-f none /bin/sed=bin/sed 0755 root other
 d none /info 0755 root other
 f none /info/sed.info=info/sed.info 0644 root other
 f none /info/sed.info-1=info/sed.info-1 0644 root other
