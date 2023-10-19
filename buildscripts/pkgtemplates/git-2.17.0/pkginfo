@@ -1,0 +1,7 @@
+PKG="git"
+NAME="git"
+ARCH="i386"
+VERSION="2.17.0"
+RELEASE="1"
+CLASSES="none"
+CATEGORY="applications"

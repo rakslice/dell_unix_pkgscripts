@@ -39,6 +39,9 @@ export NO_ICONV
 
 make_args="V=1 NO_MSGFMT=1"
 
+prefixvar=DESTDIR
+pkgdestrootbased=1
+
 . $incdir/build.inc
 
 unset NO_ICONV
