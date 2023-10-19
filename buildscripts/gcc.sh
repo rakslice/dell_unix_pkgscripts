@@ -23,6 +23,7 @@ fi
 cd build-gcc
 
 configure_cmd=../$package/configure
+configure_once=1
 
 CONFIG_SHELL=/usr/local/bin/bash
 export CONFIG_SHELL
