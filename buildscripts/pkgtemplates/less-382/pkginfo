@@ -1,0 +1,7 @@
+PKG="less"
+NAME="less"
+ARCH="i386"
+VERSION="382"
+RELEASE="1"
+CLASSES="none"
+CATEGORY="applications"

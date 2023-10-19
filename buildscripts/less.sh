@@ -9,6 +9,7 @@ export PATH
 
 . preamble.inc
 
+configure_cmd="bash configure"
 config_options=""
 
 CONFIG_SHELL=/usr/local/bin/bash
