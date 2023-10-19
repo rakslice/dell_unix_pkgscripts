@@ -1,0 +1,7 @@
+PKG="tcl"
+NAME="tcl"
+ARCH="i386"
+VERSION="8.4.20"
+RELEASE="1"
+CLASSES="none"
+CATEGORY="applications"

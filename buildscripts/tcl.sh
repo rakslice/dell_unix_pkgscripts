@@ -15,8 +15,17 @@ cd unix
 LIBS="-lucb"
 export LIBS
 
+prefixvar=DESTDIR
+pkgdestrootbased=1
+
+localbindir="$srcdir/destdir/$package/usr/local/bin"
+mkdir -p "$localbindir"
+
+if [ ! -h "$localbindir/tclsh" ]; then
+  ln -s "$localbindir/tclsh8.4" "$localbindir/tclsh"
+fi
+
 . $incdir/build.inc
 
 unset LIBS
 
-ln -s /usr/local/bin/tclsh8.4 /usr/local/bin/tclsh
