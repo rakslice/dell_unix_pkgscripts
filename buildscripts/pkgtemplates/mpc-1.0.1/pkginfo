@@ -1,0 +1,7 @@
+PKG="mpc"
+NAME="mpc"
+ARCH="i386"
+VERSION="1.0.1"
+RELEASE="1"
+CLASSES="none"
+CATEGORY="libraries"

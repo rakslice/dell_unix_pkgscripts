@@ -17,6 +17,9 @@ export ACCEPT_INFERIOR_RM_PROGRAM
 CONFIG_SHELL=/usr/local/bin/bash
 export CONFIG_SHELL
 
+prefixvar=DESTDIR
+pkgdestrootbased=1
+
 . $incdir/build.inc
 
 unset CONFIG_SHELL
