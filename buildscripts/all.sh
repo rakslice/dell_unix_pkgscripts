@@ -29,7 +29,7 @@ sh tiff-3.9.1.sh
 sh imlib.sh
 sh diffutils.sh
 sh windowmaker.sh
-sh libast.sh
+sh libast.sh  # this needs gcc < 3.3.6 because it is set up to use varargs
 sh eterm.sh
 
 sh perl.sh
@@ -44,4 +44,15 @@ sh tcl.sh
 sh git.sh
 
 sh gdb-5.3.sh
+
 sh less.sh
+
+#sh gmp.sh
+#sh mpfr.sh
+#sh mpc.sh
+#sh gcc-4.8.3.sh
+
+#sh binutils-2.14a.sh # newer binutils, doesn't run into header size problems like 2.13
+
+#sh gcc-3.0.4.sh # newer, before they removed varargs support
+#sh gcc-3.3.6.sh # newest gcc building so far

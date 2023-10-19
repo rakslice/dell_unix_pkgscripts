@@ -20,11 +20,13 @@ fi
 
 configure_cmd="./Configure"
 
-#config_options="BSD-x86 no-threads no-asm no-shared no-dso no-hw-padlock"
 config_options="-lsocket -lnsl BSD-x86 no-threads no-asm no-shared no-dso no-hw-padlock"
 
 CONFIG_SHELL=/usr/local/bin/bash
 export CONFIG_SHELL
+
+prefixvar=INSTALL_PREFIX
+pkgdestrootbased=1
 
 . $incdir/build.inc
 

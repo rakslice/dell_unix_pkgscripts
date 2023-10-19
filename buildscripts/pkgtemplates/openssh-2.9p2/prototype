@@ -1,0 +1,35 @@
+i	pkginfo
+d none / 0755 root other
+d none /usr 0755 root other
+d none /usr/local 0755 root other
+d none /usr/local/bin 0755 root other
+s none /usr/local/bin/slogin=ssh
+f none /usr/local/bin/ssh=usr/local/bin/ssh 4711 root other
+f none /usr/local/bin/scp=usr/local/bin/scp 0755 root other
+f none /usr/local/bin/ssh-add=usr/local/bin/ssh-add 0755 root other
+f none /usr/local/bin/ssh-agent=usr/local/bin/ssh-agent 0755 root other
+f none /usr/local/bin/ssh-keygen=usr/local/bin/ssh-keygen 0755 root other
+f none /usr/local/bin/ssh-keyscan=usr/local/bin/ssh-keyscan 0755 root other
+f none /usr/local/bin/sftp=usr/local/bin/sftp 0755 root other
+d none /usr/local/sbin 0755 root other
+f none /usr/local/sbin/sshd=usr/local/sbin/sshd 0755 root other
+d none /usr/local/man 0755 root other
+d none /usr/local/man/man1 0755 root other
+s none /usr/local/man/man1/slogin.1=ssh.1
+f none /usr/local/man/man1/ssh.1=usr/local/man/man1/ssh.1 0644 root other
+f none /usr/local/man/man1/scp.1=usr/local/man/man1/scp.1 0644 root other
+f none /usr/local/man/man1/ssh-add.1=usr/local/man/man1/ssh-add.1 0644 root other
+f none /usr/local/man/man1/ssh-agent.1=usr/local/man/man1/ssh-agent.1 0644 root other
+f none /usr/local/man/man1/ssh-keygen.1=usr/local/man/man1/ssh-keygen.1 0644 root other
+f none /usr/local/man/man1/ssh-keyscan.1=usr/local/man/man1/ssh-keyscan.1 0644 root other
+f none /usr/local/man/man1/sftp.1=usr/local/man/man1/sftp.1 0644 root other
+d none /usr/local/man/man8 0755 root other
+f none /usr/local/man/man8/sshd.8=usr/local/man/man8/sshd.8 0644 root other
+f none /usr/local/man/man8/sftp-server.8=usr/local/man/man8/sftp-server.8 0644 root other
+d none /usr/local/libexec 0755 root other
+f none /usr/local/libexec/sftp-server=usr/local/libexec/sftp-server 0755 root other
+d none /usr/local/etc 0755 root other
+f none /usr/local/etc/ssh_config=usr/local/etc/ssh_config 0644 root other
+f none /usr/local/etc/sshd_config=usr/local/etc/sshd_config 0644 root other
+f none /usr/local/etc/ssh_prng_cmds=usr/local/etc/ssh_prng_cmds 0644 root other
+f none /usr/local/etc/primes=usr/local/etc/primes 0644 root other

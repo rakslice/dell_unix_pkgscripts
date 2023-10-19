@@ -1,0 +1,7 @@
+PKG="openssh"
+NAME="openssh"
+ARCH="i386"
+VERSION="2.9p2"
+RELEASE="1"
+CLASSES="none"
+CATEGORY="applications"
