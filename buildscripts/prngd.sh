@@ -22,6 +22,8 @@ make CC=gcc CFLAGS="-O2 -Wall -DFREEBSD" DEFS="-DRANDSAVENAME=\\\"/usr/local/etc
 
 target="$srcdir/destdir/$package/usr/local"
 
+pkgdestrootbased=1
+
 for d in $target $target/bin $target/sbin $target/etc $target/etc/prngd $target/var $target/var/run; do
 	if [ ! -d "$d" ]; then
 		mkdir -p "$d"

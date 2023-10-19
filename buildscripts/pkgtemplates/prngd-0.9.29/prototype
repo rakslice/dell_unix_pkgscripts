@@ -1,13 +1,13 @@
 i	pkginfo
+d none / 0755 root other
+d none /usr 0755 root other
 d none /usr/local 0755 root other
-d none /usr/local/usr 0755 root other
-d none /usr/local/usr/local 0755 root other
-d none /usr/local/usr/local/bin 0755 root other
-f none /usr/local/usr/local/bin/startprngd=usr/local/bin/startprngd 0755 root other
-d none /usr/local/usr/local/sbin 0755 root other
-f none /usr/local/usr/local/sbin/prngd=usr/local/sbin/prngd 0755 root other
-d none /usr/local/usr/local/etc 0755 root other
-d none /usr/local/usr/local/etc/prngd 0755 root other
-v none /usr/local/usr/local/etc/prngd/prngd.conf=usr/local/etc/prngd/prngd.conf 0644 root other
-d none /usr/local/usr/local/var 0755 root other
-d none /usr/local/usr/local/var/run 0755 root other
+d none /usr/local/bin 0755 root other
+f none /usr/local/bin/startprngd=usr/local/bin/startprngd 0755 root other
+d none /usr/local/sbin 0755 root other
+f none /usr/local/sbin/prngd=usr/local/sbin/prngd 0755 root other
+d none /usr/local/etc 0755 root other
+d none /usr/local/etc/prngd 0755 root other
+f none /usr/local/etc/prngd/prngd.conf=usr/local/etc/prngd/prngd.conf 0644 root other
+d none /usr/local/var 0755 root other
+d none /usr/local/var/run 0755 root other
