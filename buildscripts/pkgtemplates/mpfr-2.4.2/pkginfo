@@ -1,0 +1,7 @@
+PKG="mpfr"
+NAME="mpfr"
+ARCH="i386"
+VERSION="2.4.2"
+RELEASE="1"
+CLASSES="none"
+CATEGORY="libraries"

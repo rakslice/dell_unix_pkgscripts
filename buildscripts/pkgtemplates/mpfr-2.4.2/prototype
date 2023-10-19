@@ -1,0 +1,27 @@
+i	pkginfo
+d none / 0755 root other
+d none /usr 0755 root other
+d none /usr/local 0755 root other
+d none /usr/local/lib 0755 root other
+f none /usr/local/lib/libmpfr.la=usr/local/lib/libmpfr.la 0755 root other
+f none /usr/local/lib/libmpfr.a=usr/local/lib/libmpfr.a 0644 root other
+d none /usr/local/include 0755 root other
+f none /usr/local/include/mpfr.h=usr/local/include/mpfr.h 0644 root other
+f none /usr/local/include/mpf2mpfr.h=usr/local/include/mpf2mpfr.h 0644 root other
+d none /usr/local/share 0755 root other
+d none /usr/local/share/info 0755 root other
+f none /usr/local/share/info/mpfr.info=usr/local/share/info/mpfr.info 0644 root other
+d none /usr/local/share/doc 0755 root other
+d none /usr/local/share/doc/mpfr 0755 root other
+d none /usr/local/share/doc/mpfr/examples 0755 root other
+f none /usr/local/share/doc/mpfr/examples/ReadMe=usr/local/share/doc/mpfr/examples/ReadMe 0644 root other
+f none /usr/local/share/doc/mpfr/examples/divworst.c=usr/local/share/doc/mpfr/examples/divworst.c 0644 root other
+f none /usr/local/share/doc/mpfr/examples/rndo-add.c=usr/local/share/doc/mpfr/examples/rndo-add.c 0644 root other
+f none /usr/local/share/doc/mpfr/examples/sample.c=usr/local/share/doc/mpfr/examples/sample.c 0644 root other
+f none /usr/local/share/doc/mpfr/AUTHORS=usr/local/share/doc/mpfr/AUTHORS 0644 root other
+f none /usr/local/share/doc/mpfr/BUGS=usr/local/share/doc/mpfr/BUGS 0644 root other
+f none /usr/local/share/doc/mpfr/COPYING=usr/local/share/doc/mpfr/COPYING 0644 root other
+f none /usr/local/share/doc/mpfr/COPYING.LIB=usr/local/share/doc/mpfr/COPYING.LIB 0644 root other
+f none /usr/local/share/doc/mpfr/FAQ.html=usr/local/share/doc/mpfr/FAQ.html 0644 root other
+f none /usr/local/share/doc/mpfr/NEWS=usr/local/share/doc/mpfr/NEWS 0644 root other
+f none /usr/local/share/doc/mpfr/TODO=usr/local/share/doc/mpfr/TODO 0644 root other
