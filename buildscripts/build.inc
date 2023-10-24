@@ -115,3 +115,12 @@ pkgmk -d "$pkgdir" -f "$pkgtemplatesdir/prototype" -b "$pkgdestdir"
 
 eval `grep '^PKG=' $pkgtemplatesdir/pkginfo`
 pkgadd -nd "$pkgdir" $PKG
+
+# remove the completed pkgdest
+
+rm -rf "$pkgdestdir"
+
+if [ "$REMOVE_BUILT_SOURCE_DIRS" != "" ]; then
+	# remove the completed source directory
+	rm -rf "$srcdir/$packagedir"
+fi
