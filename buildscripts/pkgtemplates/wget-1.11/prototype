@@ -8,7 +8,5 @@ d none /usr/local/share 0755 root other
 d none /usr/local/share/info 0755 root other
 f none /usr/local/share/info/wget.info=usr/local/share/info/wget.info 0644 root other
 d none /usr/local/share/man 0755 root other
-d none /usr/local/share/man/man1 0755 root other
-f none /usr/local/share/man/man1/wget.1=usr/local/share/man/man1/wget.1 0644 root other
 d none /usr/local/etc 0755 root other
 f none /usr/local/etc/wgetrc=usr/local/etc/wgetrc 0644 root other
