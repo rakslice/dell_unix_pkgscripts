@@ -28,6 +28,8 @@ configure_cmd="bash configure"
 
 config_options="--without-iconv"
 
+configure_once=1
+
 CONFIG_SHELL=/usr/local/bin/bash
 export CONFIG_SHELL
 
