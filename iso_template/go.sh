@@ -21,7 +21,7 @@ if [ ! -d /usr/local ]; then
 	mkdir $storage_location/var_tmp
 	chmod 777 $storage_location/var_tmp
 	chmod +t $storage_location/var_tmp
-	rmdir /var/tmp
+	rm -rf /var/tmp
 	ln -s $storage_location/var_tmp /var/tmp
 fi
 
