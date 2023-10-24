@@ -3,7 +3,7 @@ d none /usr/local 0755 root other
 d none /usr/local/bin 0755 root other
 f none /usr/local/bin/gawk=bin/gawk 0755 root other
 l none /usr/local/bin/gawk-3.0.6=/usr/local/bin/gawk
-s none /usr/local/bin/awk=gawk
+s none /usr/local/bin/awk=./gawk
 f none /usr/local/bin/igawk=bin/igawk 0755 root other
 d none /usr/local/share 0755 root other
 d none /usr/local/share/awk 0755 root other

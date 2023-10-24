@@ -3,7 +3,7 @@ d none / 0755 root other
 d none /usr 0755 root other
 d none /usr/local 0755 root other
 d none /usr/local/bin 0755 root other
-s none /usr/local/bin/tclsh=tclsh8.4
+s none /usr/local/bin/tclsh=./tclsh8.4
 f none /usr/local/bin/tclsh8.4=usr/local/bin/tclsh8.4 0755 root other
 d none /usr/local/lib 0755 root other
 d none /usr/local/lib/tcl8.4 0755 root other

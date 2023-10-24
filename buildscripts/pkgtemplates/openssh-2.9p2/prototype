@@ -3,7 +3,7 @@ d none / 0755 root other
 d none /usr 0755 root other
 d none /usr/local 0755 root other
 d none /usr/local/bin 0755 root other
-s none /usr/local/bin/slogin=ssh
+s none /usr/local/bin/slogin=./ssh
 f none /usr/local/bin/ssh=usr/local/bin/ssh 4711 root other
 f none /usr/local/bin/scp=usr/local/bin/scp 0755 root other
 f none /usr/local/bin/ssh-add=usr/local/bin/ssh-add 0755 root other
@@ -15,7 +15,7 @@ d none /usr/local/sbin 0755 root other
 f none /usr/local/sbin/sshd=usr/local/sbin/sshd 0755 root other
 d none /usr/local/man 0755 root other
 d none /usr/local/man/man1 0755 root other
-s none /usr/local/man/man1/slogin.1=ssh.1
+s none /usr/local/man/man1/slogin.1=./ssh.1
 f none /usr/local/man/man1/ssh.1=usr/local/man/man1/ssh.1 0644 root other
 f none /usr/local/man/man1/scp.1=usr/local/man/man1/scp.1 0644 root other
 f none /usr/local/man/man1/ssh-add.1=usr/local/man/man1/ssh-add.1 0644 root other
