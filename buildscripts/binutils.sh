@@ -16,8 +16,6 @@ cd build-binutils
 
 configure_cmd=../$package/configure
 
-configure_once=1
-
 prefixvar=prefix
 
 CONFIG_SHELL=/usr/local/bin/bash
@@ -25,6 +23,9 @@ export CONFIG_SHELL
 
 PATH=/usr/local/bin:/usr/dell/gcc-2/bin:$PATH
 export PATH
+
+# the first configure doesn't work right, run it twice
+$configure_cmd
 
 . $incdir/build.inc
 
