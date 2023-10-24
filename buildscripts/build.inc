@@ -130,7 +130,10 @@ pkgadd -nd "$pkgdir" $PKG
 
 rm -rf "$pkgdestdir"
 
+cd "$srcdir"
+
 if [ "$REMOVE_BUILT_SOURCE_DIRS" != "" ]; then
 	# remove the completed source directory
 	rm -rf "$srcdir/$packagedir"
 fi
+
