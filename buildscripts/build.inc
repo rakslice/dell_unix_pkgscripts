@@ -88,10 +88,20 @@ fi
 
 set +x
 
-(cd "$pkgdestdir"; find . -type f -print) | while read curfile; do
+(cd "$pkgdestdir"; find . -type f -print) | (
+failed=no
+while read curfile; do
 	curfile=`echo "$curfile" | cut -d/ -f2-`
-	fgrep " $pkgprotoprefix$curfile=" "$pkgtemplatesdir/prototype" > /dev/null || (echo $pkgtemplatesdir/prototype is missing $curfile; exit 1)
+	if fgrep " $pkgprotoprefix$curfile=" "$pkgtemplatesdir/prototype" > /dev/null ; then
+		true
+	else
+		echo $pkgtemplatesdir/prototype is missing $curfile
+		failed=yes
+	fi
 done
+if [ "$failed" = "yes" ]; then
+	exit 1
+fi)
 
 set -x
 

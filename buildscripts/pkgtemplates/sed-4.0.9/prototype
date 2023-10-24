@@ -2,6 +2,8 @@ i	pkginfo
 d none / 0755 root other
 d none /usr 0755 root other
 d none /usr/local 0755 root other
+d none /usr/local/lib 0755 root other
+f none /usr/local/lib/charset.alias=usr/local/lib/charset.alias 0644 root other
 d none /usr/local/share 0755 root other
 d none /usr/local/share/locale 0755 root other
 d none /usr/local/share/locale/ca 0755 root other
@@ -16,6 +18,7 @@ f none /usr/local/share/locale/da/LC_MESSAGES/sed.mo=usr/local/share/locale/da/L
 d none /usr/local/share/locale/de 0755 root other
 d none /usr/local/share/locale/de/LC_MESSAGES 0755 root other
 f none /usr/local/share/locale/de/LC_MESSAGES/sed.mo=usr/local/share/locale/de/LC_MESSAGES/sed.mo 0644 root other
+f none /usr/local/share/locale/locale.alias=usr/local/share/locale/locale.alias 0644 root other
 d none /usr/local/share/locale/el 0755 root other
 d none /usr/local/share/locale/el/LC_MESSAGES 0755 root other
 f none /usr/local/share/locale/el/LC_MESSAGES/sed.mo=usr/local/share/locale/el/LC_MESSAGES/sed.mo 0644 root other
@@ -94,7 +97,6 @@ f none /usr/local/share/locale/tr/LC_MESSAGES/sed.mo=usr/local/share/locale/tr/L
 d none /usr/local/share/locale/zh_CN 0755 root other
 d none /usr/local/share/locale/zh_CN/LC_MESSAGES 0755 root other
 f none /usr/local/share/locale/zh_CN/LC_MESSAGES/sed.mo=usr/local/share/locale/zh_CN/LC_MESSAGES/sed.mo 0644 root other
-f none /usr/local/share/locale/locale.alias=usr/local/share/locale/locale.alias 0644 root other
 d none /usr/local/bin 0755 root other
 f none /usr/local/bin/sed=usr/local/bin/sed 0755 root other
 d none /usr/local/info 0755 root other

@@ -1,6 +1,17 @@
+diff -ur stock/sed-4.0.9/intl/Makefile.in sed-4.0.9/intl/Makefile.in
+--- stock/sed-4.0.9/intl/Makefile.in	Wed Jan  7 05:57:18 2004
++++ sed-4.0.9/intl/Makefile.in	Mon Oct 23 20:52:44 2023
+@@ -32,6 +32,7 @@
+ libdir = @libdir@
+ includedir = @includedir@
+ datadir = @datadir@
++install_sh = @install_sh@
+ localedir = $(datadir)/locale
+ gettextsrcdir = $(datadir)/gettext/intl
+ aliaspath = $(localedir)
 diff -ur stock/sed-4.0.9/lib/mkstemp.c sed-4.0.9/lib/mkstemp.c
 --- stock/sed-4.0.9/lib/mkstemp.c	Fri Mar 14 22:38:42 2003
-+++ sed-4.0.9/lib/mkstemp.c	Thu Sep 28 04:54:36 2023
++++ sed-4.0.9/lib/mkstemp.c	Mon Oct 23 20:50:35 2023
 @@ -13,6 +13,7 @@
  #endif /* HAVE_STDLIB_H */
  
@@ -18,3 +29,14 @@ diff -ur stock/sed-4.0.9/lib/mkstemp.c sed-4.0.9/lib/mkstemp.c
  
  #include <limits.h>
  #include <errno.h>
+diff -ur stock/sed-4.0.9/po/Makefile.in.in sed-4.0.9/po/Makefile.in.in
+--- stock/sed-4.0.9/po/Makefile.in.in	Wed Jan  7 05:57:54 2004
++++ sed-4.0.9/po/Makefile.in.in	Mon Oct 23 20:52:56 2023
+@@ -23,6 +23,7 @@
+ prefix = @prefix@
+ exec_prefix = @exec_prefix@
+ datadir = @datadir@
++install_sh = @install_sh@
+ localedir = $(datadir)/locale
+ gettextsrcdir = $(datadir)/gettext/po
+ 

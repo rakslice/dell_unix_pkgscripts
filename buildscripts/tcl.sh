@@ -22,7 +22,7 @@ localbindir="$srcdir/destdir/$package/usr/local/bin"
 mkdir -p "$localbindir"
 
 if [ ! -h "$localbindir/tclsh" ]; then
-  ln -s "$localbindir/tclsh8.4" "$localbindir/tclsh"
+  (cd "$localbindir"; ln -s tclsh8.4 tclsh)
 fi
 
 . $incdir/build.inc
