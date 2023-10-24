@@ -19,10 +19,10 @@ export CONFIG_SHELL
 
 configure_cmd="bash configure"
 
-. $incdir/build.inc
-
 prefixvar=DESTDIR
 pkgdestrootbased=1
+
+. $incdir/build.inc
 
 unset CONFIG_SHELL
 unset ACCEPT_INFERIOR_RM_PROGRAM
