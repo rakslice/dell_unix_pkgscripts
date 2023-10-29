@@ -1,0 +1,14 @@
+i	pkginfo
+d none / 0755 root other
+d none /usr 0755 root other
+d none /usr/local 0755 root other
+d none /usr/local/lib 0755 root other
+f none /usr/local/lib/charset.alias=usr/local/lib/charset.alias 0644 root other
+d none /usr/local/bin 0755 root other
+f none /usr/local/bin/m4=usr/local/bin/m4 0755 root other
+d none /usr/local/share 0755 root other
+d none /usr/local/share/info 0755 root other
+f none /usr/local/share/info/m4.info=usr/local/share/info/m4.info 0644 root other
+d none /usr/local/share/man 0755 root other
+d none /usr/local/share/man/man1 0755 root other
+f none /usr/local/share/man/man1/m4.1=usr/local/share/man/man1/m4.1 0644 root other
