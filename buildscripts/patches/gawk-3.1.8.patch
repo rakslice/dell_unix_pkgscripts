@@ -1,0 +1,19 @@
+diff -ur stock/gawk-3.1.8/getopt.c gawk-3.1.8/getopt.c
+--- stock/gawk-3.1.8/getopt.c	Mon Apr 12 12:49:55 2010
++++ gawk-3.1.8/getopt.c	Tue Oct 24 06:24:20 2023
+@@ -120,6 +120,7 @@
+    how much of ARGV has been scanned so far.  */
+ 
+ /* 1003.2 says this must be 1 before any call.  */
++#ifndef __svr4__
+ int optind = 1;
+ 
+ /* Callers store zero here to inhibit the error message
+@@ -132,6 +133,7 @@
+    system's own getopt implementation.  */
+ 
+ int optopt = '?';
++#endif
+ 
+ /* Keep a global copy of all internal members of getopt_data.  */
+ 

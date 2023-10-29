@@ -1,0 +1,7 @@
+PKG="GNUawk318"
+NAME="GNU awk"
+ARCH="i386"
+VERSION="3.1.8"
+RELEASE="1"
+CLASSES="none"
+CATEGORY="applications"
