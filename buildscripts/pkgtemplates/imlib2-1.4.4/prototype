@@ -3,6 +3,9 @@ d none / 0755 root other
 d none /usr 0755 root other
 d none /usr/local 0755 root other
 d none /usr/local/lib 0755 root other
+s none /usr/local/lib/libImlib2.so.1=./libImlib2.so.1.4.4
+f none /usr/local/lib/libImlib2.so.1.4.4=usr/local/lib/libImlib2.so.1.4.4 0755 root other
+s none /usr/local/lib/libImlib2.so=./libImlib2.so.1.4.4
 d none /usr/local/lib/imlib2 0755 root other
 d none /usr/local/lib/imlib2/loaders 0755 root other
 f none /usr/local/lib/imlib2/loaders/jpeg.la=usr/local/lib/imlib2/loaders/jpeg.la 0755 root other

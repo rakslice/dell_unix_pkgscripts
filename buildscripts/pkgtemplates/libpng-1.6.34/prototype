@@ -3,9 +3,13 @@ d none / 0755 root other
 d none /usr 0755 root other
 d none /usr/local 0755 root other
 d none /usr/local/lib 0755 root other
+s none /usr/local/lib/libpng16.so.16=./libpng16.so.16.34.0
+f none /usr/local/lib/libpng16.so.16.34.0=usr/local/lib/libpng16.so.16.34.0 0755 root other
+s none /usr/local/lib/libpng16.so=./libpng16.so.16.34.0
 s none /usr/local/lib/libpng.a=./libpng16.a
 f none /usr/local/lib/libpng16.la=usr/local/lib/libpng16.la 0755 root other
 f none /usr/local/lib/libpng16.a=usr/local/lib/libpng16.a 0644 root other
+s none /usr/local/lib/libpng.so=./libpng16.so
 s none /usr/local/lib/libpng.la=./libpng16.la
 d none /usr/local/lib/pkgconfig 0755 root other
 s none /usr/local/lib/pkgconfig/libpng.pc=./libpng16.pc

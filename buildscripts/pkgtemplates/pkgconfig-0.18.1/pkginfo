@@ -1,0 +1,7 @@
+PKG="pkgcf0181"
+NAME="pkgconfig"
+ARCH="i386"
+VERSION="0.18.1"
+RELEASE="1"
+CLASSES="none"
+CATEGORY="applications"

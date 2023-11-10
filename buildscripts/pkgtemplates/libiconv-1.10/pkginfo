@@ -1,0 +1,7 @@
+PKG="libiconv"
+NAME="libiconv"
+ARCH="i386"
+VERSION="1.10"
+RELEASE="1"
+CLASSES="none"
+CATEGORY="libraries"

@@ -6,6 +6,9 @@ d none /usr/local/lib 0755 root other
 d none /usr/local/lib/pkgconfig 0755 root other
 f none /usr/local/lib/pkgconfig/zlib.pc=usr/local/lib/pkgconfig/zlib.pc 0644 root other
 f none /usr/local/lib/libz.a=usr/local/lib/libz.a 0644 root other
+f none /usr/local/lib/libz.so.1.2.11=usr/local/lib/libz.so.1.2.11 0755 root other
+s none /usr/local/lib/libz.so=./libz.so.1.2.11
+s none /usr/local/lib/libz.so.1=./libz.so.1.2.11
 d none /usr/local/share 0755 root other
 d none /usr/local/share/man 0755 root other
 d none /usr/local/share/man/man3 0755 root other

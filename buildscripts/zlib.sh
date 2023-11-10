@@ -9,7 +9,7 @@ export PATH
 
 . preamble.inc
 
-config_options="--static"
+#config_options="--static"
 
 CONFIG_SHELL=/usr/local/bin/bash
 export CONFIG_SHELL

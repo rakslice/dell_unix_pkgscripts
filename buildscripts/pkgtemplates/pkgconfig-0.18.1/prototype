@@ -1,0 +1,10 @@
+i	pkginfo
+d none /usr/local 0755 root other
+d none /usr/local/bin 0755 root other
+f none /usr/local/bin/pkg-config=bin/pkg-config 0755 root other
+d none /usr/local/share 0755 root other
+d none /usr/local/share/aclocal 0755 root other
+f none /usr/local/share/aclocal/pkg.m4=share/aclocal/pkg.m4 0644 root other
+d none /usr/local/man 0755 root other
+d none /usr/local/man/man1 0755 root other
+f none /usr/local/man/man1/pkg-config.1=man/man1/pkg-config.1 0644 root other
