@@ -1,0 +1,89 @@
+diff -ur -x aclocal.m4 -x configure -x Makefile.in stock/libtool-2.4.7/m4/libtool.m4 libtool-2.4.7/m4/libtool.m4
+--- stock/libtool-2.4.7/m4/libtool.m4	Wed Mar 16 18:43:39 2022
++++ libtool-2.4.7/m4/libtool.m4	Sun Oct 29 06:16:54 2023
+@@ -3029,7 +3029,7 @@
+   need_version=yes
+   ;;
+ 
+-sysv4 | sysv4.3*)
++sysv4 | sysv4.0 | sysv4.3*)
+   version_type=linux # correct to gnu/linux during the next big refactor
+   library_names_spec='$libname$release$shared_ext$versuffix $libname$release$shared_ext$major $libname$shared_ext'
+   soname_spec='$libname$release$shared_ext$major'
+@@ -3049,6 +3049,9 @@
+       shlibpath_overrides_runpath=no
+       sys_lib_search_path_spec='/lib /usr/lib /usr/ccs/lib'
+       ;;
++    pc)
++      sys_lib_search_path_spec='/lib /usr/lib /usr/ccs/lib'
++      ;;
+   esac
+   ;;
+ 
+@@ -3608,6 +3611,12 @@
+   lt_cv_deplibs_check_method=pass_all
+   ;;
+ 
++sysv4.0)
++  lt_cv_file_magic_cmd='/bin/file'
++  lt_cv_deplibs_check_method="file_magic ELF [[0-9]][[0-9]]*-bit [[LM]]SB dynamic lib"
++  lt_cv_file_magic_test_file=/usr/ccs/lib/libc.so
++  ;;
++
+ sysv4 | sysv4.3*)
+   case $host_vendor in
+   motorola)
+@@ -3962,7 +3971,7 @@
+ sysv5* | sco5v6* | unixware* | OpenUNIX*)
+   symcode='[[ABDT]]'
+   ;;
+-sysv4)
++sysv4 | sysv4.0)
+   symcode='[[DFNSTU]]'
+   ;;
+ esac
+@@ -4827,7 +4836,7 @@
+       _LT_TAGVAR(lt_prog_compiler_static, $1)='-Bstatic'
+       ;;
+ 
+-    sysv4 | sysv4.2uw2* | sysv4.3*)
++    sysv4 | sysv4.0 | sysv4.2uw2* | sysv4.3*)
+       _LT_TAGVAR(lt_prog_compiler_wl, $1)='-Wl,'
+       _LT_TAGVAR(lt_prog_compiler_pic, $1)='-KPIC'
+       _LT_TAGVAR(lt_prog_compiler_static, $1)='-Bstatic'
+@@ -4924,6 +4933,7 @@
+ m4_require([_LT_TAG_COMPILER])dnl
+ AC_MSG_CHECKING([whether the $compiler linker ($LD) supports shared libraries])
+ m4_if([$1], [CXX], [
++  echo lets cxx case 1>&2
+   _LT_TAGVAR(export_symbols_cmds, $1)='$NM $libobjs $convenience | $global_symbol_pipe | $SED '\''s/.* //'\'' | sort | uniq > $export_symbols'
+   _LT_TAGVAR(exclude_expsyms, $1)=['_GLOBAL_OFFSET_TABLE_|_GLOBAL__F[ID]_.*']
+   case $host_os in
+@@ -5972,7 +5982,7 @@
+       _LT_TAGVAR(hardcode_shlibpath_var, $1)=no
+       ;;
+ 
+-    sysv4)
++    sysv4 | sysv4.0)
+       case $host_vendor in
+ 	sni)
+ 	  _LT_TAGVAR(archive_cmds, $1)='$LD -G -h $soname -o $lib $libobjs $deplibs $linker_flags'
+@@ -6064,7 +6074,7 @@
+ 
+     if test sni = "$host_vendor"; then
+       case $host in
+-      sysv4 | sysv4.2uw2* | sysv4.3* | sysv5*)
++      sysv4 | sysv4.0 | sysv4.2uw2* | sysv4.3* | sysv5*)
+ 	_LT_TAGVAR(export_dynamic_flag_spec, $1)='$wl-Blargedynsym'
+ 	;;
+       esac
+@@ -7332,6 +7342,9 @@
+         esac
+         ;;
+ 
++    sysv4.0)
++      # try no-op
++      ;; 
+     sysv4*uw2* | sysv5OpenUNIX* | sysv5UnixWare7.[[01]].[[10]]* | unixware7* | sco3.2v5.0.[[024]]*)
+       _LT_TAGVAR(no_undefined_flag, $1)='$wl-z,text'
+       _LT_TAGVAR(archive_cmds_need_lc, $1)=no
