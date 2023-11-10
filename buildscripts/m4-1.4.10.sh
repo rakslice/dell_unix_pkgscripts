@@ -2,23 +2,27 @@
 set -e
 set -x
 
-package=screen-3.9.15
+package=m4-1.4.10
 
 PATH=/usr/local/bin:$PATH
 export PATH
 
 . preamble.inc
 
-CONFIG_SHELL=/usr/local/bin/bash
-export CONFIG_SHELL
+cp $codefragments/strcasecmp.c .
 
 configure_cmd="bash configure"
+configure_once=1
+
+config_options=""
 
 prefixvar=DESTDIR
-pkgdesttrailingslash=1
+pkgdestrootbased=1
+
+CONFIG_SHELL=/usr/local/bin/bash
+export CONFIG_SHELL
 
 . $incdir/build.inc
 
 unset CONFIG_SHELL
-unset SHELL
 

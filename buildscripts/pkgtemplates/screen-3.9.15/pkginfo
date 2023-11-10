@@ -1,0 +1,7 @@
+PKG="screen"
+NAME="screen"
+ARCH="i386"
+VERSION="3.9.15"
+RELEASE="1"
+CLASSES="none"
+CATEGORY="applications"

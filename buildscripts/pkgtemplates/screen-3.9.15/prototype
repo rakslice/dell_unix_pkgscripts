@@ -1,0 +1,35 @@
+i	pkginfo
+d none /usr/local 0755 root other
+d none /usr/local/bin 0755 root other
+s none /usr/local/bin/screen=./screen-3.9.15
+f none /usr/local/bin/screen-3.9.15=bin/screen-3.9.15 4755 root other
+d none /usr/local/share 0755 root other
+d none /usr/local/share/screen 0755 root other
+d none /usr/local/share/screen/utf8encodings 0755 root other
+f none /usr/local/share/screen/utf8encodings/01=share/screen/utf8encodings/01 0644 root other
+f none /usr/local/share/screen/utf8encodings/02=share/screen/utf8encodings/02 0644 root other
+f none /usr/local/share/screen/utf8encodings/03=share/screen/utf8encodings/03 0644 root other
+f none /usr/local/share/screen/utf8encodings/04=share/screen/utf8encodings/04 0644 root other
+f none /usr/local/share/screen/utf8encodings/18=share/screen/utf8encodings/18 0644 root other
+f none /usr/local/share/screen/utf8encodings/19=share/screen/utf8encodings/19 0644 root other
+f none /usr/local/share/screen/utf8encodings/a1=share/screen/utf8encodings/a1 0644 root other
+f none /usr/local/share/screen/utf8encodings/bf=share/screen/utf8encodings/bf 0644 root other
+f none /usr/local/share/screen/utf8encodings/c2=share/screen/utf8encodings/c2 0644 root other
+f none /usr/local/share/screen/utf8encodings/c3=share/screen/utf8encodings/c3 0644 root other
+f none /usr/local/share/screen/utf8encodings/c4=share/screen/utf8encodings/c4 0644 root other
+f none /usr/local/share/screen/utf8encodings/c6=share/screen/utf8encodings/c6 0644 root other
+f none /usr/local/share/screen/utf8encodings/c7=share/screen/utf8encodings/c7 0644 root other
+f none /usr/local/share/screen/utf8encodings/c8=share/screen/utf8encodings/c8 0644 root other
+f none /usr/local/share/screen/utf8encodings/cc=share/screen/utf8encodings/cc 0644 root other
+f none /usr/local/share/screen/utf8encodings/cd=share/screen/utf8encodings/cd 0644 root other
+f none /usr/local/share/screen/utf8encodings/d6=share/screen/utf8encodings/d6 0644 root other
+d none /usr/local/man 0755 root other
+d none /usr/local/man/man1 0755 root other
+f none /usr/local/man/man1/screen.1=man/man1/screen.1 0644 root other
+d none /usr/local/info 0755 root other
+f none /usr/local/info/screen.info=info/screen.info 0644 root other
+f none /usr/local/info/screen.info-1=info/screen.info-1 0644 root other
+f none /usr/local/info/screen.info-2=info/screen.info-2 0644 root other
+f none /usr/local/info/screen.info-3=info/screen.info-3 0644 root other
+f none /usr/local/info/screen.info-4=info/screen.info-4 0644 root other
+f none /usr/local/info/screen.info-5=info/screen.info-5 0644 root other

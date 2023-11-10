@@ -1,0 +1,7 @@
+PKG="autoconf"
+NAME="autoconf"
+ARCH="i386"
+VERSION="2.69"
+RELEASE="1"
+CLASSES="none"
+CATEGORY="build"

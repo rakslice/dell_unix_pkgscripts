@@ -40,6 +40,9 @@ if [ ! -d "$destdir" ]; then
 fi
 
 pkgdestdir="$destdir/$package"
+if [ "$pkgdesttrailingslash" != "" ]; then
+	pkgdestdir="$pkgdestdir/"
+fi
 
 if [ ! -d "$pkgdestdir" ]; then
 	mkdir "$pkgdestdir"

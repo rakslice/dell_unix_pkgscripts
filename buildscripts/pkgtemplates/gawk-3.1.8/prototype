@@ -1,0 +1,41 @@
+i	pkginfo
+d none / 0755 root other
+d none /usr 0755 root other
+d none /usr/local 0755 root other
+d none /usr/local/bin 0755 root other
+f none /usr/local/bin/gawk-3.1.8=usr/local/bin/gawk-3.1.8 0755 root other
+l none /usr/local/bin/gawk=/usr/local/bin/gawk-3.1.8
+f none /usr/local/bin/pgawk=usr/local/bin/pgawk 0755 root other
+l none /usr/local/bin/pgawk-3.1.8=/usr/local/bin/pgawk
+s none /usr/local/bin/awk=./gawk
+d none /usr/local/libexec 0755 root other
+d none /usr/local/libexec/awk 0755 root other
+d none /usr/local/share 0755 root other
+d none /usr/local/share/awk 0755 root other
+f none /usr/local/share/awk/passwd.awk=usr/local/share/awk/passwd.awk 0644 root other
+f none /usr/local/share/awk/group.awk=usr/local/share/awk/group.awk 0644 root other
+f none /usr/local/share/awk/assert.awk=usr/local/share/awk/assert.awk 0644 root other
+f none /usr/local/share/awk/bits2str.awk=usr/local/share/awk/bits2str.awk 0644 root other
+f none /usr/local/share/awk/cliff_rand.awk=usr/local/share/awk/cliff_rand.awk 0644 root other
+f none /usr/local/share/awk/ctime.awk=usr/local/share/awk/ctime.awk 0644 root other
+f none /usr/local/share/awk/ftrans.awk=usr/local/share/awk/ftrans.awk 0644 root other
+f none /usr/local/share/awk/getopt.awk=usr/local/share/awk/getopt.awk 0644 root other
+f none /usr/local/share/awk/gettime.awk=usr/local/share/awk/gettime.awk 0644 root other
+f none /usr/local/share/awk/join.awk=usr/local/share/awk/join.awk 0644 root other
+f none /usr/local/share/awk/libintl.awk=usr/local/share/awk/libintl.awk 0644 root other
+f none /usr/local/share/awk/nextfile.awk=usr/local/share/awk/nextfile.awk 0644 root other
+f none /usr/local/share/awk/noassign.awk=usr/local/share/awk/noassign.awk 0644 root other
+f none /usr/local/share/awk/ord.awk=usr/local/share/awk/ord.awk 0644 root other
+f none /usr/local/share/awk/readable.awk=usr/local/share/awk/readable.awk 0644 root other
+f none /usr/local/share/awk/rewind.awk=usr/local/share/awk/rewind.awk 0644 root other
+f none /usr/local/share/awk/round.awk=usr/local/share/awk/round.awk 0644 root other
+f none /usr/local/share/awk/strtonum.awk=usr/local/share/awk/strtonum.awk 0644 root other
+f none /usr/local/share/awk/zerofile.awk=usr/local/share/awk/zerofile.awk 0644 root other
+d none /usr/local/share/info 0755 root other
+f none /usr/local/share/info/gawk.info=usr/local/share/info/gawk.info 0644 root other
+f none /usr/local/share/info/gawkinet.info=usr/local/share/info/gawkinet.info 0644 root other
+d none /usr/local/share/man 0755 root other
+d none /usr/local/share/man/man1 0755 root other
+f none /usr/local/share/man/man1/pgawk.1=usr/local/share/man/man1/pgawk.1 0644 root other
+l none /usr/local/share/man/man1/gawk.1=/usr/local/share/man/man1/pgawk.1
+f none /usr/local/share/man/man1/igawk.1=usr/local/share/man/man1/igawk.1 0644 root other
