@@ -24,6 +24,9 @@ f none /usr/local/include/libast/url.h=usr/local/include/libast/url.h 0644 root 
 f none /usr/local/include/libast/vector_if.h=usr/local/include/libast/vector_if.h 0644 root other
 f none /usr/local/include/libast.h=usr/local/include/libast.h 0644 root other
 d none /usr/local/lib 0755 root other
+s none /usr/local/lib/libast.so.2=./libast.so.2.0.1
+f none /usr/local/lib/libast.so.2.0.1=usr/local/lib/libast.so.2.0.1 0755 root other
+s none /usr/local/lib/libast.so=./libast.so.2.0.1
 f none /usr/local/lib/libast.la=usr/local/lib/libast.la 0755 root other
 f none /usr/local/lib/libast.a=usr/local/lib/libast.a 0644 root other
 d none /usr/local/bin 0755 root other

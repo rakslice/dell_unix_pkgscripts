@@ -17,8 +17,15 @@ fi
 CONFIG_SHELL=/usr/local/bin/bash
 export CONFIG_SHELL
 
+ACCEPT_INFERIOR_RM_PROGRAM=yes
+export ACCEPT_INFERIOR_RM_PROGRAM
+
 prefixvar=DESTDIR
 pkgdestrootbased=1
+
+# for dynamic library builds
+libtoolize
+autoreconf -i
 
 . $incdir/build.inc
 
