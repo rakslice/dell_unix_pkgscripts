@@ -1,0 +1,33 @@
+#!/bin/sh
+set -e
+set -x
+set -u
+
+existing=`pkginfo | grep GNUgcc | awk '{print $2}'`
+
+device=/home/dell/pkg
+
+ver="$1"
+case $ver in \
+	3.0.4)
+		target=GNUgcc304
+		device=/home3/pkgfiles/$target.pkg
+		;;
+	3.4.6)
+		target=GNUgcc346
+		;;
+	*)
+		set +x
+		echo "Unknown ver $ver"
+		exit 1
+		;;
+esac
+
+if [ "$existing" != "$target" ]; then
+	for pkg in $existing; do
+		pkgrm -n $pkg
+	done
+	pkgadd -d $device $target
+fi
+
+
