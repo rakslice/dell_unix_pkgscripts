@@ -1,6 +1,25 @@
-diff -ur stock/tiff-3.9.1/port/strcasecmp.c tiff-3.9.1/port/strcasecmp.c
+diff -ur -x configure -x aclocal.m4 -x ltmain.sh -x Makefile.in -x libtool.m4 -x ltoptions.m4 -x ltversion.m4 -x lt~obsolete.m4 -x tif_config.h.in stock/tiff-3.9.1/libtiff/Makefile.am tiff-3.9.1/libtiff/Makefile.am
+--- stock/tiff-3.9.1/libtiff/Makefile.am	Thu Apr 10 16:05:55 2008
++++ tiff-3.9.1/libtiff/Makefile.am	Fri Nov 10 21:31:10 2023
+@@ -113,7 +113,6 @@
+ endif
+ 
+ libtiff_la_LDFLAGS = \
+-	-no-undefined \
+ 	-version-number $(LIBTIFF_VERSION_INFO)
+ if HAVE_RPATH
+ libtiff_la_LDFLAGS += $(LIBDIR)
+@@ -121,7 +120,6 @@
+ libtiff_la_LIBADD = $(LIBPORT)
+ 
+ libtiffxx_la_LDFLAGS = \
+-	-no-undefined \
+ 	-version-number $(LIBTIFF_VERSION_INFO)
+ if HAVE_RPATH
+ libtiffxx_la_LDFLAGS += $(LIBDIR)
+diff -ur -x configure -x aclocal.m4 -x ltmain.sh -x Makefile.in -x libtool.m4 -x ltoptions.m4 -x ltversion.m4 -x lt~obsolete.m4 -x tif_config.h.in stock/tiff-3.9.1/port/strcasecmp.c tiff-3.9.1/port/strcasecmp.c
 --- stock/tiff-3.9.1/port/strcasecmp.c	Thu Jul  7 09:34:06 2005
-+++ tiff-3.9.1/port/strcasecmp.c	Thu Sep 28 04:11:26 2023
++++ tiff-3.9.1/port/strcasecmp.c	Fri Nov 10 21:19:44 2023
 @@ -37,6 +37,8 @@
  #include <ctype.h>
  #include <string.h>

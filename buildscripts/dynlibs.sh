@@ -22,4 +22,5 @@ sh zlib.sh
 sh libpng-1.6.34.sh
 sh freetype.sh
 sh jpeg-9e.sh
+sh tiff-3.9.1.sh
 sh imlib.sh

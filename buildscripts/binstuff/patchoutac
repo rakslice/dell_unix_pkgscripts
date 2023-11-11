@@ -4,4 +4,5 @@ set -x
 set -u
 path="$1"
 shift
-./patchout "$path" -x configure -x aclocal.m4 -x ltmain.sh "$@"
+./patchout "$path" -x configure -x aclocal.m4 -x ltmain.sh -x Makefile.in \
+ -x libtool.m4 -x ltoptions.m4 -x ltversion.m4 -x lt~obsolete.m4 "$@"
