@@ -1,5 +1,5 @@
 unsigned long long strtoull(const char *s, char **endptr, int base) {
-  unsigned long long sum = 0;
+  unsigned long long sum = 0ULL;
   /* ignore leading space/tab only */
   while (' ' == *s || '\t' == *s)
 	++s;
@@ -33,14 +33,14 @@ unsigned long long strtoull(const char *s, char **endptr, int base) {
         if (endptr) {
           *endptr = s;
         }
-        return 0ULL;
+        return sum;
     }
 
     if (dig >= base) {
       if (endptr) {
-        *endptr = s;
+        *endptr = s-1;
       }
-      return 0ULL;
+      return sum;
     }
 
     sum = sum*base + dig;

@@ -1,5 +1,5 @@
 long long strtoll(const char *s, char **endptr, int base) {
-  long long sum = 0;
+  long long sum = 0LL;
   /* ignore leading space/tab only */
   while (' ' == *s || '\t' == *s)
   	++s;
@@ -35,20 +35,20 @@ long long strtoll(const char *s, char **endptr, int base) {
         if (endptr) {
           *endptr = s;
         }
-        return 0LL;
+        return sum;
     }
 
     if (dig >= base) {
       if (endptr) {
-        *endptr = s;
+        *endptr = s-1;
       }
-      return 0LL;
+      return sum;
     }
-
-    sum = sum*base + dig;
+    if (neg)
+      sum = sum*base - dig;
+    else
+      sum = sum*base + dig;
   }
-  if (neg)
-        sum = -sum;
   if (endptr) {
     *endptr = s;
   }
