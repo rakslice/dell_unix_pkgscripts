@@ -1,6 +1,32 @@
-diff -ur stock/freetype-2.3.9/builds/unix/ftsystem.c freetype-2.3.9/builds/unix/ftsystem.c
+diff -ur -x configure -x aclocal.m4 -x ltmain.sh stock/freetype-2.3.9/builds/unix/configure.ac freetype-2.3.9/builds/unix/configure.ac
+--- stock/freetype-2.3.9/builds/unix/configure.ac	Thu Mar 12 01:57:37 2009
++++ freetype-2.3.9/builds/unix/configure.ac	Fri Nov 10 19:39:34 2023
+@@ -182,7 +182,7 @@
+ esac
+ 
+ if test x"${ft_use_autoconf_sizeof_types}" = xyes; then
+-  AC_DEFINE([FT_USE_AUTOCONF_SIZEOF_TYPES])
++  AC_DEFINE([FT_USE_AUTOCONF_SIZEOF_TYPES], [], [use autoconf sizeof types])
+ fi
+ 
+ CPPFLAGS="${orig_CPPFLAGS}"
+@@ -644,9 +644,12 @@
+ 
+ # configuration file -- stay in 8.3 limit
+ #
++# we don't use this, this is just a dummy header for autoheader
++# to clobber so it doesn't get in the way of ftconfig.in
++AC_CONFIG_HEADERS([dummy.h])
++#
+ # since #undef doesn't survive in configuration header files we replace
+ # `/undef' with `#undef' after creating the output file
+-
+ AC_CONFIG_HEADERS([ftconfig.h:ftconfig.in],
+   [mv ftconfig.h ftconfig.tmp
+    sed 's|/undef|#undef|' < ftconfig.tmp > ftconfig.h
+diff -ur -x configure -x aclocal.m4 -x ltmain.sh stock/freetype-2.3.9/builds/unix/ftsystem.c freetype-2.3.9/builds/unix/ftsystem.c
 --- stock/freetype-2.3.9/builds/unix/ftsystem.c	Wed Jan 21 21:51:10 2009
-+++ freetype-2.3.9/builds/unix/ftsystem.c	Thu Sep 28 05:18:19 2023
++++ freetype-2.3.9/builds/unix/ftsystem.c	Fri Nov 10 18:53:58 2023
 @@ -25,6 +25,8 @@
  #include FT_TYPES_H
  #include FT_INTERNAL_STREAM_H
@@ -10,3 +36,15 @@ diff -ur stock/freetype-2.3.9/builds/unix/ftsystem.c freetype-2.3.9/builds/unix/
    /* memory-mapping includes and definitions */
  #ifdef HAVE_UNISTD_H
  #include <unistd.h>
+diff -ur -x configure -x aclocal.m4 -x ltmain.sh stock/freetype-2.3.9/builds/unix/unix-cc.in freetype-2.3.9/builds/unix/unix-cc.in
+--- stock/freetype-2.3.9/builds/unix/unix-cc.in	Sun Oct 15 01:57:22 2006
++++ freetype-2.3.9/builds/unix/unix-cc.in	Fri Nov 10 20:49:16 2023
+@@ -106,7 +106,7 @@
+ # Library linking
+ #
+ LINK_LIBRARY = $(LIBTOOL) --mode=link $(CCraw) -o $@ $(OBJECTS_LIST) \
+-                          -rpath $(libdir) -version-info $(version_info) \
++                          -rpath $(libdir) -L$(libdir) -version-info $(version_info) \
+                           $(LDFLAGS) -no-undefined \
+                           # -export-symbols $(EXPORTS_LIST)
+ 

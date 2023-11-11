@@ -5,6 +5,9 @@ d none /usr/local 0755 root other
 d none /usr/local/lib 0755 root other
 d none /usr/local/lib/pkgconfig 0755 root other
 f none /usr/local/lib/pkgconfig/freetype2.pc=usr/local/lib/pkgconfig/freetype2.pc 0644 root other
+s none /usr/local/lib/libfreetype.so=./libfreetype.so.6.3.20
+f none /usr/local/lib/libfreetype.so.6.3.20=usr/local/lib/libfreetype.so.6.3.20 0755 root other
+s none /usr/local/lib/libfreetype.so.6=./libfreetype.so.6.3.20
 f none /usr/local/lib/libfreetype.la=usr/local/lib/libfreetype.la 0755 root other
 f none /usr/local/lib/libfreetype.a=usr/local/lib/libfreetype.a 0644 root other
 d none /usr/local/include 0755 root other
