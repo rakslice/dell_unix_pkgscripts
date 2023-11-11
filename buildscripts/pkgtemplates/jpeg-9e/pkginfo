@@ -1,0 +1,7 @@
+PKG="jpeg9e"
+NAME="jpeg"
+ARCH="i386"
+VERSION="9e"
+RELEASE="1"
+CLASSES="none"
+CATEGORY="image"
