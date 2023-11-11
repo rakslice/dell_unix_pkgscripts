@@ -6,6 +6,8 @@ if false; then
   true
 fi
 
+# I worked on this stuff with gcc-3.4.6 installed; it may be required
+
 sh m4-1.4.10.sh
 sh autoconf.sh
 sh bash-3.sh
@@ -18,4 +20,6 @@ sh pkgconfig-0.18.1.sh
 # rebuild with shared libs
 sh zlib.sh
 sh libpng-1.6.34.sh
+sh freetype.sh
+sh jpeg-9e.sh
 sh imlib.sh
