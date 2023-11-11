@@ -3,15 +3,24 @@ d none / 0755 root other
 d none /usr 0755 root other
 d none /usr/local 0755 root other
 d none /usr/local/lib 0755 root other
+s none /usr/local/lib/libpcre.so.0=./libpcre.so.0.0.1
+f none /usr/local/lib/libpcre.so.0.0.1=usr/local/lib/libpcre.so.0.0.1 0755 root other
+s none /usr/local/lib/libpcre.so=./libpcre.so.0.0.1
+s none /usr/local/lib/libpcreposix.so=./libpcreposix.so.0.0.0
+f none /usr/local/lib/libpcre.la=usr/local/lib/libpcre.la 0755 root other
+f none /usr/local/lib/libpcreposix.so.0.0.0=usr/local/lib/libpcreposix.so.0.0.0 0755 root other
+s none /usr/local/lib/libpcreposix.so.0=./libpcreposix.so.0.0.0
+s none /usr/local/lib/libpcrecpp.so.0=./libpcrecpp.so.0.0.0
+f none /usr/local/lib/libpcreposix.la=usr/local/lib/libpcreposix.la 0755 root other
+f none /usr/local/lib/libpcrecpp.so.0.0.0=usr/local/lib/libpcrecpp.so.0.0.0 0755 root other
+s none /usr/local/lib/libpcrecpp.so=./libpcrecpp.so.0.0.0
 d none /usr/local/lib/pkgconfig 0755 root other
 f none /usr/local/lib/pkgconfig/libpcre.pc=usr/local/lib/pkgconfig/libpcre.pc 0644 root other
 f none /usr/local/lib/pkgconfig/libpcreposix.pc=usr/local/lib/pkgconfig/libpcreposix.pc 0644 root other
 f none /usr/local/lib/pkgconfig/libpcrecpp.pc=usr/local/lib/pkgconfig/libpcrecpp.pc 0644 root other
-f none /usr/local/lib/libpcre.la=usr/local/lib/libpcre.la 0755 root other
-f none /usr/local/lib/libpcre.a=usr/local/lib/libpcre.a 0644 root other
-f none /usr/local/lib/libpcreposix.la=usr/local/lib/libpcreposix.la 0755 root other
-f none /usr/local/lib/libpcreposix.a=usr/local/lib/libpcreposix.a 0644 root other
 f none /usr/local/lib/libpcrecpp.la=usr/local/lib/libpcrecpp.la 0755 root other
+f none /usr/local/lib/libpcre.a=usr/local/lib/libpcre.a 0644 root other
+f none /usr/local/lib/libpcreposix.a=usr/local/lib/libpcreposix.a 0644 root other
 f none /usr/local/lib/libpcrecpp.a=usr/local/lib/libpcrecpp.a 0644 root other
 d none /usr/local/bin 0755 root other
 f none /usr/local/bin/pcretest=usr/local/bin/pcretest 0755 root other
@@ -77,7 +86,6 @@ f none /usr/local/share/man/man1/pcre-config.1=usr/local/share/man/man1/pcre-con
 f none /usr/local/share/man/man1/pcregrep.1=usr/local/share/man/man1/pcregrep.1 0644 root other
 f none /usr/local/share/man/man1/pcretest.1=usr/local/share/man/man1/pcretest.1 0644 root other
 d none /usr/local/share/man/man3 0755 root other
-f none /usr/local/share/man/man3/pcrecpp.3=usr/local/share/man/man3/pcrecpp.3 0644 root other
 f none /usr/local/share/man/man3/pcre.3=usr/local/share/man/man3/pcre.3 0644 root other
 f none /usr/local/share/man/man3/pcre_compile.3=usr/local/share/man/man3/pcre_compile.3 0644 root other
 f none /usr/local/share/man/man3/pcre_compile2.3=usr/local/share/man/man3/pcre_compile2.3 0644 root other
@@ -93,8 +101,8 @@ f none /usr/local/share/man/man3/pcre_get_named_substring.3=usr/local/share/man/
 f none /usr/local/share/man/man3/pcre_get_stringnumber.3=usr/local/share/man/man3/pcre_get_stringnumber.3 0644 root other
 f none /usr/local/share/man/man3/pcre_get_stringtable_entries.3=usr/local/share/man/man3/pcre_get_stringtable_entries.3 0644 root other
 f none /usr/local/share/man/man3/pcre_get_substring.3=usr/local/share/man/man3/pcre_get_substring.3 0644 root other
-f none /usr/local/share/man/man3/pcre_get_substring_list.3=usr/local/share/man/man3/pcre_get_substring_list.3 0644 root other
 f none /usr/local/share/man/man3/pcre_info.3=usr/local/share/man/man3/pcre_info.3 0644 root other
+f none /usr/local/share/man/man3/pcre_get_substring_list.3=usr/local/share/man/man3/pcre_get_substring_list.3 0644 root other
 f none /usr/local/share/man/man3/pcre_maketables.3=usr/local/share/man/man3/pcre_maketables.3 0644 root other
 f none /usr/local/share/man/man3/pcre_refcount.3=usr/local/share/man/man3/pcre_refcount.3 0644 root other
 f none /usr/local/share/man/man3/pcre_study.3=usr/local/share/man/man3/pcre_study.3 0644 root other
@@ -112,6 +120,7 @@ f none /usr/local/share/man/man3/pcreprecompile.3=usr/local/share/man/man3/pcrep
 f none /usr/local/share/man/man3/pcresample.3=usr/local/share/man/man3/pcresample.3 0644 root other
 f none /usr/local/share/man/man3/pcrestack.3=usr/local/share/man/man3/pcrestack.3 0644 root other
 f none /usr/local/share/man/man3/pcresyntax.3=usr/local/share/man/man3/pcresyntax.3 0644 root other
+f none /usr/local/share/man/man3/pcrecpp.3=usr/local/share/man/man3/pcrecpp.3 0644 root other
 d none /usr/local/include 0755 root other
 f none /usr/local/include/pcreposix.h=usr/local/include/pcreposix.h 0644 root other
 f none /usr/local/include/pcrecpp.h=usr/local/include/pcrecpp.h 0644 root other

@@ -17,6 +17,12 @@ export CONFIG_SHELL
 prefixvar=DESTDIR
 pkgdestrootbased=1
 
+# for dynamic library builds
+libtoolize
+autoreconf -i
+ACCEPT_INFERIOR_RM_PROGRAM=yes
+export ACCEPT_INFERIOR_RM_PROGRAM
+
 . $incdir/build.inc
 
 unset CONFIG_SHELL
