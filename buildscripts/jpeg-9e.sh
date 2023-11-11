@@ -11,7 +11,7 @@ export PATH
 
 . preamble.inc
 
-config_options="--enable-static --enable-shared"
+config_options="--enable-static --enable-shared --disable-ld-version-script"
 
 CONFIG_SHELL=/usr/local/bin/bash
 export CONFIG_SHELL
