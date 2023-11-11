@@ -6,12 +6,12 @@ f none /usr/local/bin/bunzip2=bin/bunzip2 0755 root other
 f none /usr/local/bin/bzcat=bin/bzcat 0755 root other
 f none /usr/local/bin/bzip2recover=bin/bzip2recover 0755 root other
 f none /usr/local/bin/bzgrep=bin/bzgrep 0775 root other
-s none /usr/local/bin/bzegrep=/home/dell/destdir/bzip2-1.0.6/bin/bzgrep
-s none /usr/local/bin/bzfgrep=/home/dell/destdir/bzip2-1.0.6/bin/bzgrep
+s none /usr/local/bin/bzegrep=./bzgrep
+s none /usr/local/bin/bzfgrep=./bzgrep
 f none /usr/local/bin/bzmore=bin/bzmore 0775 root other
-s none /usr/local/bin/bzless=/home/dell/destdir/bzip2-1.0.6/bin/bzmore
+s none /usr/local/bin/bzless=./bzmore
 f none /usr/local/bin/bzdiff=bin/bzdiff 0775 root other
-s none /usr/local/bin/bzcmp=/home/dell/destdir/bzip2-1.0.6/bin/bzdiff
+s none /usr/local/bin/bzcmp=./bzdiff
 d none /usr/local/lib 0755 root other
 f none /usr/local/lib/libbz2.a=lib/libbz2.a 0644 root other
 d none /usr/local/man 0755 root other
