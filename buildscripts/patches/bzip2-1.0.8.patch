@@ -1,6 +1,6 @@
 diff -ur stock/bzip2-1.0.8/Makefile bzip2-1.0.8/Makefile
 --- stock/bzip2-1.0.8/Makefile	Sat Jul 13 10:50:05 2019
-+++ bzip2-1.0.8/Makefile	Fri Nov 10 22:31:41 2023
++++ bzip2-1.0.8/Makefile	Fri Nov 10 22:48:53 2023
 @@ -75,31 +75,31 @@
  	if ( test ! -d $(PREFIX)/man ) ; then mkdir -p $(PREFIX)/man ; fi
  	if ( test ! -d $(PREFIX)/man/man1 ) ; then mkdir -p $(PREFIX)/man/man1 ; fi
@@ -44,3 +44,15 @@ diff -ur stock/bzip2-1.0.8/Makefile bzip2-1.0.8/Makefile
  	chmod a+r $(PREFIX)/man/man1/bzgrep.1
  	chmod a+r $(PREFIX)/man/man1/bzmore.1
  	chmod a+r $(PREFIX)/man/man1/bzdiff.1
+diff -ur stock/bzip2-1.0.8/Makefile-libbz2_so bzip2-1.0.8/Makefile-libbz2_so
+--- stock/bzip2-1.0.8/Makefile-libbz2_so	Sat Jul 13 10:50:05 2019
++++ bzip2-1.0.8/Makefile-libbz2_so	Fri Nov 10 23:02:23 2023
+@@ -36,7 +36,7 @@
+ 
+ all: $(OBJS)
+ 	$(CC) -shared -Wl,-soname -Wl,libbz2.so.1.0 -o libbz2.so.1.0.8 $(OBJS)
+-	$(CC) $(CFLAGS) -o bzip2-shared bzip2.c libbz2.so.1.0.8
++	$(CC) $(CFLAGS) -o bzip2-shared bzip2.c -Wl,-rpath,/usr/local/lib libbz2.so.1.0.8
+ 	rm -f libbz2.so.1.0
+ 	ln -s libbz2.so.1.0.8 libbz2.so.1.0
+ 
