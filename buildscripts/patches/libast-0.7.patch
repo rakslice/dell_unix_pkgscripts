@@ -1,6 +1,6 @@
-diff -ur -x sysdefs.h stock/libast-0.7/include/libast/types.h.in libast-0.7/include/libast/types.h.in
---- stock/libast-0.7/include/libast/types.h.in	Tue Dec 28 22:39:10 2004
-+++ libast-0.7/include/libast/types.h.in	Fri Sep 29 00:59:18 2023
+diff -ur -x configure -x aclocal.m4 -x ltmain.sh -x Makefile.in -x libtool.m4 -x ltoptions.m4 -x ltversion.m4 -x lt~obsolete.m4 -x config.h.in -x sysdefs.h stock/libast-0.7/include/libast/types.h libast-0.7/include/libast/types.h
+--- stock/libast-0.7/include/libast/types.h	Mon Jan 23 10:25:28 2006
++++ libast-0.7/include/libast/types.h	Sat Nov 11 00:10:55 2023
 @@ -779,6 +779,10 @@
   */
  typedef spif_uint16_t spif_sockport_t;
@@ -12,9 +12,23 @@ diff -ur -x sysdefs.h stock/libast-0.7/include/libast/types.h.in libast-0.7/incl
  /**
   * The length of a socket address structure.
   *
-diff -ur -x sysdefs.h stock/libast-0.7/include/libast.h libast-0.7/include/libast.h
+diff -ur -x configure -x aclocal.m4 -x ltmain.sh -x Makefile.in -x libtool.m4 -x ltoptions.m4 -x ltversion.m4 -x lt~obsolete.m4 -x config.h.in -x sysdefs.h stock/libast-0.7/include/libast/types.h.in libast-0.7/include/libast/types.h.in
+--- stock/libast-0.7/include/libast/types.h.in	Tue Dec 28 22:39:10 2004
++++ libast-0.7/include/libast/types.h.in	Sat Nov 11 00:10:36 2023
+@@ -779,6 +779,10 @@
+  */
+ typedef spif_uint16_t spif_sockport_t;
+ 
++#ifdef __svr4__
++typedef int socklen_t;
++#endif
++
+ /**
+  * The length of a socket address structure.
+  *
+diff -ur -x configure -x aclocal.m4 -x ltmain.sh -x Makefile.in -x libtool.m4 -x ltoptions.m4 -x ltversion.m4 -x lt~obsolete.m4 -x config.h.in -x sysdefs.h stock/libast-0.7/include/libast.h libast-0.7/include/libast.h
 --- stock/libast-0.7/include/libast.h	Mon Jan 23 10:17:26 2006
-+++ libast-0.7/include/libast.h	Thu Sep 28 22:39:33 2023
++++ libast-0.7/include/libast.h	Sat Nov 11 00:10:36 2023
 @@ -107,6 +107,10 @@
  #  endif
  #endif
@@ -26,9 +40,9 @@ diff -ur -x sysdefs.h stock/libast-0.7/include/libast.h libast-0.7/include/libas
  #include <libast/types.h>
  #include <libast/obj.h>
  
-diff -ur -x sysdefs.h stock/libast-0.7/src/snprintf.c libast-0.7/src/snprintf.c
+diff -ur -x configure -x aclocal.m4 -x ltmain.sh -x Makefile.in -x libtool.m4 -x ltoptions.m4 -x ltversion.m4 -x lt~obsolete.m4 -x config.h.in -x sysdefs.h stock/libast-0.7/src/snprintf.c libast-0.7/src/snprintf.c
 --- stock/libast-0.7/src/snprintf.c	Fri Jul 23 15:34:05 2004
-+++ libast-0.7/src/snprintf.c	Thu Sep 28 22:41:45 2023
++++ libast-0.7/src/snprintf.c	Sat Nov 11 00:10:36 2023
 @@ -9,6 +9,10 @@
  # undef HAVE_STDARG_H
  #endif
@@ -40,3 +54,18 @@ diff -ur -x sysdefs.h stock/libast-0.7/src/snprintf.c libast-0.7/src/snprintf.c
  static const char __attribute__((unused)) cvs_ident[] = "$Id: snprintf.c,v 1.6 2004/07/23 21:38:39 mej Exp $";
  
  /* 
+diff -ur -x configure -x aclocal.m4 -x ltmain.sh -x Makefile.in -x libtool.m4 -x ltoptions.m4 -x ltversion.m4 -x lt~obsolete.m4 -x config.h.in -x sysdefs.h stock/libast-0.7/src/socket.c libast-0.7/src/socket.c
+--- stock/libast-0.7/src/socket.c	Fri Jul 23 15:34:05 2004
++++ libast-0.7/src/socket.c	Sat Nov 11 00:29:01 2023
+@@ -721,7 +721,11 @@
+         hinfo = gethostbyname(SPIF_CHARPTR_C(SPIF_STR_STR(hostname)));
+     } while ((tries <= 3) && (hinfo == NULL) && (h_errno == TRY_AGAIN));
+     if (hinfo == NULL) {
++	#ifndef __svr4__
+         libast_print_error("Unable to resolve hostname \"%s\" -- %s\n", SPIF_STR_STR(hostname), hstrerror(h_errno));
++	#else
++        libast_print_error("Unable to resolve hostname \"%s\" -- h errno %d\n", SPIF_STR_STR(hostname), h_errno);
++	#endif
+         return SPIF_NULL_TYPE(ipsockaddr);
+     }
+ 
