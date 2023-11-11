@@ -1,5 +1,8 @@
 unsigned long long strtoull(const char *s, char **endptr, int base) {
   unsigned long long sum = 0;
+  /* ignore leading space/tab only */
+  while (' ' == *s || '\t' == *s)
+	++s;
   if ('+' == *s) {
         ++s;
   } else if ('-' == *s) {
