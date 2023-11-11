@@ -26,7 +26,7 @@ cp $codefragments/c99-snprintf/snprintf.c c99_snprintf.c
 
 configure_cmd="bash configure"
 
-config_options="--without-iconv"
+config_options="--without-iconv --with-zlib=/usr/local"
 
 configure_once=1
 
@@ -39,7 +39,7 @@ export SHELL_PATH
 NO_ICONV=1
 export NO_ICONV
 
-make_args="V=1 NO_MSGFMT=1"
+make_args="V=1 NO_MSGFMT=1 NO_R_TO_GCC_LINKER=1"
 
 prefixvar=DESTDIR
 pkgdestrootbased=1
