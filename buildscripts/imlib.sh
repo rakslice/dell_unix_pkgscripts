@@ -11,7 +11,7 @@ export PATH
 
 cp $codefragments/strcasecmp.c src/lib/
 
-config_libs="-Wl,-rpath,/usr/local/lib -lz -ljpeg -ltiff -lm -lsocket -lnsl"
+config_libs="-Wl,-rpath,/usr/local/lib -lz -ljpeg -ltiff -lm -lsocket -lnsl -lltdl"
 config_options="--disable-mmx PNG_LIBS=-lpng16 PNG_CFLAGS=-I/usr/local/include/libpng16"
 
 if [ ! -f .patched ]; then

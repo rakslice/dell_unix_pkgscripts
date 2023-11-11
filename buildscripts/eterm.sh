@@ -29,7 +29,7 @@ if [ ! -f .patched ]; then
 	touch .patched
 fi
 
-config_libs="-lsocket -lnsl -lfreetype -lucb"
+config_libs="-Wl,-rpath,/usr/local/lib -lsocket -lnsl -lfreetype -ltiff /usr/local/lib/libpng.a -lm -lucb -lltdl -ldl"
 
 CONFIG_SHELL=/usr/local/bin/bash
 export CONFIG_SHELL
@@ -37,11 +37,20 @@ export CONFIG_SHELL
 SHELL=/usr/local/bin/bash
 export SHELL
 
+CP=cp
+export CP
+
 configure_cmd="bash configure"
 config_options="--enable-mmx --disable-multi-charset"
 
 prefixvar=DESTDIR
 pkgdestrootbased=1
+
+# for dynamic library builds
+libtoolize
+autoreconf -i
+ACCEPT_INFERIOR_RM_PROGRAM=yes
+export ACCEPT_INFERIOR_RM_PROGRAM
 
 . $incdir/build.inc
 

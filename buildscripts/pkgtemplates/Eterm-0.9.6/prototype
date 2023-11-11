@@ -3,6 +3,9 @@ d none / 0755 root other
 d none /usr 0755 root other
 d none /usr/local 0755 root other
 d none /usr/local/lib 0755 root other
+s none /usr/local/lib/libEterm.so=./libEterm-0.9.6.so.0.0
+f none /usr/local/lib/libEterm-0.9.6.so.0.0=usr/local/lib/libEterm-0.9.6.so.0.0 0755 root other
+s none /usr/local/lib/libEterm-0.9.6.so=./libEterm-0.9.6.so.0.0
 f none /usr/local/lib/libEterm.la=usr/local/lib/libEterm.la 0755 root other
 f none /usr/local/lib/libEterm.a=usr/local/lib/libEterm.a 0644 root other
 d none /usr/local/bin 0755 root other
@@ -111,6 +114,6 @@ f none /usr/local/share/Eterm/pix/thumb_1.png=usr/local/share/Eterm/pix/thumb_1.
 f none /usr/local/share/Eterm/pix/thumb_2.png=usr/local/share/Eterm/pix/thumb_2.png 0644 root other
 f none /usr/local/share/Eterm/pix/help.png=usr/local/share/Eterm/pix/help.png 0644 root other
 f none /usr/local/share/Eterm/pix/exit.png=usr/local/share/Eterm/pix/exit.png 0644 root other
-d none /usr/local/man 0755 root other
-d none /usr/local/man/man1 0755 root other
-f none /usr/local/man/man1/Eterm.1=usr/local/man/man1/Eterm.1 0644 root other
+d none /usr/local/share/man 0755 root other
+d none /usr/local/share/man/man1 0755 root other
+f none /usr/local/share/man/man1/Eterm.1=usr/local/share/man/man1/Eterm.1 0644 root other
