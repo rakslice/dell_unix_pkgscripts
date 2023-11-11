@@ -76,6 +76,9 @@ if [ ! -f "$pkgtemplatesdir/prototype" ]; then
 	printf "i\tpkginfo\n" > "$pkgtemplatesdir/prototype.new" || true
 	(cd "$pkgdestdir" ; pkgproto ".=$pkgprotoprefix" >> "$pkgtemplatesdir/prototype.new")
 	mv "$pkgtemplatesdir/prototype.new" "$pkgtemplatesdir/prototype"
+	# a pause to modify symlinks
+	# TODO actually script something here
+	read pause
 fi
 
 # remove any files from the destdir we specifically want to exclude
