@@ -1,0 +1,7 @@
+#!/usr/local/bin/bash
+set -e
+set -x
+set -u
+path="$1"
+shift
+./patchout "$path" -x configure -x aclocal.m4 -x ltmain.sh "$@"
