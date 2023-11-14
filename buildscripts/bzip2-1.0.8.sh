@@ -29,9 +29,13 @@ make_cmd="make -f meta.mk"
 #config_libs="-lm -lz -ljpeg -ltiff"
 #config_options="PNG_LIBS=-lpng16 PNG_CFLAGS=-I/usr/local/include/libpng16"
 
+PATH=/usr/local/bin:$PATH
+export PATH
+
 if [ ! -f .patched ]; then
 	mv Makefile Makefile.orig
 	sed 's/cp -f /cp /g' Makefile.orig > Makefile
+        patch -p1 -i $patches/$package.patch
 	touch .patched
 fi
 
@@ -44,10 +48,9 @@ for f in bin/bzegrep bin/bzfgrep bin/bzless bin/bzcmp lib/libbz2.so; do
 	fi
 done
 
-PATH=/usr/local/bin:$PATH
-export PATH
-
 prefixvar=PREFIX
 
 . $incdir/build.inc
+
+ldd /usr/local/bin/bzip2
 
