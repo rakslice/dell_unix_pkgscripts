@@ -4,6 +4,9 @@ d none /usr/local/bin 0755 root other
 f none /usr/local/bin/libtoolize=bin/libtoolize 0755 root other
 f none /usr/local/bin/libtool=bin/libtool 0755 root other
 d none /usr/local/lib 0755 root other
+s none /usr/local/lib/libltdl.so=./libltdl.so.7.3.2
+f none /usr/local/lib/libltdl.so.7.3.2=lib/libltdl.so.7.3.2 0755 root other
+s none /usr/local/lib/libltdl.so.7=./libltdl.so.7.3.2
 f none /usr/local/lib/libltdl.la=lib/libltdl.la 0755 root other
 f none /usr/local/lib/libltdl.a=lib/libltdl.a 0644 root other
 d none /usr/local/share 0755 root other

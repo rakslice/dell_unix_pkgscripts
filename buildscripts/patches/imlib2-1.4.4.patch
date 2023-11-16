@@ -1,6 +1,6 @@
 diff -ur -x configure -x aclocal.m4 -x ltmain.sh -x Makefile.in -x libtool.m4 -x ltoptions.m4 -x ltversion.m4 -x lt~obsolete.m4 -x config.h.in stock/imlib2-1.4.4/src/lib/font_load.c imlib2-1.4.4/src/lib/font_load.c
 --- stock/imlib2-1.4.4/src/lib/font_load.c	Tue Jul 28 11:35:59 2009
-+++ imlib2-1.4.4/src/lib/font_load.c	Fri Nov 10 23:02:51 2023
++++ imlib2-1.4.4/src/lib/font_load.c	Thu Nov 16 02:45:17 2023
 @@ -221,6 +221,7 @@
  int
  imlib_font_insert_into_fallback_chain_imp(ImlibFont * fn, ImlibFont * fallback)
@@ -20,14 +20,8 @@ diff -ur -x configure -x aclocal.m4 -x ltmain.sh -x Makefile.in -x libtool.m4 -x
     fallback->fallback_prev = fn;
 diff -ur -x configure -x aclocal.m4 -x ltmain.sh -x Makefile.in -x libtool.m4 -x ltoptions.m4 -x ltversion.m4 -x lt~obsolete.m4 -x config.h.in stock/imlib2-1.4.4/src/lib/image.c imlib2-1.4.4/src/lib/image.c
 --- stock/imlib2-1.4.4/src/lib/image.c	Wed May  5 11:25:49 2010
-+++ imlib2-1.4.4/src/lib/image.c	Sat Nov 11 03:39:58 2023
-@@ -9,11 +9,14 @@
- #ifdef BUILD_X11
- # include <X11/Xlib.h>
- #endif
-+#include <ltdl.h>
- #include "image.h"
- #include "file.h"
++++ imlib2-1.4.4/src/lib/image.c	Thu Nov 16 02:45:17 2023
+@@ -14,6 +14,8 @@
  #include "loaderpath.h"
  #include "Imlib2.h"
  
@@ -36,65 +30,9 @@ diff -ur -x configure -x aclocal.m4 -x ltmain.sh -x Makefile.in -x libtool.m4 -x
  static ImlibImage  *images = NULL;
  
  #ifdef BUILD_X11
-@@ -564,24 +567,31 @@
- {
-    ImlibLoader        *l;
-    void                (*l_formats) (ImlibLoader * l);
--
-+   lt_dladvise ltadvise;
-+   if (lt_dladvise_init(&ltadvise)) {
-+      free(l);
-+      return NULL;
-+   }
-+   lt_dladvise_preload(&ltadvise);
-    l = malloc(sizeof(ImlibLoader));
-    l->num_formats = 0;
-    l->formats = NULL;
--   l->handle = dlopen(file, RTLD_NOW | RTLD_LOCAL);
-+   /* l->handle = dlopen(file, RTLD_NOW | RTLD_LOCAL); */
-+   l->handle = lt_dlopenadvise(file, ltadvise); 
-+   lt_dladvise_destroy(&ltadvise);
-    if (!l->handle)
-      {
-         free(l);
-         return NULL;
-      }
--   l->load = dlsym(l->handle, "load");
--   l->save = dlsym(l->handle, "save");
--   l_formats = dlsym(l->handle, "formats");
-+   l->load = lt_dlsym(l->handle, "load");
-+   l->save = lt_dlsym(l->handle, "save");
-+   l_formats = lt_dlsym(l->handle, "formats");
- 
-    /* each loader must provide formats() and at least load() or save() */
-    if (!l_formats || (!l->load && !l->save))
-      {
--        dlclose(l->handle);
-+        lt_dlclose(l->handle);
-         free(l);
-         return NULL;
-      }
-@@ -663,7 +673,7 @@
- #ifdef __CYGWIN__
-                         (!strcasecmp(ext, ".dll")) ||
- #endif
--                        (!strcasecmp(ext, ".so"))))
-+                        (!strcasecmp(ext, ".la"))))
-           {
-              /* Don't add the same loader multiple times... */
-              if (!__imlib_ItemInList(ret, size, list[i]))
-@@ -709,7 +719,7 @@
-    if (l->file)
-       free(l->file);
-    if (l->handle)
--      dlclose(l->handle);
-+      lt_dlclose(l->handle);
-    if (l->formats)
-      {
-         int                 i;
 diff -ur -x configure -x aclocal.m4 -x ltmain.sh -x Makefile.in -x libtool.m4 -x ltoptions.m4 -x ltversion.m4 -x lt~obsolete.m4 -x config.h.in stock/imlib2-1.4.4/src/modules/loaders/loader_png.c imlib2-1.4.4/src/modules/loaders/loader_png.c
 --- stock/imlib2-1.4.4/src/modules/loaders/loader_png.c	Thu Feb 11 12:02:11 2010
-+++ imlib2-1.4.4/src/modules/loaders/loader_png.c	Fri Nov 10 23:02:51 2023
++++ imlib2-1.4.4/src/modules/loaders/loader_png.c	Thu Nov 16 02:45:17 2023
 @@ -58,7 +58,7 @@
               fclose(f);
               return 0;
@@ -156,7 +94,7 @@ diff -ur -x configure -x aclocal.m4 -x ltmain.sh -x Makefile.in -x libtool.m4 -x
       }
 diff -ur -x configure -x aclocal.m4 -x ltmain.sh -x Makefile.in -x libtool.m4 -x ltoptions.m4 -x ltversion.m4 -x lt~obsolete.m4 -x config.h.in stock/imlib2-1.4.4/src/modules/loaders/loader_tga.c imlib2-1.4.4/src/modules/loaders/loader_tga.c
 --- stock/imlib2-1.4.4/src/modules/loaders/loader_tga.c	Tue Jul 28 11:35:59 2009
-+++ imlib2-1.4.4/src/modules/loaders/loader_tga.c	Fri Nov 10 23:02:51 2023
++++ imlib2-1.4.4/src/modules/loaders/loader_tga.c	Thu Nov 16 02:45:17 2023
 @@ -15,6 +15,12 @@
  #include "colormod.h"
  #include "blend.h"
