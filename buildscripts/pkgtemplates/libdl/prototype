@@ -1,0 +1,5 @@
+i	pkginfo
+d none / 0755 root other
+d none /usr 0755 root other
+d none /usr/lib 0755 root other
+f none /usr/lib/libdl.so=usr/lib/libdl.so 0755 root other

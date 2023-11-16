@@ -1,0 +1,7 @@
+PKG="libm"
+NAME="libm"
+ARCH="i386"
+VERSION="4.0"
+RELEASE="1"
+CLASSES="none"
+CATEGORY="libraries"

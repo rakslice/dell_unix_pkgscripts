@@ -1,0 +1,7 @@
+i	pkginfo
+d none / 0755 root other
+d none /usr 0755 root other
+d none /usr/ucblib 0755 root other
+f none /usr/ucblib/libmp.so=usr/ucblib/libmp.so 0755 root other
+d none /usr/lib 0755 root other
+s none /usr/lib/libmp.so=../ucblib/libmp.so

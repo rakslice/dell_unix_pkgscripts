@@ -1,0 +1,6 @@
+i	pkginfo
+d none / 0755 root other
+d none /usr 0755 root other
+d none /usr/ccs 0755 root other
+d none /usr/ccs/lib 0755 root other
+f none /usr/ccs/lib/libld.so=usr/ccs/lib/libld.so 0755 root other

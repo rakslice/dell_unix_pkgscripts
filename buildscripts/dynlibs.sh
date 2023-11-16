@@ -8,6 +8,11 @@ fi
 
 # I worked on this stuff with gcc-3.4.6 installed; it may be required
 
+sh libm.sh
+sh libmp.sh
+sh libld.sh
+sh libdl.sh
+
 sh m4-1.4.10.sh
 sh autoconf.sh
 sh bash-3.sh
