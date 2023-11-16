@@ -9,11 +9,6 @@ export PATH
 
 . preamble.inc
 
-if [ ! -f .patched ]; then
-        patch -p1 -i $patches/$package.patch
-        touch .patched
-fi
-
 config_options="--enable-mips-msa=no --enable-powerpc-vsx=no"
 config_libs="-L/usr/local/lib"
 

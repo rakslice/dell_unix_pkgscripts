@@ -29,7 +29,7 @@ if [ ! -f .patched ]; then
 	touch .patched
 fi
 
-config_libs="-Wl,-rpath,/usr/local/lib -lsocket -lnsl -lfreetype -ltiff /usr/local/lib/libpng.a -lm -lucb -lltdl -ldl"
+config_libs="-Wl,-rpath,/usr/local/lib -lsocket -lnsl -lfreetype -ltiff -lm -lucb"
 
 CONFIG_SHELL=/usr/local/bin/bash
 export CONFIG_SHELL
