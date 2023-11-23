@@ -1,4 +1,6 @@
 #!/bin/sh
+set -e
+set -x
 
 sh gmp.sh
 sh mpfr.sh
