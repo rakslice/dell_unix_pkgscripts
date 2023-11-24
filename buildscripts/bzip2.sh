@@ -21,8 +21,11 @@ if [ ! -f .patched ]; then
 	touch .patched
 fi
 
+# package install doesn't handle existing symlinks pointing
+# to the wrong things and returns an error code;
+# just remove them in advance as a precaution
 for f in bzegrep bzfgrep bzless bzcmp; do
-	if [ -f /usr/local/bin/$f ]; then
+	if [ -h /usr/local/bin/$f ]; then
 		rm /usr/local/bin/$f
 	fi
 done

@@ -5,6 +5,7 @@ set -u
 existing=`pkginfo | grep GNUgcc | awk '{print $2}'`
 
 device=/home/dell/pkg
+pkgarchive=/home3/pkgfiles
 
 if [ $# -lt 1 ]; then
 	echo "Usage:"
@@ -18,7 +19,7 @@ ver="$1"
 case $ver in \
 	3.0.4)
 		target=GNUgcc304
-		device=/home3/pkgfiles/$target.pkg
+		device=$pkgarchive/$target.pkg
 		;;
 	3.4.6)
 		target=GNUgcc346

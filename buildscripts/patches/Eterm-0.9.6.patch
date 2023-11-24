@@ -1,6 +1,6 @@
 diff -ur -x configure -x aclocal.m4 -x ltmain.sh -x Makefile.in -x libtool.m4 -x ltoptions.m4 -x ltversion.m4 -x lt~obsolete.m4 -x config.h.in stock/Eterm-0.9.6/configure.ac Eterm-0.9.6/configure.ac
 --- stock/Eterm-0.9.6/configure.ac	Tue Mar 15 21:16:59 2011
-+++ Eterm-0.9.6/configure.ac	Sat Nov 11 00:40:17 2023
++++ Eterm-0.9.6/configure.ac	Tue Nov 14 12:36:08 2023
 @@ -1037,10 +1037,10 @@
  AC_SUBST(GDB_CMD_FILE)
  
@@ -14,25 +14,9 @@ diff -ur -x configure -x aclocal.m4 -x ltmain.sh -x Makefile.in -x libtool.m4 -x
  LIBS="$GRLIBS $X_PRE_LIBS $LIBS $X_EXTRA_LIBS"
  
  AC_SUBST(CC)
-diff -ur -x configure -x aclocal.m4 -x ltmain.sh -x Makefile.in -x libtool.m4 -x ltoptions.m4 -x ltversion.m4 -x lt~obsolete.m4 -x config.h.in stock/Eterm-0.9.6/src/Makefile.am Eterm-0.9.6/src/Makefile.am
---- stock/Eterm-0.9.6/src/Makefile.am	Tue Jan  6 01:05:36 2009
-+++ Eterm-0.9.6/src/Makefile.am	Sat Nov 11 02:57:04 2023
-@@ -36,7 +36,11 @@
- 
- Eterm_SOURCES = main.c
- Eterm_DEPENDENCIES = libEterm.la
--Eterm_LDFLAGS = -rpath $(libdir):$(pkglibdir)
-+IMLD = $(libdir)/imlib2/loaders
-+Eterm_LDFLAGS = -rpath $(libdir):$(pkglibdir) -export-dynamic -dlopen \
-+  $(IMLD)/argb.la $(IMLD)/bmp.la $(IMLD)/bz2.la $(IMLD)/jpeg.la \
-+  $(IMLD)/lbm.la $(IMLD)/png.la $(IMLD)/pnm.la $(IMLD)/tga.la \
-+  $(IMLD)/tiff.la $(IMLD)/xpm.la $(IMLD)/zlib.la
- Eterm_LDADD = libEterm.la 
- 
- EXTRA_DIST = gdb.scr mmx_cmod.S sse2_cmod.c
 diff -ur -x configure -x aclocal.m4 -x ltmain.sh -x Makefile.in -x libtool.m4 -x ltoptions.m4 -x ltversion.m4 -x lt~obsolete.m4 -x config.h.in stock/Eterm-0.9.6/src/defaultfont.h Eterm-0.9.6/src/defaultfont.h
 --- stock/Eterm-0.9.6/src/defaultfont.h	Tue Jan  6 01:05:36 2009
-+++ Eterm-0.9.6/src/defaultfont.h	Sat Nov 11 00:40:17 2023
++++ Eterm-0.9.6/src/defaultfont.h	Tue Nov 14 12:36:08 2023
 @@ -8,7 +8,10 @@
  # endif
  
@@ -46,7 +30,7 @@ diff -ur -x configure -x aclocal.m4 -x ltmain.sh -x Makefile.in -x libtool.m4 -x
  
 diff -ur -x configure -x aclocal.m4 -x ltmain.sh -x Makefile.in -x libtool.m4 -x ltoptions.m4 -x ltversion.m4 -x lt~obsolete.m4 -x config.h.in stock/Eterm-0.9.6/src/events.c Eterm-0.9.6/src/events.c
 --- stock/Eterm-0.9.6/src/events.c	Tue Mar 15 21:16:59 2011
-+++ Eterm-0.9.6/src/events.c	Sat Nov 11 00:40:17 2023
++++ Eterm-0.9.6/src/events.c	Tue Nov 14 12:36:08 2023
 @@ -217,7 +217,9 @@
      }
      if (BITFIELD_IS_SET(vt_options, VT_OPTIONS_URG_ALERT)) {
@@ -69,7 +53,7 @@ diff -ur -x configure -x aclocal.m4 -x ltmain.sh -x Makefile.in -x libtool.m4 -x
          }
 diff -ur -x configure -x aclocal.m4 -x ltmain.sh -x Makefile.in -x libtool.m4 -x ltoptions.m4 -x ltversion.m4 -x lt~obsolete.m4 -x config.h.in stock/Eterm-0.9.6/src/libscream.c Eterm-0.9.6/src/libscream.c
 --- stock/Eterm-0.9.6/src/libscream.c	Fri Nov 20 19:58:10 2009
-+++ Eterm-0.9.6/src/libscream.c	Sat Nov 11 00:40:17 2023
++++ Eterm-0.9.6/src/libscream.c	Tue Nov 14 12:36:08 2023
 @@ -45,6 +45,10 @@
  #include "config.h"
  #include "feature.h"
@@ -83,7 +67,7 @@ diff -ur -x configure -x aclocal.m4 -x ltmain.sh -x Makefile.in -x libtool.m4 -x
  #  include <libast.h>
 diff -ur -x configure -x aclocal.m4 -x ltmain.sh -x Makefile.in -x libtool.m4 -x ltoptions.m4 -x ltversion.m4 -x lt~obsolete.m4 -x config.h.in stock/Eterm-0.9.6/src/screen.c Eterm-0.9.6/src/screen.c
 --- stock/Eterm-0.9.6/src/screen.c	Tue Mar 15 21:16:59 2011
-+++ Eterm-0.9.6/src/screen.c	Sat Nov 11 00:40:17 2023
++++ Eterm-0.9.6/src/screen.c	Tue Nov 14 12:36:08 2023
 @@ -1553,7 +1553,9 @@
  
      if (BITFIELD_IS_SET(vt_options, VT_OPTIONS_URG_ALERT)) {
@@ -96,7 +80,7 @@ diff -ur -x configure -x aclocal.m4 -x ltmain.sh -x Makefile.in -x libtool.m4 -x
      }
 diff -ur -x configure -x aclocal.m4 -x ltmain.sh -x Makefile.in -x libtool.m4 -x ltoptions.m4 -x ltversion.m4 -x lt~obsolete.m4 -x config.h.in stock/Eterm-0.9.6/src/term.c Eterm-0.9.6/src/term.c
 --- stock/Eterm-0.9.6/src/term.c	Tue Mar 15 21:16:59 2011
-+++ Eterm-0.9.6/src/term.c	Sat Nov 11 00:40:17 2023
++++ Eterm-0.9.6/src/term.c	Tue Nov 14 12:36:08 2023
 @@ -723,7 +723,9 @@
  
                          /* Tab key is normal unless it's shift-tab. */
@@ -109,7 +93,7 @@ diff -ur -x configure -x aclocal.m4 -x ltmain.sh -x Makefile.in -x libtool.m4 -x
                              strcpy(kbuf, "\033[Z");
 diff -ur -x configure -x aclocal.m4 -x ltmain.sh -x Makefile.in -x libtool.m4 -x ltoptions.m4 -x ltversion.m4 -x lt~obsolete.m4 -x config.h.in stock/Eterm-0.9.6/src/windows.c Eterm-0.9.6/src/windows.c
 --- stock/Eterm-0.9.6/src/windows.c	Tue Mar 15 21:16:59 2011
-+++ Eterm-0.9.6/src/windows.c	Sat Nov 11 00:40:17 2023
++++ Eterm-0.9.6/src/windows.c	Tue Nov 14 12:36:08 2023
 @@ -504,7 +504,12 @@
  
          atom = XInternAtom(Xdisplay, "UTF8_STRING", False);

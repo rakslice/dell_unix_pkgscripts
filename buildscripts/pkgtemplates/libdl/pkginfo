@@ -1,0 +1,7 @@
+PKG="libdl"
+NAME="libdl"
+ARCH="i386"
+VERSION="4.0"
+RELEASE="1"
+CLASSES="none"
+CATEGORY="libraries"

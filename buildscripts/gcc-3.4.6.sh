@@ -26,6 +26,8 @@ cd $builddir
 configure_cmd="bash ../$package/configure"
 
 configure_once=1
+LIBS=-Wl,-rpath,/usr/ccs/lib
+export LIBS
 
 prefixvar=DESTDIR
 pkgdestrootbased=1

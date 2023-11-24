@@ -8,6 +8,11 @@ fi
 
 # I worked on this stuff with gcc-3.4.6 installed; it may be required
 
+sh libm.sh
+sh libmp.sh
+sh libld.sh
+sh libdl.sh
+
 sh m4-1.4.10.sh
 sh autoconf.sh
 sh bash-3.sh
@@ -25,3 +30,6 @@ sh jpeg-9e.sh
 sh tiff-3.9.1.sh
 sh bzip2-1.0.8.sh
 sh imlib.sh
+
+sh libast.sh
+sh eterm.sh

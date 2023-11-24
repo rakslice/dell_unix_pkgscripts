@@ -1,0 +1,8 @@
+i	pkginfo
+d none / 0755 root other
+d none /usr 0755 root other
+d none /usr/ccs 0755 root other
+d none /usr/ccs/lib 0755 root other
+f none /usr/ccs/lib/libm.so=usr/ccs/lib/libm.so 0755 root other
+d none /usr/lib 0755 root other
+s none /usr/lib/libm.so=../ccs/lib/libm.so
